@@ -71,12 +71,12 @@
 							 C22.65 211.1 22.65 212.31 22 212.97 C21.34 213.63 20.13 213.52 19.58 212.97 L4.18 198.23 C4.18 198.23
 							 4.18 198.23 4.07 198.12 L0.66 194.27 Z" class="st3"/>
 			</g>
-			<g id="shape109-12" v:mID="109" v:groupContext="shape" transform="translate(19.5756,2.84217E-14)">
+			<g id="shape109-12" v:mID="109" v:groupContext="shape" transform="translate(19.5756,0)">
 				<title>Feuille.109</title>
 				<path d="M32.99 148.74 L11.55 148.74 L0 181.3 L14.08 181.41 L3.08 213.63 L33.43 170.63 L18.7 170.63 L32.99 148.74
 							 Z" class="st4"/>
 			</g>
-			<g id="shape110-14" v:mID="110" v:groupContext="shape" transform="translate(22.655,2.84217E-14)">
+			<g id="shape110-14" v:mID="110" v:groupContext="shape" transform="translate(22.655,0)">
 				<title>Feuille.110</title>
 				<path d="M15.62 170.63 L29.91 148.74 L18.7 148.74 L6.82 175.8 L20.9 175.91 L0 213.63 L30.35 170.63 L15.62 170.63 Z"
 						class="st5"/>
@@ -84,11 +84,11 @@
 		</g>
 		<g id="shape111-16" v:mID="111" v:groupContext="shape" transform="translate(336.653,-51.2794)">
 			<title>Feuille.111</title>
-			<desc>Function</desc>
+			<desc>DAL</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="37.9003" cy="199.455" width="75.81" height="28.3465"/>
 			<rect x="0" y="185.282" width="75.8005" height="28.3465" class="st6"/>
-			<text x="14.89" y="203.05" class="st7" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Function</text>		</g>
+			<text x="26.23" y="203.05" class="st7" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>DAL</text>		</g>
 		<g id="shape114-19" v:mID="114" v:groupContext="shape" transform="translate(501.744,-95.2639)">
 			<title>Feuille.114</title>
 			<desc>CosmosDB</desc>
@@ -147,7 +147,7 @@
 			<title>Redis Cache #1</title>
 			<g id="group123-35" v:mID="123" v:groupContext="group">
 				<title>Feuille.123</title>
-				<g id="shape124-36" v:mID="124" v:groupContext="shape" transform="translate(0.351867,2.84217E-14)">
+				<g id="shape124-36" v:mID="124" v:groupContext="shape" transform="translate(0.351867,0)">
 					<title>Feuille.124</title>
 					<path d="M0.17 201.87 C0.07 202.47 0.58 203.07 1.68 203.52 L24.31 212.79 C26.34 213.63 29.65 213.63 31.68 212.79
 								 L54.31 203.52 C55.41 203.07 55.92 202.47 55.82 201.87 L55.83 196.56 C55.9 197.14 55.39 197.73 54.31
@@ -163,7 +163,7 @@
 			</g>
 			<g id="group126-40" transform="translate(0,-9.38238)" v:mID="126" v:groupContext="group">
 				<title>Feuille.126</title>
-				<g id="shape127-41" v:mID="127" v:groupContext="shape" transform="translate(0.351867,2.84217E-14)">
+				<g id="shape127-41" v:mID="127" v:groupContext="shape" transform="translate(0.351867,0)">
 					<title>Feuille.127</title>
 					<path d="M0.17 201.87 C0.07 202.47 0.58 203.07 1.68 203.52 L24.31 212.79 C26.34 213.63 29.65 213.63 31.68 212.79
 								 L54.31 203.52 C55.41 203.07 55.92 202.47 55.82 201.87 L55.83 196.56 C55.9 197.14 55.39 197.73 54.31
@@ -186,7 +186,7 @@
 								 198.18 L31.68 207.45 C29.65 208.28 26.34 208.28 24.31 207.45 L1.68 198.18 C0.5 197.69 0 197.03 0.2
 								 196.39 L0.17 201.87 Z" class="st12"/>
 				</g>
-				<g id="shape131-48" v:mID="131" v:groupContext="shape" transform="translate(0.351867,2.84217E-14)">
+				<g id="shape131-48" v:mID="131" v:groupContext="shape" transform="translate(0.351867,0)">
 					<title>Feuille.131</title>
 					<path d="M0.17 201.87 C0.07 202.47 0.58 203.07 1.68 203.52 L24.31 212.79 C26.34 213.63 29.65 213.63 31.68 212.79
 								 L54.31 203.52 C55.41 203.07 55.92 202.47 55.82 201.87 L55.83 196.56 C55.9 197.14 55.39 197.73 54.31
@@ -316,12 +316,12 @@
 							 C22.65 211.1 22.65 212.31 22 212.97 C21.34 213.63 20.13 213.52 19.58 212.97 L4.18 198.23 C4.18 198.23
 							 4.18 198.23 4.07 198.12 L0.66 194.27 Z" class="st3"/>
 			</g>
-			<g id="shape155-99" v:mID="155" v:groupContext="shape" transform="translate(19.5756,2.84217E-14)">
+			<g id="shape155-99" v:mID="155" v:groupContext="shape" transform="translate(19.5756,0)">
 				<title>Feuille.155</title>
 				<path d="M32.99 148.74 L11.55 148.74 L0 181.3 L14.08 181.41 L3.08 213.63 L33.43 170.63 L18.7 170.63 L32.99 148.74
 							 Z" class="st4"/>
 			</g>
-			<g id="shape156-101" v:mID="156" v:groupContext="shape" transform="translate(22.655,2.84217E-14)">
+			<g id="shape156-101" v:mID="156" v:groupContext="shape" transform="translate(22.655,0)">
 				<title>Feuille.156</title>
 				<path d="M15.62 170.63 L29.91 148.74 L18.7 148.74 L6.82 175.8 L20.9 175.91 L0 213.63 L30.35 170.63 L15.62 170.63 Z"
 						class="st5"/>
@@ -329,11 +329,11 @@
 		</g>
 		<g id="shape157-103" v:mID="157" v:groupContext="shape" transform="translate(79.3821,-51.2794)">
 			<title>Feuille.157</title>
-			<desc>Function</desc>
+			<desc>Business</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="37.9003" cy="199.455" width="75.81" height="28.3465"/>
 			<rect x="0" y="185.282" width="75.8005" height="28.3465" class="st6"/>
-			<text x="14.89" y="203.05" class="st7" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Function</text>		</g>
+			<text x="13.55" y="203.05" class="st7" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Business</text>		</g>
 		<g id="shape158-106" v:mID="158" v:groupContext="shape" v:layerMember="0" transform="translate(284.894,-100.114)">
 			<title>Lien dynamique.158</title>
 			<path d="M0 206.54 L33.81 206.54" class="st1"/>

@@ -1,6 +1,11 @@
 ## CosmosDB : En attendant le partial update
 
-Cela fait maintenant : 6 ans que cette idée a été remonté à Microsoft, 2 ans et demi que le sujet est dans la roadmap de Microsoft, 1 ans et demi que celui-ci est commencé et... toujours rien.
+Cela fait maintenant : 
+- 6 ans que cette idée a été remonté à Microsoft, 
+- 2 ans et demi que le sujet est dans la roadmap de Microsoft, 
+- 1 ans et demi que celui-ci est commencé et... 
+
+toujours rien.
 
 Pourtant, cette fonctionnalité pourrait tout changer ! J'ai eu l'occasion de rencontrer des clients qui pour cette unique raison préféraient partir sur MongoDB Atlas.
 
@@ -8,22 +13,25 @@ Mais pourquoi cette fonctionnalité change tout ?
 
 ### Constat : Atomicité des mises à jour DocumentDB
 
-Donc pour faire une mise à jour dans un conteneur CosmosDB, il faut récupérer le document, le mettre à jour (merge entre la donnée reçu et celle exitant dans CosmosDB) et l'enregistrer dans le conteneur.
+Aujourd'hui, pour faire une mise à jour dans un conteneur CosmosDB, il faut :
+1. récupérer le document, 
+2. le mettre à jour (merge entre la donnée reçu et celle exitant dans CosmosDB) et 
+3. l'enregistrer dans le conteneur.
 
 ![Uml Diagram before](../img/UmlDiagram.before.svg)
 
-Mais lorsque plusieurs composants sont suceptibles de mettre à jour cette mise à jour ou que vous utilisé des mécanismes de scalabilités horizontal pour vos composants, il y'a un risque d'écrasement de donnée.
+Mais lorsque plusieurs composants sont suceptibles de réaliser cette mise à jour ou que vous utilisez des mécanismes de scalabilités horizontal, il y'a un risque d'écrasement de la donnée (et donc de perte de donnée).
 
 En effet, prenons 2 composants A et B réalisant une mise à jour au même moment sur la même donnée.
 - L'identifiant est lié à la proriété "id" (je mets de coté volontairement la notion de clé de partition),
 - Le composant A met à jour la date de naissance ainsi que l'adresse email,
-- Le composant B met à jour la date de naissance ainsi que le numéro de téléphone. 
+- Le composant B met à jour la date de naissance et le numéro de téléphone. 
 
 | Data Composant A | Data Composant B | Data CosmosDB |
 | - | - | - |
-| {<br>&nbsp;&nbsp;"id": "99039816",<br>&nbsp;&nbsp;"firstname": "joe",<br>&nbsp;&nbsp;"lastname": "doe",<br>&nbsp;&nbsp;"birthdate": "1984-**06**-16T00:00:00Z",<br>&nbsp;&nbsp;**"email": "joe.doe@yopmail.com"**<br>} | {<br>&nbsp;&nbsp;"id": "99039816",<br>&nbsp;&nbsp;"firstname": "joe",<br>&nbsp;&nbsp;"lastname": "doe",<br>&nbsp;&nbsp;"birthdate": "1984-**07**-16T00:00:00Z",<br>&nbsp;&nbsp;**"phone": "+33.8.76.54.32.10"**<br>} | {<br>&nbsp;&nbsp;"id": "99039816",<br>&nbsp;&nbsp;"firstname": "joe",<br>&nbsp;&nbsp;"lastname": "doe",<br>&nbsp;&nbsp;"birthdate": "1984-05-16T00:00:00Z",<br>}
+| {<br>&nbsp;&nbsp;"id": "99039816",<br>&nbsp;&nbsp;,"birthdate": "1984-**06**-16T00:00:00Z",<br>&nbsp;&nbsp;**"email": "joe.doe@yopmail.com"**<br>} | {<br>&nbsp;&nbsp;"id": "99039816",<br>&nbsp;&nbsp;"birthdate": "1984-**07**-16T00:00:00Z",<br>&nbsp;&nbsp;**"phone": "+33.8.76.54.32.10"**<br>} | {<br>&nbsp;&nbsp;"id": "99039816",<br>&nbsp;&nbsp;"firstname": "joe",<br>&nbsp;&nbsp;"lastname": "doe",<br>&nbsp;&nbsp;"birthdate": "1984-05-16T00:00:00Z",<br>}
 
-Dans un traitement classic suite à la mise à jour de la donnée par les 2 composants nous devrions avoir dans CosmosDB :
+Dans un traitement classique suite à la mise à jour de la donnée par les 2 composants nous devrions avoir :
 
 - Si le composant A est passé avant le composant B :
 ```
@@ -66,8 +74,9 @@ Suite à la mise à jour de la donnée par les 2 composants nous aurons dans Cos
     "phone": "+33.8.76.54.32.10"
 }
 ```
-L'information adresse email est PERDU ! 
-Le problème c'est que le composant A ne sais pas que le composant B réalise une opération de mise à jour au même moment. Et chaque composant réalise sont opération de mise à jour de son coté croyant qu'il est seul au monde !
+L'information adresse email est **PERDU** ! 
+
+Le problème, c'est que le composant A ne sait pas que le composant B réalise une opération de mise à jour au même moment. Et chaque composant fait sa mise à jour de son coté croyant qu'il est seul au monde !
 
 Mais comment résoudre ce problème ?
 
@@ -77,23 +86,25 @@ Je reprend mes vieux cours d'informatique et la solution est "le verrou".
 
 ### Une solution : CosmosDB + Redis
 
-Dans le cloud Azure, le service "cache redis" est bien pratique. Il ne sert pas qu'a faire du cache ! Il peut aussi gérer notre verrou.
+Dans le cloud Azure, le service "cache redis" est bien pratique. Il ne sert pas qu'à faire du cache ! Il peut aussi gérer notre verrou.
 
 ##### Le principe
 
-Chaque composant voulant réaliser une opération de mise à jour va systématiquement devoir poser un verrou dans Redis. Si le cache contient déjà ce verrou au moment où le composant souhaite poser son verrou, le composant saura alors qu'un autre composant est en train de réaliser une opération de mise à jour.
+Chaque composant voulant réaliser une opération de mise à jour doit systématiquement poser un verrou dans Redis avant de réaliser la mise à jour (fetch-merge-upsert). Si le cache contient déjà ce verrou, alors le composant sait qu'un autre composant est en train de réaliser une opération de mise à jour.
 Ainsi, grace au verrou l'atomicité de l'operation de mise à jour est préservée.
 Il faudra bien entendu penser à libérer le verrou une fois l'opération terminée.
 
 ![Uml Diagram after](../img/UmlDiagram.after.svg)
 
-Il ne reste plus qu'à encapsuler cela dans une petite couche de technique (DAL) afin d'abstraire tout cela de mon traitement métier.
+Il ne reste plus qu'à l'encapsuler dans une petite couche technique (DAL) afin d'abstraire tout cela du traitement métier.
 
-> Pour le verrou, il faut utiliser l'identifiant (la clé primaire) de la donnée en tant que clé. Par exemple pour notre exemple ci-dessous, on utilisera "99039816" comme clé. 
+> Pour le verrou, il faut utiliser l'identifiant (la clé primaire) de la donnée en tant que clé. Par exemple pour notre exemple ci-dessus, on utilisera "99039816" comme clé. 
 
 Parfait !
 
-Mais que se passe-t-il s'il y a un verrou de posé ? On attends !
+Mais que se passe-t-il s'il y a un verrou de posé ? 
+
+On attends !
 
 Oui, mais imaginons que l'on ai une vague de mise à jour sur la même donnée (c'est un cas extrème), ou que le cache redis ou que le comosdb ne réponde pas ? Mon composant ne va pas attendre éternellement ! 
 
@@ -101,10 +112,7 @@ C'est vrai. Pour cela, je conseille d'utiliser une file d'attente.
 
 #### L'architecture
 
-L'idée est de découper le traitement de mise à jour en 2 composants.
-- Le premier composant (Métier) va pousser sa demande mise à jour dans une file d'attente.
-- Le second composant (DAL) va lui traiter cette file d'attente et réaliser les mise à jour.
-- En cas d'impossibilité de réaliser une mise à jour par le second composant, celui-ci va remettre la demande en file d'attente (celle-ci sera traité ultérieurement)  
+L'idée est de découper le traitement de mise à jour en 2. Le premier composant (Business) va pousser sa demande mise à jour dans une file d'attente. Le second composant (DAL) va lui traiter cette file d'attente et réaliser les mises à jour. En cas d'impossibilité de réaliser une mise à jour par le second composant, celui-ci va remettre la demande en file d'attente (celle-ci sera traité ultérieurement)  
 
 ![Schema CosmosDB-Redis](../img/cosmosdb.redis.svg)
 ```
@@ -116,19 +124,23 @@ L'idée est de découper le traitement de mise à jour en 2 composants.
 5'- Remise en file d'attente en cas d'échec. 
 ```
 
+> Je préconise de tenter 5 à 10 fois la mise à jour par le composant avant de remettre la demande  en file d'attente.
+
 #### Cas au limite
 
 C'est bien cette histoire de file d'attente, mais du coup, j'ai un risque que les opérations de mise à jour soient réalisées dans le désordre.
 
 C'est vrai.
 
-Pour cela, on peut se baser sur le timestamp de la donnée (il faudra alors stocker cette information en plus dans CosmosDB). Si la mise à jour à traité est antiérieur à la dernière mise à jour dans CosmosDB, la mise à jour est abandonnée.
+Pour cela, on peut se baser sur le timestamp de la donnée (il faudra alors stocker cette information en plus dans CosmosDB). Ainsi, si la mise à jour à traiter est antiérieur à la dernière mise à jour dans CosmosDB, la mise à jour est abandonnée.
 
-Ca reste imparfait.
+Cela reste imparfait.
 
 ### Conclusion
 
-Il faut se doter de plusieurs ressources azure pour obtenir une solution capable de gérer proprement les mise à jour dans CosmosDB.
+Il faut se doter de plusieurs ressources azure et réaliser un peu de développement pour obtenir une solution capable de gérer presque proprement les mises à jour dans CosmosDB.
+
+Le partial update permettrait de se défaire de cette problèmatique en n'envoyant dans CosmosDB que les propriétés à mettre à jour. Le CosmosDB ce chargeant de réaliser les opérations de fetch-merge-upsert lui même. Cela simplifierait beaucoup de chose.
 
 Vivement le Partial Update !
 

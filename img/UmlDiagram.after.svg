@@ -308,14 +308,14 @@
 		</g>
 		<g id="shape159-121" v:mID="159" v:groupContext="shape" transform="translate(110.66,-264.278)">
 			<title>Feuille.159</title>
-			<desc>Find Data</desc>
+			<desc>Fetch Data</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
 			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
-			<text x="49.99" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Find Data</text>		</g>
+			<text x="46.65" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Fetch Data</text>		</g>
 		<g id="shape160-124" v:mID="160" v:groupContext="shape" v:layerMember="0" transform="translate(475.792,-316.877)">
 			<title>Lien dynamique.160</title>
-			<path d="M0 491.25 L-150.56 491.25 A2.3622 2.3622 -180 1 0 -155.28 491.25 L-410.39 491.25" class="st12"/>
+			<path d="M0 491.25 L-150.56 491.25 A2.3622 2.3622 -180 0 0 -155.28 491.25 L-410.39 491.25" class="st12"/>
 		</g>
 		<g id="shape161-129" v:mID="161" v:groupContext="shape" transform="translate(117.747,-325.223)">
 			<title>Feuille.161</title>
