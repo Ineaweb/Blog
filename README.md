@@ -1,1 +1,0 @@
-- [CosmosDB : En attendant le partial update](docs/cosmosdb.waiting_partialupdate.md)

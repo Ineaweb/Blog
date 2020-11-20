@@ -1,3 +1,5 @@
+[retour](../index.md)
+
 ## CosmosDB : En attendant le partial update
 
 Cela fait maintenant : 
@@ -149,3 +151,4 @@ Vivement le Partial Update !
 - [feedback Azure](https://feedback.azure.com/forums/263030-azure-cosmos-db/suggestions/6693091-be-able-to-do-partial-updates-on-document?page=4&per_page=20#{toggle_previous_statuses})
 - [wikipédia](https://fr.wikipedia.org/wiki/Propri%C3%A9t%C3%A9s_ACID)
   
+[retour](../index.md)
