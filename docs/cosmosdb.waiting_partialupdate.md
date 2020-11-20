@@ -134,9 +134,9 @@ C'est bien cette histoire de file d'attente, mais du coup, j'ai un risque que le
 
 C'est vrai.
 
-Pour cela, on peut se baser sur le timestamp de la donnée (il faudra alors stocker cette information en plus dans CosmosDB). Ainsi, si la mise à jour à traiter est antiérieur à la dernière mise à jour dans CosmosDB, la mise à jour peut-être abandonnée.
+Pour cela, on peut se baser sur le timestamp de la donnée (il faudra alors stocker cette information en plus dans CosmosDB). Ainsi, si la mise à jour à traiter est antérieur à la dernière mise à jour dans CosmosDB, l'opération peut-être abandonnée.
 
-Cela reste imparfait.
+Cela reste imparfait...
 
 ### Conclusion
 
