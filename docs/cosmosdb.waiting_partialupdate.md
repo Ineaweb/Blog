@@ -15,7 +15,7 @@ Mais pourquoi cette fonctionnalité change tout ?
 
 ### Constat : Atomicité des mises à jour DocumentDB
 
-Via le mécanisme de contrôle d’accès concurrentiel optimiste (Transactions optimistic concurrency) de l'api SQL, Microsoft garanti que les transactions envoyé vers un Conteneur CosmosDB sont ACID. Mais à y regarder de plus près on constate que dans la liste des opérations pris en charge, le classique "UPDATE" SQL n'est pas là. Mais comment faire une mise à jour alors ?
+Via le mécanisme de contrôle d’accès concurrentiel optimiste (etag - Transactions optimistic concurrency) de l'api SQL, Microsoft garanti que les transactions envoyées vers un Conteneur CosmosDB sont ACID. Mais à y regarder de plus près on constate que le classique "UPDATE" SQL n'est pas dans la liste des opérations pris en charge. Mais comment faire une mise à jour alors ?
 
 Aujourd'hui, pour faire une mise à jour dans un conteneur CosmosDB, il faut :
 1. récupérer le document, 
@@ -144,7 +144,7 @@ Cela reste imparfait...
 
 Il faut se doter de plusieurs ressources azure et réaliser un peu de développement pour obtenir une solution capable de gérer presque proprement les mises à jour dans CosmosDB.
 
-Une autre solution qui pourrait sembler être plus "sexy" serait d'utiliser les procédures stockées JS de CosmosDB. En effet, les ProcStock permettent de garantir l'atomicité de l'opération. Mais si vous devez gérer des données complexe dans votre conteneur CosmosDB, vous allez galérer à implémenter et à maintenir celle-ci.
+Une autre solution qui pourrait sembler être plus "sexy" serait d'utiliser les procédures stockées JS de CosmosDB. En effet, les ProcStock permettent de garantir l'atomicité de l'opération. Mais à mon avis, si vous devez gérer des données complexe dans votre conteneur CosmosDB, vous allez galérer à implémenter et maintenir celles-ci.
 
 Le partial update permettrait de se défaire de cette problèmatique en n'envoyant dans CosmosDB que les propriétés à mettre à jour. Le CosmosDB ce chargeant de réaliser les opérations de fetch-merge-upsert lui même. Cela simplifierait beaucoup de chose.
 
