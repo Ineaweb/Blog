@@ -144,7 +144,9 @@ Cela reste imparfait...
 
 Il faut se doter de plusieurs ressources azure et réaliser un peu de développement pour obtenir une solution capable de gérer presque proprement les mises à jour dans CosmosDB.
 
-Une autre solution qui pourrait sembler être plus "sexy" serait d'utiliser les procédures stockées JS de CosmosDB. En effet, les ProcStock permettent de garantir l'atomicité de l'opération. Mais à mon avis, si vous devez gérer des données complexe dans votre conteneur CosmosDB, vous allez galérer à implémenter et maintenir celles-ci.
+Il existe d'autres solutions :
+- Une qui pourrait sembler être plus "sexy" serait d'utiliser les procédures stockées JS de CosmosDB. En effet, les ProcStock permettent de garantir l'atomicité de l'opération. Mais à mon avis, si vous devez gérer des données complexe dans votre conteneur CosmosDB, vous allez galérer à implémenter et maintenir celles-ci.
+- Une autre, consiste à utiliser les Azure Function Durable Entities. Mais je n'ai pas encore eu l'occassion de tester. 
 
 Le partial update permettrait de se défaire de cette problèmatique en n'envoyant dans CosmosDB que les propriétés à mettre à jour. Le CosmosDB ce chargeant de réaliser les opérations de fetch-merge-upsert lui même. Cela simplifierait beaucoup de chose.
 
@@ -156,5 +158,12 @@ Vivement le Partial Update !
 - [Wikipédia](https://fr.wikipedia.org/wiki/Propri%C3%A9t%C3%A9s_ACID)
 - [CosmosDB - Stored Procedures](https://docs.microsoft.com/fr-fr/azure/cosmos-db/stored-procedures-triggers-udfs)
 - [CosmosDB - Transactions optimistic concurrency](https://docs.microsoft.com/fr-fr/azure/cosmos-db/database-transactions-optimistic-concurrency)
+- [Azure Function Durable Entities](https://docs.microsoft.com/fr-fr/azure/azure-functions/durable/durable-functions-entities?tabs=csharp)
   
+#### Remerciement
+
+- [Quentin Joseph](https://www.linkedin.com/in/quentin-joseph-a4962b87/) : pour la relecture
+- [Benjamin Dufour](https://www.linkedin.com/in/benjamin-dufour-01288b51/) : pour les  Azure Function Durable Entities ;-)
+- [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
+
 [retour](../index.md)
