@@ -37,7 +37,7 @@ L'idée est d'utiliser le CRC (Contrôle de redondance cyclique) pour déduire l
 
 Voici un petit tableau de correspondance :
 
-| Nombre de bits | Nombre de clé possible | Volumétrie de donnée |
+| Nombre de bits (CRC-x) | Nombre de clé possible | Volumétrie de donnée |
 |-|-|-|
 | 2 | 4 | entre 4 000 et 40 000 |
 | 3 | 8 | entre 8 000 et 80 000 |
@@ -49,11 +49,13 @@ Voici un petit tableau de correspondance :
 
 Ainsi, contrairement à l'attribution aléatoire de la valeur de la clé de partition, on garantie que peut importe le processus réalisant une opération sur le conteneur il n'y a aucun risque de se retrouver avec des doublons.
 
+L'autre avantage, est que si vous souhaitez récupérer une donnée à partir de son identifiant, vous pouvez automatiquement déduire sa clé de partition. Ainsi, lorsque vous interrogez votre conteneur cosmosdb vous pouvez préciser la partition et ainsi vous récupérez plus rapidement et/ou pour moins cher (moins de RU consommés) à votre donnée.
+
 ### Conclusion
 
-En intégrant ce mécanisme de déduction de la clé de partition directement dans votre modèle de donnée, vous faites abstraction de cette contrainte technique.
+En intégrant ce mécanisme de déduction de la clé de partition directement dans votre modèle de données, vous faites abstraction de cette contrainte technique.
 
-Certe vous aurez dans votre conteneur une données technique en plus qui ne sert pas à grand chose fonctionnellement. Mais bon, c'est mieux que d'avoir des doublons en pagaille !
+Certe vous aurez dans votre conteneur une donnée technique en plus qui ne sert pas à grand chose fonctionnellement. Mais bon, c'est mieux que d'avoir des doublons en pagaille !
 
 #### Références
 
