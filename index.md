@@ -1,6 +1,6 @@
 ## Introduction
 
-Ce blog à pour objectif de partager mes expériences autour du cloud Azure et d'Azure Devops.
+Ce blog à pour objectif de partager mes expériences autour du cloud Azure et du DevOps.
 
 ## Articles
 
