@@ -1,0 +1,68 @@
+[retour](../index.md)
+
+## CosmosDB : Une clé de partition calculé !
+
+Dans cosmosdb, la notion de clé de partition est essentielle. Une effet, contraitement à d'autre système de stockage de données classique (SQL par exemple), l'unicité d'une donnée est basé sur le couple **identifiant** - **clé de partition**.
+Les conteneurs CosmosDB sont découpées en partition logique. Donc, dans un même conteneur vous pouvez très bien avoir le même **identifiant** dans 2 partitions logique différente.
+
+La clé de partition peut-être définit à partir de n'importe quelle propriété de la données. Mais il y a quelques contraintes à respecter :
+
+- Cette propriété doit être immuable (tout comme l'identifiant).
+- Le stockage sur une clé est limité à 20 Go. 
+- Le nombre de valeur possible de cette propriété doit être proportionnel au nombre de d'items stockés dans le conteneur (je conseille un rapport compris entre 1/1 000 et 1/10 000).
+- La répartition du stockage doit être uniforme entre toutes les clés.
+- La répartition des requêtes doit être de préférence uniforme entre toutes les clés.
+
+Dans ces conditions il est parfois difficile de trouver la propriété répondant à tous ces critères !
+
+Pas de panique, j'ai une solution !  
+
+Elle consiste à calculer la clé de partition à partir de l'**identifiant**.
+
+### La fausse bonne idée !
+
+Une solution simple serait de définir de façon aléatoire la clé de partition. Ainsi on maitrise le nombre de partition et on s'assure que la répartition du stockage et des requêtes est uniforme. 
+
+Parfait ! Sauf que s'il on a 2 processus qui réalise au même moment l'ajout de la même donnée chacun va calculer sa propre clé de partition et les 2 ajouts seront enregistrés. Nous aurons un doublon !
+
+Et ne croyez pas que j'exagère et que mon exemple ne peux pas arriver ! J'aime souvent cité la loi de Murphy dans ce type de cas : "Tout ce qui est susceptible d'aller mal, ira mal.". Et personnellement, je déteste les doublons !
+
+### Une solution : Un CRC en guise de clé de partition.
+
+Pourquoi ne pas déduire la clé de partition à partir de l'identifiant ! 
+
+Un peu comme les 2 derniers chiffres de votre numéro de sécurité sociale... 
+
+L'idée est d'utiliser le CRC (Contrôle de redondance cyclique) pour déduire la clé de partition à partir de l'identifiant. Le nombre de bits du CRC, va permettre de jouer sur le nombre de valleurs possible de la clé.
+
+Voici un petit tableau de correspondance :
+
+| Nombre de bits | Nombre de clé possible | Volumétrie de donnée |
+|-|-|-|
+| 2 | 4 | entre 4 000 et 40 000 |
+| 3 | 8 | entre 8 000 et 80 000 |
+| 4 | 16 | entre 16 000 et 160 000 |
+| 5 | 32 | entre 32 000 et 320 000 |
+| 6 | 64 | entre 64 000 et 640 000 |
+| 7 | 128 | entre 128 000 et 1 280 000 |
+| 8 | 256 | entre 256 000 et 2 560 000 |
+
+Ainsi, contrairement à l'attribution aléatoire de la valeur de la clé de partition, on garantie que peut importe le processus réalisant une opération sur le conteneur il n'y a aucun risque de se retrouver avec des doublons.
+
+### Conclusion
+
+En intégrant ce mécanisme de déduction de la clé de partition directement dans votre modèle de donnée, vous faites abstraction de cette contrainte technique.
+
+Certe vous aurez dans votre conteneur une données technique en plus qui ne sert pas à grand chose fonctionnellement. Mais bon, c'est mieux que d'avoir des doublons en pagaille !
+
+#### Références
+
+- [Partitions CosmosDB](https://docs.microsoft.com/fr-fr/azure/cosmos-db/partitioning-overview#choose-partitionkey)
+- [Jim Blackler CRCTool](http://svn.jimblackler.net/jimblackler/trunk/Visual%20Studio%202005/Projects/PersistentObjects/CRCTool.cs)
+  
+#### Remerciement
+
+- [Quentin Joseph](https://www.linkedin.com/in/quentin-joseph-a4962b87/) : pour la relecture
+- [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
+
+[retour](../index.md)
