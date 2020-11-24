@@ -47,7 +47,7 @@ Voici un petit tableau de correspondance :
 | 7 | 128 | entre 128 000 et 1 280 000 |
 | 8 | 256 | entre 256 000 et 2 560 000 |
 
-Ainsi, contrairement à l'attribution aléatoire de la valeur de la clé de partition, on garantie que peut importe le processus réalisant une opération sur le conteneur il n'y a aucun risque de se retrouver avec des doublons.
+Ainsi, contrairement à l'attribution aléatoire de la valeur de la clé de partition, on garantit que peu importe le processus réalisant une opération sur le conteneur il n'y a aucun risque de se retrouver avec des doublons.
 
 L'autre avantage, est que si vous souhaitez récupérer une donnée à partir de son identifiant, vous pouvez automatiquement déduire sa clé de partition. Ainsi, lorsque vous interrogez votre conteneur cosmosdb vous pouvez préciser la partition et ainsi vous récupérez plus rapidement et/ou pour moins cher (moins de RU consommés) votre donnée.
 
