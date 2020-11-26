@@ -5,6 +5,7 @@ Ce blog à pour objectif de partager mes expériences autour du cloud Azure et d
 ## Articles
 
 - [CosmosDB : En attendant le partial update](docs/cosmosdb.waiting_partialupdate.md)
+- [CosmosDB : Une clé de partition calculée !](docs/cosmosdb.calculatedPartitionKey.md)
 
 ## Me suivre ou réagir !
 

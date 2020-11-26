@@ -1,13 +1,15 @@
 [retour](../index.md)
 
-## CosmosDB : Une clé de partition calculé !
+## CosmosDB : Une clé de partition calculée !
 
 Dans CosmosDB, la notion de clé de partition est essentielle. En effet, contraitement à d'autres systèmes de stockage de données classique (SQL par exemple), l'unicité d'une donnée est basée sur le couple **identifiant** - **clé de partition**.
-Les conteneurs CosmosDB sont découpés en partitions logiques. Chaque partition logique gère indépendamment l'unicité de ses éléments en se basant sur l'identifiant **id**. C'est un peu comme un dossier qui s'assure qu'à l'intérieur de lui, il n'y a pas 2 fois le même nom de fichier. 
+
+Les conteneurs CosmosDB sont découpés en partitions logiques. Chaque partition logique gère indépendamment l'unicité de ses éléments en se basant sur l'identifiant **id**. 
 
 ![CosmosDB PartitionKey](../img/cosmosdb.partitionkey.svg)
 
-Donc, dans un même conteneur vous pouvez très bien avoir le même **identifiant** dans 2 partitions logique différente.
+C'est un peu comme un dossier qui s'assure qu'à l'intérieur de lui, il n'y a pas 2 fois le même nom de fichier. 
+Donc, dans un même conteneur vous pouvez très bien avoir le même **identifiant** dans 2 partitions logiques différentes.
 
 La clé de partition peut-être définie à partir de n'importe quelle propriété de la donnée. Mais il y a quelques contraintes à respecter :
 
@@ -20,9 +22,7 @@ La clé de partition peut-être définie à partir de n'importe quelle propriét
 
 Dans ces conditions il est parfois difficile de trouver la propriété répondant à tous ces critères !
 
-Pas de panique, j'ai une solution !  
-
-Elle consiste à calculer la clé de partition à partir de l'**identifiant**.
+**Pas de panique, j'ai une solution !** Elle consiste à calculer la clé de partition.
 
 ### La fausse bonne idée !
 
