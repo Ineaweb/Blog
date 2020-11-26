@@ -2,7 +2,7 @@
 
 ## CosmosDB : Une clé de partition calculé !
 
-Dans CosmosDb, la notion de clé de partition est essentielle. En effet, contraitement à d'autres systèmes de stockage de données classique (SQL par exemple), l'unicité d'une donnée est basée sur le couple **identifiant** - **clé de partition**.
+Dans CosmosDB, la notion de clé de partition est essentielle. En effet, contraitement à d'autres systèmes de stockage de données classique (SQL par exemple), l'unicité d'une donnée est basée sur le couple **identifiant** - **clé de partition**.
 Les conteneurs CosmosDB sont découpés en partition logique. Chaque partition logique gère indépendamment l'unicité de ses éléments en se basant sur l'identifiant **id**. C'est un peu comme un dossier qui s'assure qu'à l'interieur de lui, il n'y a pas 2 fois le même nom de fichier. 
 
 ![CosmosDB PartitionKey](../img/cosmosdb.partitionkey.svg)
@@ -61,6 +61,8 @@ L'autre avantage, est que si vous souhaitez récupérer une donnée à partir de
 En intégrant ce mécanisme de déduction de la clé de partition directement dans votre modèle de données, vous faites abstraction de cette contrainte technique.
 
 Certe vous aurez dans votre conteneur une donnée technique en plus qui ne sert pas à grand chose fonctionnellement. Mais bon, c'est mieux que d'avoir des doublons en pagaille !
+
+> Cette solution peut aussi s'appliquer pour les Table Storage Azure ;-).
 
 #### Références
 
