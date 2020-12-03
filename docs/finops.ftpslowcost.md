@@ -60,7 +60,7 @@ Certe cette solution ne permet pas de gérer plusieurs compte d'accès. Si vous 
 
 Mais ce qu'il faut retenir, c'est que :
 - d'une part, ce service ne vous coutera rien ou presque rien (juste les coûts du StorageAccount).
-- d'une autre part, ce sera l'occasion d'inciter vos partenaires à changer de méthode pour consommer ou pousser des fichiers (API Rest,...).
+- d'autre part, ce sera l'occasion d'inciter vos partenaires à changer de méthode pour consommer ou pousser des fichiers (API Rest,...).
 
 > Dans mon exemple j'utilise une FunctionApp mais cela fonctionne tout aussi bien avec un WebApp.
 
