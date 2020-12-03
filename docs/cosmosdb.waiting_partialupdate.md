@@ -166,4 +166,6 @@ Vivement le Partial Update !
 - [Benjamin Dufour](https://www.linkedin.com/in/benjamin-dufour-01288b51/) : pour les  Azure Function Durable Entities ;-)
 - [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
+_Rédigé par Philippe MORISSEAU, Publié le 20 Novembre 2020_
+
 [retour](../index.md)

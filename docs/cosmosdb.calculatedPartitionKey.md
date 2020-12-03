@@ -74,4 +74,6 @@ Certe vous aurez dans votre conteneur une donnée technique en plus qui ne sert 
 - [Quentin Joseph](https://www.linkedin.com/in/quentin-joseph-a4962b87/) : pour la relecture
 - [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
+_Rédigé par Philippe MORISSEAU, Publié le 27 Novembre 2020_
+
 [retour](../index.md)
