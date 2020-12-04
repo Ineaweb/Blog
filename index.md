@@ -6,6 +6,7 @@ Ce blog à pour objectif de partager mes expériences autour du cloud Azure et d
 
 - [CosmosDB : En attendant le partial update](docs/cosmosdb.waiting_partialupdate.md)
 - [CosmosDB : Une clé de partition calculée !](docs/cosmosdb.calculatedPartitionKey.md)
+- [FinOps : Un FTPS Low Cost](docs/finops.ftpslowcost.md)
 
 ## Me suivre ou réagir !
 
