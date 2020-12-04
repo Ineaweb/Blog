@@ -7,18 +7,18 @@ Il vous reste donc 2 options :
 1. Se créer son propre serveur FTP à partir d'une VM ou d'une ACI (à tester).
 2. Passer par un tiers qui vous mettra à disposition ce service.
 
-Cela nécessitera dans tous les cas un coût non négligeable pour un service tèrs basique. N'y a-t-il pas une autre solution ?
+Cela nécessitera dans tous les cas un coût non négligeable pour un service très basique. N'y a-t-il pas une autre solution ?
 
 **J'ai une solution !**
 
-Je vais certainement faire huler tous les puristes, mais il s'avère que cette solution à fait ses preuves et fonctionne parfaitement chez les clients depuis plus de 2 ans.
+Je vais certainement faire hurler tous les puristes, mais il s'avère que cette solution à fait ses preuves et fonctionne parfaitement chez les clients depuis plus de 2 ans.
 Il suffit d'utiliser 2 services managés Azure : Une FunctionApp + Un StorageAccount.
 
 ![FunctionApps + StorageAccount](../img/finops.ftps.svg)
 
 ### Une solution : Une FunctionApp en tant que serveur FTP(S).
 
-Pour déployer votre code source sur vos FunctionApp, vous avez plusieurs possibilités. L'un d'elle utilise un service FTP(S). L'idée est donc de réutiliser ce service de la FunctionApp pour en faire la principale fonctionnalité.
+Pour déployer votre code source sur vos FunctionApp, vous avez plusieurs possibilités. L'un d'elle utilise un service FTP(S). L'idée est donc de réutiliser ce service de la FunctionApp pour en faire la fonctionnalité principale.
 
 Pour cela rien de plus simple, il faut :
 1. Créer une FunctionApp avec un service plan "Free" (Sku : Y1),
@@ -70,7 +70,6 @@ Mais ce qu'il faut retenir, c'est que :
 
 #### Remerciement
 
-- [Quentin Joseph](https://www.linkedin.com/in/quentin-joseph-a4962b87/) : pour la relecture
 - [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
 _Rédigé par Philippe MORISSEAU, Publié le 04 Novembre 2020_
