@@ -18,7 +18,7 @@ Ce blog à pour objectif de partager mes expériences autour du cloud Azure et d
 ## Mes Talks
 
 - CloudOuest 2021 : **Un datahub dans Azure : Retour d'expérience sur les services managés**
-- France DevOps (Juillet 2021) : **Au secours, le DevOps part en vrille !** *(replay : https://www.francedevops.fr/webinars/au-secours-le-devops-part-en-vrille)*
+- France DevOps (Juillet 2021) : **Au secours, le DevOps part en vrille !** *[replay](https://www.francedevops.fr/webinars/au-secours-le-devops-part-en-vrille)*
 
 A venir :
 
