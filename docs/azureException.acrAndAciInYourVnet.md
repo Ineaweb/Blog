@@ -38,6 +38,10 @@ Les 2 services Microsoft ne pouvant être utiliser conjointement dans un réseau
    
    ![archi 3](../img/azureException.acrAndAciWithVnet3.svg)
 
+Et il ne faut pas compter sur l'utilisation d'un **Service Endpoint** (en preview) puisque celui-ci ne permet pas non plus de récupérer l'image depuis d'un **Azure Container Instance**.
+
+_Les instances de services Azure, notamment Azure DevOps Services, Web Apps et Azure Container Instances, ne peuvent pas non plus accéder à un registre de conteneurs dont l’accès réseau est restreint._
+
 ### Conclusion
 
 Il n'y a pour le moment pas de contournement idéal. 
@@ -51,6 +55,7 @@ C'est un début.
 
 - [Déployer des instance de conteneur dans un réseau virtuel Azure](https://docs.microsoft.com/fr-fr/azure/container-instances/container-instances-vnet)
 - [Connexion privée à un registre de conteneurs Azure à l’aide d’Azure Private Link](https://docs.microsoft.com/fr-fr/azure/container-registry/container-registry-private-link)
+- [Restreindre l’accès à un registre de conteneurs à l’aide d’un point de terminaison de service dans un réseau virtuel Azure](https://docs.microsoft.com/fr-fr/azure/container-registry/container-registry-vnet#preview-limitations)
 - [Deploying Linux custom container from private Azure Container Registry](https://azure.github.io/AppService/2021/07/03/Linux-container-from-ACR-with-private-endpoint.html)
 - [ACR with private endpoint - Web Apps](https://github.com/MicrosoftDocs/azure-docs/issues/78210)
 
