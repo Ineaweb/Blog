@@ -56,8 +56,6 @@ C'est un début.
 
 #### Remerciement
 
-- [Fabrice Weinling](https://www.linkedin.com/in/quentin-joseph-a4962b87/) : pour la relecture
-- [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
 _Rédigé par Philippe MORISSEAU, Publié le 09 Septembre 2021_
 
