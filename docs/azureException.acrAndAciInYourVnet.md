@@ -27,7 +27,7 @@ _Extrait [docs.microsoft.com](https://docs.microsoft.com/fr-fr/azure/container-r
 
 ### Contournement
 
-Les 2 services Microsoft ne pouvant être utiliser conjointement dans un réseau privé, 3 solutions s'offrent à nous :
+Les 2 services Microsoft ne pouvant être utilisé conjointement dans un réseau privé, 3 solutions s'offrent à nous :
 1. Ne plus restreindre l'accès réseau de notre **Azure Container Registry**.
    
    ![archi 2](../img/azureException.acrAndAciWithVnet1.svg)
@@ -61,6 +61,8 @@ C'est un début.
 
 #### Remerciement
 
+- [Etienne Louise](https://www.linkedin.com/in/benjamin-dufour-01288b51/) : pour la relecture
+- [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
 _Rédigé par Philippe MORISSEAU, Publié le 09 Septembre 2021_
 
