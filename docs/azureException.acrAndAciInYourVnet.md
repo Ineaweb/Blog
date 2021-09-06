@@ -23,7 +23,7 @@ Donc, sur le papier le schéma d'architecture ci-dessous fonctionne... Ce n'est 
 
 Après quelques tests infructueux, nous avons fait une petite recherche et découvert rapidement que l'utilisation d'un **Private Endpoint** pour un **Azure Container Registry** comportait quelques exceptions et notamment celle-ci : 
 
-_Les instances de services Azure, notamment Azure DevOps Services, Web Apps et Azure Container Instances, ne peuvent pas non plus accéder à un registre de conteneurs dont l’accès réseau est restreint._
+_Extrait [docs.microsoft.com](https://docs.microsoft.com/fr-fr/azure/container-registry/container-registry-private-link) : Les instances de services Azure, notamment Azure DevOps Services, Web Apps et Azure Container Instances, ne peuvent pas non plus accéder à un registre de conteneurs dont l’accès réseau est restreint._
 
 ### Contournement
 
@@ -31,16 +31,16 @@ Les 2 services Microsoft ne pouvant être utiliser conjointement dans un réseau
 1. Ne plus restreindre l'accès réseau de notre **Azure Container Registry**.
    
    ![archi 2](../img/azureException.acrAndAciWithVnet1.svg)
-2. Remplacer notre **Azure Container Registry** par un solution **Container Registry Self Hosted**
+2. Remplacer notre **Azure Container Registry** par une solution **Container Registry Self Hosted**
    
    ![archi 3](../img/azureException.acrAndAciWithVnet2.svg)
 2. Remplacer nos **Azure Container Instance** par un cluster **Azure Kubernetes Services** par exemple.
    
    ![archi 3](../img/azureException.acrAndAciWithVnet3.svg)
 
-Et il ne faut pas compter sur l'utilisation d'un **Service Endpoint** (en preview) puisque celui-ci ne permet pas non plus de récupérer l'image depuis d'un **Azure Container Instance**.
+Et il ne faut pas compter sur l'utilisation d'un **Service Endpoint** (en preview) puisque celui-ci ne permet pas non plus de récupérer l'image depuis un **Azure Container Instance**.
 
-_Les instances de services Azure, notamment Azure DevOps Services, Web Apps et Azure Container Instances, ne peuvent pas non plus accéder à un registre de conteneurs dont l’accès réseau est restreint._
+_Extrait de [docs.microsoft.com](https://docs.microsoft.com/fr-fr/azure/container-registry/container-registry-vnet#preview-limitations) : Les instances de services Azure, notamment Azure DevOps Services, Web Apps et Azure Container Instances, ne peuvent pas non plus accéder à un registre de conteneurs dont l’accès réseau est restreint._
 
 ### Conclusion
 
