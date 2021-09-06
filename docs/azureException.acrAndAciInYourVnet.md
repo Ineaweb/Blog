@@ -64,6 +64,6 @@ C'est un début.
 - [Etienne Louise](https://www.linkedin.com/in/etienne-louise-78154063/) : pour la relecture
 - [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
-_Rédigé par Philippe MORISSEAU, Publié le 09 Septembre 2021_
+_Rédigé par Philippe MORISSEAU, Publié le 06 Septembre 2021_
 
 [retour](../index.md)
