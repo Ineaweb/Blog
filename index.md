@@ -7,6 +7,7 @@ Ce blog a pour objectif de partager mes expériences autour du cloud Azure et du
 - [CosmosDB : En attendant le partial update](docs/cosmosdb.waiting_partialupdate.md)
 - [CosmosDB : Une clé de partition calculée !](docs/cosmosdb.calculatedPartitionKey.md)
 - [FinOps : Un FTPS Low Cost](docs/finops.ftpslowcost.md)
+- [Azure, Les exceptions qui font mal : Chapitre 1 - Azure Container Registry et Azure Container Instance dans votre Vnet](docs/azureException.acrAndAciInYourVnet.md)
 
 ## Mes certifications
 
