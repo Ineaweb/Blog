@@ -61,7 +61,7 @@ C'est un début.
 
 #### Remerciement
 
-- [Etienne Louise](https://www.linkedin.com/in/benjamin-dufour-01288b51/) : pour la relecture
+- [Etienne Louise](https://www.linkedin.com/in/etienne-louise-78154063/) : pour la relecture
 - [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
 _Rédigé par Philippe MORISSEAU, Publié le 09 Septembre 2021_
