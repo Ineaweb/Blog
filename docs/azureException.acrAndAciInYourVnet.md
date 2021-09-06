@@ -2,9 +2,9 @@
 
 # Azure, Les exceptions qui font mal ! 
 
-Voici le premier volet d'une série d'article basé sur des retours d'expériences malheureux avec Azure.
-Il ne faut pas y voir une critique de la platforme cloud, mais plutôt comprendre cette série comme une occasion manqué et une possibilité pour Microsoft d'améliorer encore son cloud Azure. Rien n'est parfait !
-J'espère que cette série vous permettra d'éviter les pièges dans lequels nous sommes tombés, moi et mon équipe.
+Voici le premier volet d'une série d'articles basé sur des retours d'expériences malheureux avec Azure.
+Il ne faut pas y voir une critique de la plateforme cloud, mais plutôt comprendre cette série comme une occasion manquée et une possibilité pour Microsoft d'améliorer encore son cloud Azure. Rien n'est parfait !
+J'espère que cette série vous permettra d'éviter les pièges dans lesquels nous sommes tombés, moi et mon équipe.
 
 ## Chapitre 1 : Azure Container Registry et Azure Container Instance dans votre Vnet.
 
@@ -14,7 +14,7 @@ Parlons un peu de l'architecture que nous avions envisagé de réaliser.
 L'objectif est d'instancier des conteneurs via des **Azure Container Instance** à partir d'image déployé dans un **Azure Container Registry**. Tout cela doit être sécurisé au niveau reseau dans un **Virtual Network**.
 
 D'un coté le service **Azure Container Registry** permet d'utiliser les **Private Endpoint** pour restreindre l'accès de son service de registre de conteneur à un réseau privé.
-De l'autre, les **Azure Container Instance** peuvent être déployé dans un réseau privé virtuel.
+De l'autre, les **Azure Container Instance** peuvent être déployés dans un réseau privé virtuel.
 Donc, sur le papier le schéma d'architecture ci-dessous fonctionne... Ce n'est pas le cas.
 
 ![archi 1](../img/azureException.acrAndAciWithVnet.svg)
@@ -27,7 +27,7 @@ _Extrait [docs.microsoft.com](https://docs.microsoft.com/fr-fr/azure/container-r
 
 ### Contournement
 
-Les 2 services Microsoft ne pouvant être utilisé conjointement dans un réseau privé, 3 solutions s'offrent à nous :
+Les 2 services Microsoft ne pouvant être utilisés conjointement dans un réseau privé, 3 solutions s'offrent à nous :
 1. Ne plus restreindre l'accès réseau de notre **Azure Container Registry**.
    
    ![archi 2](../img/azureException.acrAndAciWithVnet1.svg)
@@ -62,6 +62,7 @@ C'est un début.
 #### Remerciement
 
 - [Etienne Louise](https://www.linkedin.com/in/etienne-louise-78154063/) : pour la relecture
+- [David Dubourg](https://www.linkedin.com/in/dubourg-david-7413779/) : pour la relecture
 - [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
 _Rédigé par Philippe MORISSEAU, Publié le 06 Septembre 2021_
