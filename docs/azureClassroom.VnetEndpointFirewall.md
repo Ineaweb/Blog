@@ -125,6 +125,7 @@ Comme vous pouvez le constatez chaque fonctionnalité de sécurisation réseau a
 - [Etienne Louise](https://www.linkedin.com/in/etienne-louise-78154063/) : pour la relecture
 - [David Dubourg](https://www.linkedin.com/in/dubourg-david-7413779/) : pour la relecture
 - [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
+- [Quentin Joseph](https://www.linkedin.com/in/quentin-joseph-a4962b87/) : pour la relecture
 
 _Rédigé par Philippe MORISSEAU, Publié le 13 Septembre 2021_
 
