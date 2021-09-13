@@ -19,9 +19,9 @@ Mais, cela n'est généralement pas suffisant si vous souhaitez protéger votre 
 
 ![privateEndpoint2](../img/azureClassroom.VnetEndpointFirewall2.svg)
 
-Dans l'exemple ci-dessus on constate que notre **Event Hubs A** bien qu'il ai un **Private Endpoint** dans le **Subnet A** est accessible depuis le **Subnet B** et internet.
+Dans l'exemple ci-dessus on constate que notre **Event Hubs A** bien qu'il ait un **Private Endpoint** dans le **Subnet A** est accessible depuis le **Subnet B** et internet.
 
-S'il on souhaite restreindre son accès, il va falloir mettre en places des règles firewall. 
+Si on souhaite restreindre son accès, il va falloir mettre en place des règles firewall. 
 Dans le cas d'un **Private Endpoint** / **Private Link**, la règle est très simple : 
 - **Deny : All**
 
@@ -96,7 +96,7 @@ Les **Service Tag** peuvent aussi être utilisé dans les règles firewall de no
 L'utilisation du **Private Endpoint** / **Private Link** :
 - est légèrement complexe à mettre en place, 
 - est relativement économique (à partir de 6,57 € / mois).
-- est recommandé en cas d'inbound/outbound trafic : De votre **Virtual Network** vers ou à destination votre service managé.
+- est recommandé en cas d'inbound/outbound trafic : De votre **Virtual Network** vers ou à destination de votre service managé.
 
 L'utilisation du **Service Endpoint** :
 - est simple à mettre en place, 
@@ -106,7 +106,7 @@ L'utilisation du **Service Endpoint** :
 L'utilisation du **Dedicated service** :
 - est simple à mettre en place, 
 - est parfois onéreux (**Application Service Environment**, **Integration Service Environnement**, ...). 
-- est recommandé en cas d'inbound/outbound trafic : De votre **Virtual Network** vers ou à destination votre service managé.
+- est recommandé en cas d'inbound/outbound trafic : De votre **Virtual Network** vers ou à destination de votre service managé.
 
 Comme vous pouvez le constatez chaque fonctionnalité de sécurisation réseau a son utilité. Et vous pouvez très bien mixer celles-ci pour obtenir le niveau de sécurité souhaité.
 
@@ -117,9 +117,14 @@ Comme vous pouvez le constatez chaque fonctionnalité de sécurisation réseau a
 #### Références
 
 - [Intégrer des services Azure à des réseaux virtuels pour l’isolement réseau](https://docs.microsoft.com/fr-fr/azure/virtual-network/vnet-integration-for-azure-services)
+- [Configurer des restrictions d’accès dans Azure App Service](https://docs.microsoft.com/fr-fr/azure/app-service/app-service-ip-restrictions)
+- [Configurer des pare-feux et des réseaux virtuels dans Stockage Azure](https://docs.microsoft.com/fr-fr/azure/storage/common/storage-network-security?tabs=azure-portal)
 
 #### Remerciement
 
+- [Etienne Louise](https://www.linkedin.com/in/etienne-louise-78154063/) : pour la relecture
+- [David Dubourg](https://www.linkedin.com/in/dubourg-david-7413779/) : pour la relecture
+- [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
 
 _Rédigé par Philippe MORISSEAU, Publié le 13 Septembre 2021_
 
