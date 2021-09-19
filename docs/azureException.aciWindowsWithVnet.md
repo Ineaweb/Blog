@@ -32,7 +32,7 @@ Vous pouvez aussi utiliser un **AKS** ou un **VM Scale Set**, mais de mon point 
 
 ### Conclusion
 
-Si vous êtes vraiment pressé par le temps ou vous doutez que Microsoft propose l'integration Vnet des **Azure Container Instance** Windows rapidement, je serais tenté de vous orienter vers **Azure Batch**. Un service managé d'Azure pas assez mis en valeur à mon gout !
+Si vous êtes vraiment pressé par le temps ou vous doutez que Microsoft propose l'integration Vnet des **Azure Container Instance** Windows rapidement, je serais tenté de vous orienter vers **Azure Batch**. Un service managé d'Azure pas assez mis en valeur à mon goût !
 
 #### Références
 
