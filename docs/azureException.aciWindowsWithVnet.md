@@ -1,0 +1,49 @@
+[retour](../index.md)
+
+# Azure, Les exceptions qui font mal ! 
+
+## Chapitre 2 : Azure Container Instance et Windows dans votre Vnet.
+
+### Le scénario
+
+Vous souhaitez proposer des services ayant une durée de vie limité, executable sous Linux ou Windows et isolé dans votre **Virtual Network**. Par exemple : Des runners **self-hosted** pour github.
+
+On imagine donc une architecture avec des **Azure Container Instance** du style :   
+
+![archi 1](../img/azureException.aciWindowsWithVnet.svg)
+
+Cela fonctionne pour nos conteneurs Linux mais pas pour nos conteneurs Windows... 
+
+### L'exception
+
+Après quelques tests infructueux, nous avons fait une petite recherche et découvert rapidement que l'utilisation d'**Azure Container Instance** dans un **Virtual Network** comportait quelques exceptions et notamment celle-ci : 
+
+_Extrait [docs.microsoft.com](https://docs.microsoft.com/fr-fr/azure/container-instances/container-instances-virtual-network-concepts#other-limitations) : Actuellement, seuls les conteneurs Linux sont pris en charge dans un groupe de conteneurs déployé sur un réseau virtuel._
+
+### Contournement
+
+Les **Azure Container Instance** ne permettant pas d'intégrer des conteneurs Windows dans votre Vnet, il ne nous reste que peu d'options :
+1. Microsoft avait annoncé fin 2020 que cette fonctionnalité serait disponible début 2021. S'il on admet un retard pris, on peu espérer que cette fonctionnalitée sera bientôt disponible. Donc, la première option est d'attendre.
+2. La seconde option, consiste à remplacer notre **Azure Container Instance** par **Azure Batch** avec un pool **Windows**.
+   
+   ![archi 2](../img/azureException.aciWindowsWithVnet2.svg)
+
+Vous pouvez aussi utiliser un **AKS** ou un **VM Scale Set**, mais de mon point de vue, c'est un peu "overkill".  
+
+### Conclusion
+
+Si vous êtes vraiment pressé par le temps ou vous doutez que Microsoft propose l'integration Vnet des **Azure Container Instance** Windows rapidement, je serais tenté de vous orienter vers **Azure Batch**. Un service managé d'Azure pas assez mis en valeur à mon gout !
+
+#### Références
+
+- [Ressources et scénarios relatifs aux réseaux virtuels](https://docs.microsoft.com/fr-fr/azure/container-instances/container-instances-virtual-network-concepts)
+- [Azure Container Instances (ACI) under the hood | Azure Friday](https://youtu.be/giQLmxMKAKE?t=412)
+- [Exécuter des applications de conteneur sur Azure Batch](https://docs.microsoft.com/fr-fr/azure/batch/batch-docker-container-workloads)
+- [Utiliser des conteneurs Windows Server](https://docs.microsoft.com/fr-fr/azure/aks/windows-container-cli)
+
+#### Remerciement
+
+
+_Rédigé par Philippe MORISSEAU, Publié le 20 Septembre 2021_
+
+[retour](../index.md)
