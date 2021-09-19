@@ -51,6 +51,10 @@ _WEBSITE_PULL_IMAGE_OVER_VNET=true_
 
 C'est un début.
 
+#### Dans la série
+
+- [Chapitre 2 : Azure Container Instance et Windows dans votre Vnet](../docs/azureException.aciWindowsWithVnet.md)
+
 #### Références
 
 - [Déployer des instance de conteneur dans un réseau virtuel Azure](https://docs.microsoft.com/fr-fr/azure/container-instances/container-instances-vnet)
