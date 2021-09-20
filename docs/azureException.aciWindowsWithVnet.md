@@ -23,7 +23,7 @@ _Extrait [docs.microsoft.com](https://docs.microsoft.com/fr-fr/azure/container-i
 ### Contournement
 
 Les **Azure Container Instance** ne permettant pas d'intégrer des conteneurs Windows dans votre Vnet, il ne nous reste que peu d'options :
-1. Microsoft avait annoncé fin 2020 que cette fonctionnalité serait disponible début 2021. S'il on admet un retard pris, on peu espérer que cette fonctionnalitée sera bientôt disponible. Donc, la première option est d'attendre.
+1. Microsoft avait annoncé fin 2020 que cette fonctionnalité serait disponible début 2021. Si l'on admet un retard pris, on peut espérer que cette fonctionnalité sera bientôt disponible. Donc, la première option est d'attendre.
 2. La seconde option, consiste à remplacer notre **Azure Container Instance** par **Azure Batch** avec un pool **Windows**.
    
    ![archi 2](../img/azureException.aciWindowsWithVnet2.svg)
