@@ -9,6 +9,7 @@ Ce blog a pour objectif de partager mes expériences autour du cloud Azure et du
 - [FinOps : Un FTPS Low Cost](docs/finops.ftpslowcost.md)
 - [Azure, Les exceptions qui font mal : Chapitre 1 - Azure Container Registry et Azure Container Instance dans votre Vnet](docs/azureException.acrAndAciInYourVnet.md)
 - [Azure : Private Endpoint, Service Endpoint, Dedicated Service, Service Tags & Firewall](docs/azureClassroom.VnetEndpointFirewall.md)
+- [Azure, Les exceptions qui font mal : Chapitre 2 - Azure Container Instance et Windows dans votre Vnet](docs/azureException.aciWindowsWithVnet.md)
 
 ## Mes certifications
 
