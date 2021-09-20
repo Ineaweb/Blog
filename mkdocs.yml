@@ -1,0 +1,36 @@
+site_name: "Philippe MORISSEAU"
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: light blue
+  font:
+    text: Poppins
+
+nav:
+  - index.md
+  - Articles:
+    - 'Révision du soir':
+      - articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
+    - 'Azure, Les exceptions qui font mal !':
+      - articles/exceptions/index.md
+      - articles/exceptions/01.azureException.acrAndAciInYourVnet.md
+      - articles/exceptions/02.azureException.aciWindowsWithVnet.md
+    - 'Tips & tricks':
+      - articles/tips/01.finops.ftpslowcost.md
+      - articles/tips/02.cosmosdb.waiting_partialupdate.md
+      - articles/tips/03.cosmosdb.calculatedPartitionKey.md
+  - about.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+
+extra:
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/morisseauphi
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/philippe-morisseau-8ab83216
