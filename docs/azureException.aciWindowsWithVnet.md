@@ -47,6 +47,10 @@ Si vous êtes vraiment pressé par le temps ou vous doutez que Microsoft propose
 
 #### Remerciement
 
+- [Michael Maillot](https://twitter.com/michael_maillot) : pour la relecture
+- [Oussama Mouchrit](https://www.linkedin.com/in/mouchritoussama/) : pour la relecture
+- [Laurent Mondeil](https://www.linkedin.com/in/laurent-mondeil-0a87a743/) : pour la relecture
+- [Etienne Louise](https://www.linkedin.com/in/etienne-louise-78154063/) : pour la relecture
 
 _Rédigé par Philippe MORISSEAU, Publié le 20 Septembre 2021_
 
