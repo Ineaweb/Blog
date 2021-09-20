@@ -3,11 +3,11 @@ title: "Accueil"
 ---
 ## Articles
 
-### Classroom
+### Révision du soir
 
 - [Azure : Private Endpoint, Service Endpoint, Dedicated Service, Service Tags & Firewall](articles/classroom/01.azureClassroom.VnetEndpointFirewall.md)
 
-### Azure, Les exceptions qui font mal 
+### Azure, Les exceptions qui font mal !
 
 - [Chapitre 1 - Azure Container Registry et Azure Container Instance dans votre Vnet](articles/exceptions/01.azureException.acrAndAciInYourVnet.md)
 - [Chapitre 2 - Azure Container Instance et Windows dans votre Vnet](articles/exceptions/02.azureException.aciWindowsWithVnet.md)
