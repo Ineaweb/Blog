@@ -41,7 +41,7 @@ Si vous êtes vraiment pressé par le temps ou vous doutez que Microsoft propose
 #### Références
 
 - [Ressources et scénarios relatifs aux réseaux virtuels](https://docs.microsoft.com/fr-fr/azure/container-instances/container-instances-virtual-network-concepts)
-- [Azure Container Instances (ACI) under the hood | Azure Friday](https://youtu.be/giQLmxMKAKE?t=412)
+- [Azure Container Instances (ACI) under the hood - Azure Friday](https://youtu.be/giQLmxMKAKE?t=412)
 - [Exécuter des applications de conteneur sur Azure Batch](https://docs.microsoft.com/fr-fr/azure/batch/batch-docker-container-workloads)
 - [Utiliser des conteneurs Windows Server](https://docs.microsoft.com/fr-fr/azure/aks/windows-container-cli)
 
