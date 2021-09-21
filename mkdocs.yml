@@ -2,8 +2,8 @@ site_name: "Philippe MORISSEAU"
 theme:
   name: material
   palette:
-    scheme: slate
-    primary: light blue
+    scheme: default
+    primary: blue
   font:
     text: Poppins
 
