@@ -7,7 +7,7 @@ theme:
   font:
     text: Poppins
 
-nav:
+pages:
   - index.md
   - Articles:
     - 'Révision du soir':
