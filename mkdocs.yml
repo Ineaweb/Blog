@@ -1,4 +1,5 @@
 site_name: "Philippe MORISSEAU"
+site_url: https://ineaweb.github.io/Blog
 theme:
   name: material
   palette:
