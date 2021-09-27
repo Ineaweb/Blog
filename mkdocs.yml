@@ -21,6 +21,7 @@ pages:
       - articles/tips/01.finops.ftpslowcost.md
       - articles/tips/02.cosmosdb.waiting_partialupdate.md
       - articles/tips/03.cosmosdb.calculatedPartitionKey.md
+      - articles/tips/04.sonarqube.managed.md
   - about.md
 
 plugins:
