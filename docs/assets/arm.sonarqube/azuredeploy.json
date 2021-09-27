@@ -1,0 +1,460 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+  "parameters": {
+    "appName": {
+      "type": "string",
+      "metadata": {
+        "description": "Application Name"
+      }
+    },
+    "environment": {
+      "type": "string",
+      "allowedValues": [
+        "dev",
+        "uat",
+        "prd"
+    ],      
+      "metadata": {
+        "description": "Environment code"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+          "description": "Location for all the resources"
+      }
+    },
+    "servicePlanPricingTier": {
+      "type": "string",
+      "allowedValues": [
+          "S1",
+          "S2",
+          "S3",
+          "P1V2",
+          "P2V2",
+          "P2V3"
+      ],
+      "defaultValue": "S1",
+      "metadata": {
+          "description": "App Service Plan Pricing Tier"
+      }
+    },
+    "dockerImageFullName": {
+      "type": "string",
+      "defaultValue": "sonarqube:lts-community",
+      "metadata": {
+        "description": "Docker image Full Name"
+      }    
+    },
+    "sqlDatabaseAdminLogin": {
+      "type": "string",
+      "metadata": {
+        "description": "Sql server administrator name"
+      }
+    },
+    "sqlDatabaseAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Sql server administrator password"
+      }
+    },
+    "sqlDatabaseSkuSizeGB": {
+      "type": "int",
+      "minValue": 1,
+      "maxValue": 1024,
+      "defaultValue": 5,
+      "metadata": {
+          "description": "Sql server database Max Size in GB"
+      }
+    },
+    "sqlDatabaseTier": {
+      "type": "string",
+      "defaultValue": "Standard",
+      "metadata": {
+        "description": "Sql server database Tier"
+      }
+    },
+    "sqlDatabaseSkuName": {
+      "type": "string",
+      "defaultValue": "S0",
+      "allowedValues": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12"
+      ],      
+      "metadata": {
+        "description": "Sql server database Sku Name"
+      }
+    }
+  },
+  "variables": {
+    "servicePlanPricingTiers": {
+        "F1": {
+            "tier": "Free"
+        },
+        "B1": {
+            "tier": "Basic"
+        },
+        "B2": {
+            "tier": "Basic"
+        },
+        "B3": {
+            "tier": "Basic"
+        },
+        "S1": {
+            "tier": "Standard"
+        },
+        "S2": {
+            "tier": "Standard"
+        },
+        "S3": {
+            "tier": "Standard"
+        },
+        "P1V2": {
+            "tier": "Standard"
+        },
+        "P2V2": {
+            "tier": "Standard"
+        },
+        "P2V3": {
+            "tier": "Standard"
+        }
+    },    
+    "net_api": "[providers('Microsoft.Network', 'virtualNetworks').apiVersions[0]]",
+    "pln_api": "[providers('Microsoft.Web', 'serverfarms').apiVersions[0]]",
+    "web_api": "[providers('Microsoft.Web', 'sites').apiVersions[0]]",
+    "sql_server_api": "[providers('Microsoft.Sql', 'servers').apiVersions[0]]",
+    "storageAccount_api": "[providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]]",
+    "fileService_api": "[providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]]",
+    "sto_name": "[concat(parameters('appName') , parameters('environment') , 'sto')]",
+    "net_name": "[concat(parameters('appName') , '-' , parameters('environment') , '-net')]",
+    "pln_name": "[concat(parameters('appName') , '-' , parameters('environment') , '-pln')]",
+    "web_name": "[concat(parameters('appName') , '-' , parameters('environment') , '-web')]",
+    "sql_server_name": "[concat(parameters('appName') , '-' , parameters('environment') , '-sql')]",
+    "sql_db_name": "[concat(parameters('appName') , '-' , parameters('environment') , '-sdb')]",
+    "storageAccountid": "[concat(resourceGroup().id, '/providers/', 'Microsoft.Storage/storageAccounts/', parameters('appName') , parameters('environment') , 'sto')]"
+
+  },
+  "resources": [
+    {
+      "apiVersion": "[variables('net_api')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[variables('net_name')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "192.168.1.0/24"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "sonarqube",
+            "properties": {
+              "addressPrefix": "192.168.1.0/27",
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": [
+                    "*"
+                  ]
+                },
+                {
+                  "service": "Microsoft.Sql",
+                  "locations": [
+                    "*"
+                  ]
+                }
+              ],
+              "delegations": [
+                {
+                    "name": "delegation",
+                    "properties": {
+                        "serviceName": "Microsoft.Web/serverfarms"
+                    }
+                }
+              ]
+            }
+          },
+          {
+            "name": "agentPool",
+            "properties": {
+              "addressPrefix": "192.168.1.32/27",
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Web",
+                  "locations": [
+                    "*"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },    
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "[variables('pln_api')]",
+      "name": "[variables('pln_name')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "name": "[variables('pln_name')]",
+        "reserved": true
+      },
+      "sku": {
+        "name": "[parameters('servicePlanPricingTier')]",
+        "tier": "[variables('servicePlanPricingTiers')[parameters('servicePlanPricingTier')].tier]"
+      },
+      "kind": "linux"
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "[variables('storageAccount_api')]",
+      "name": "[variables('sto_name')]",
+      "kind": "StorageV2",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "properties": {
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [
+            {
+              "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('net_name'), 'sonarqube')]",
+              "action": "Allow"
+            }
+          ],
+          "ipRules": [],
+          "defaultAction": "Deny"
+        },
+        "supportsHttpsTrafficOnly": true,
+        "publicAccess": "Container",
+        "encryption": {
+          "services": {
+            "file": {
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', variables('net_name'))]"
+      ]      
+    },
+    {
+      "name": "[concat(variables('sto_name'), '/default/sonarqubedata')]",
+      "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+      "apiVersion": "[variables('fileService_api')]",
+      "properties": {
+        "metadata": {},
+        "shareQuota": "10"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('sto_name'))]"
+      ]
+    },
+    {
+      "name": "[concat(variables('sto_name'), '/default/sonarqubeextensions')]",
+      "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+      "apiVersion": "[variables('fileService_api')]",
+      "properties": {
+        "metadata": {},
+        "shareQuota": "10"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('sto_name'))]"
+      ]
+    },
+    {
+      "name": "[concat(variables('sto_name'), '/default/sonarqubelogs')]",
+      "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+      "apiVersion": "[variables('fileService_api')]",
+      "properties": {
+        "metadata": {},
+        "shareQuota": "10"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('sto_name'))]"
+      ]
+    },   
+    {
+      "type": "Microsoft.Sql/servers",
+      "name": "[variables('sql_server_name')]",
+      "apiVersion": "[variables('sql_server_api')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "administratorLogin": "[parameters('sqlDatabaseAdminLogin')]",
+        "administratorLoginPassword": "[parameters('sqlDatabaseAdminPassword')]",
+        "version": "12.0"
+      },
+      "resources": [
+        {
+          "type": "databases",
+          "apiVersion": "[variables('sql_server_api')]",
+          "dependsOn": [
+            "[variables('sql_server_name')]"
+          ],
+          "location": "[parameters('location')]",
+          "name": "[variables('sql_db_name')]",
+          "properties": {
+            "collation": "SQL_Latin1_General_CP1_CS_AS",
+            "maxSizeBytes": "[mul(mul(mul(parameters('sqlDatabaseSkuSizeGB'),1024),1024),1024)]",
+            "zoneRedundant": false
+          },
+          "sku": {
+            "name": "[parameters('sqlDatabaseSkuName')]",
+            "tier": "[parameters('sqlDatabaseTier')]"
+          }
+        }
+      ],
+      "dependsOn": [
+      ]
+    },
+    {
+      "type": "Microsoft.Sql/servers/virtualNetworkRules",
+      "apiVersion": "2021-02-01-preview",
+      "name": "[concat(variables('sql_server_name'), '/sonarqube')]",
+      "dependsOn": [
+          "[resourceId('Microsoft.Sql/servers', variables('sql_server_name'))]",
+          "[resourceId('Microsoft.Network/virtualNetworks', variables('net_name'))]"
+      ],
+      "properties": {
+          "virtualNetworkSubnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('net_name'), 'sonarqube')]",
+          "ignoreMissingVnetServiceEndpoint": false
+      }
+    },    
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "[variables('web_api')]",
+      "name": "[variables('web_name')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "name": "[variables('web_name')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('pln_name'))]",
+        "httpsOnly": true,
+        "siteConfig": {
+          "appCommandLine": "",
+          "alwaysOn": true,
+          "ftpsState": "Disabled",
+          "appSettings": [
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "true"
+            },
+            {
+              "name": "DOCKER_REGISTRY_SERVER_URL",
+              "value": "https://index.docker.io"
+            }
+          ]
+        }
+      },     
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('pln_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', variables('net_name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites/networkConfig",
+      "apiVersion": "[variables('web_api')]",
+      "name": "[concat(variables('web_name'), '/virtualNetwork')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('net_name'), 'sonarqube')]",
+        "isSwift": true
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', variables('web_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', variables('net_name'))]"
+      ]
+    },    
+    {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "[variables('web_api')]",
+      "name": "[concat(variables('web_name'), '/web')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+          "[resourceId('Microsoft.Web/sites', variables('web_name'))]",
+          "[resourceId('Microsoft.Storage/storageAccounts', variables('sto_name'))]",
+          "[resourceId('Microsoft.Sql/servers', variables('sql_server_name'))]",
+          "[resourceId('Microsoft.Storage/storageAccounts/fileServices/shares', variables('sto_name'), 'default', 'sonarqubedata')]",
+          "[resourceId('Microsoft.Storage/storageAccounts/fileServices/shares', variables('sto_name'), 'default', 'sonarqubeextensions')]",
+          "[resourceId('Microsoft.Storage/storageAccounts/fileServices/shares', variables('sto_name'), 'default', 'sonarqubelogs')]"
+      ],
+      "properties": {
+          "linuxFxVersion": "[concat('DOCKER|', parameters('dockerImageFullName'))]",
+          "appCommandLine": "[concat('-Dsonar.web.javaAdditionalOpts=-Djava.security.egp=file:/dev/./urandom -Dsonar.search.javaAdditionalOpts=-Dnode.store.allow_mmap=false -Dsonar.jdbc.url=jdbc:sqlserver://', variables('sql_server_name'), '.database.windows.net:1433;databaseName=', variables('sql_db_name'), ';encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30; -Dsonar.jdbc.username=', parameters('sqlDatabaseAdminLogin'), ' -Dsonar.jdbc.password=', parameters('sqlDatabaseAdminPassword'))]",
+          "ipSecurityRestrictions": [
+            {
+                "vnetSubnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('net_name'), 'agentPool')]",
+                "action": "Allow",
+                "tag": "Default",
+                "priority": 100,
+                "name": "onlyVmAgentPool"
+            },
+            {
+                "ipAddress": "Any",
+                "action": "Deny",
+                "priority": 2147483647,
+                "name": "Deny all",
+                "description": "Deny all access"
+            }
+          ],
+          "scmIpSecurityRestrictions": [
+            {
+                "vnetSubnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('net_name'), 'agentPool')]",
+                "action": "Allow",
+                "tag": "Default",
+                "priority": 100,
+                "name": "onlyVmAgentPool"
+            },
+            {
+                "ipAddress": "Any",
+                "action": "Deny",
+                "priority": 2147483647,
+                "name": "Deny all",
+                "description": "Deny all access"
+            }
+          ],       
+          "azureStorageAccounts": {
+              "sonarqube_data": {
+                  "type": "AzureFiles",
+                  "accountName": "[variables('sto_name')]",
+                  "shareName": "sonarqubedata",
+                  "mountPath": "/opt/sonarqube/data",
+                  "accessKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('sto_name')), variables('storageAccount_api')).keys[0].value]"
+              },
+              "sonarqube_extensions": {
+                "type": "AzureFiles",
+                "accountName": "[variables('sto_name')]",
+                "shareName": "sonarqubeextensions",
+                "mountPath": "/opt/sonarqube/extensions",
+                "accessKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('sto_name')), variables('storageAccount_api')).keys[0].value]"
+              },
+              "sonarqube_logs": {
+                "type": "AzureFiles",
+                "accountName": "[variables('sto_name')]",
+                "shareName": "sonarqubelogs",
+                "mountPath": "/opt/sonarqube/logs",
+                "accessKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('sto_name')), variables('storageAccount_api')).keys[0].value]"
+              }
+          }
+      }
+    }    
+  ]
+}

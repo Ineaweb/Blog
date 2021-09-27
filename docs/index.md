@@ -17,3 +17,4 @@ title: "Accueil"
 - [FinOps : Un FTPS Low Cost](article/../articles/tips/01.finops.ftpslowcost.md)
 - [CosmosDB : En attendant le partial update](articles/tips/02.cosmosdb.waiting_partialupdate.md)
 - [CosmosDB : Une clé de partition calculée !](articles/tips/03.cosmosdb.calculatedPartitionKey.md)
+- [Déployer Sonarqube sur des services managés Azure](articles/tips/04.sonarqube.managed.md)
