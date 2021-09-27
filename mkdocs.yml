@@ -29,6 +29,7 @@ plugins:
 
 markdown_extensions:
   - admonition
+  - def_list
 
 extra:
   social:
