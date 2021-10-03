@@ -21,8 +21,8 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'pmorisseau'
-          slot-name: 'pmorisseau-preview'
+          app-name: 'pmorisseau(preview)'
+          slot-name: 'preview'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BF4E1B6E36F473B8C45D1F717BB7891 }}
           package: /site
 
@@ -54,6 +54,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'pmorisseau'
-          slot-name: 'pmorisseau'
+          slot-name: 'production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BF4E1B6E36F473B8C45D1F717BB7891 }}
           package: /site
