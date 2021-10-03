@@ -30,25 +30,27 @@ jobs:
   deploy-ToGithubPages:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    env:
+      SITE_URL: "https://ineaweb.github.io/Blog"    
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
-      - run: export SITE_URL="https://ineaweb.github.io/Blog"
       - run: mkdocs gh-deploy --force
 
   deploy-ToAzureWebApp:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    env:
+      SITE_URL: "https://pmorisseau.azurewebsites.net"       
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
-      - run: export SITE_URL="https://pmorisseau.azurewebsites.net"
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp

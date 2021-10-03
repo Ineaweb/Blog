@@ -19,7 +19,8 @@ pages:
       - articles/exceptions/02.azureException.aciWindowsWithVnet.md
     - 'Au secours, Le DevOps part en vrille !':
       - articles/devops/vrille/index.md
-      - articles/devops/vrille/01.pourquoi.agilite.md
+      - 'Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?':
+        - articles/devops/vrille/01.pourquoi.agilite.md
     - 'Tips & tricks':
       - articles/tips/01.finops.ftpslowcost.md
       - articles/tips/02.cosmosdb.waiting_partialupdate.md
