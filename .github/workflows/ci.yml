@@ -4,9 +4,34 @@ on:
     branches: 
       - master
       - main
+      - article/*
+
 jobs:
-  deploy:
+  deploy-ToAzureWebAppPreview:
     runs-on: ubuntu-latest
+    env:
+      SITE_URL: "https://pmorisseau-preview.azurewebsites.net"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material 
+      - run: mkdocs build      
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'pmorisseau'
+          slot-name: 'preview'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5106C7953C464E13B6939CF4F5C03DFD }}
+          package: ./site/
+
+  deploy-ToGithubPages:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: "https://ineaweb.github.io/Blog"    
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -14,3 +39,24 @@ jobs:
           python-version: 3.x
       - run: pip install mkdocs-material 
       - run: mkdocs gh-deploy --force
+
+  deploy-ToAzureWebApp:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: "https://pmorisseau.azurewebsites.net"       
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material 
+      - run: mkdocs build      
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'pmorisseau'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BF4E1B6E36F473B8C45D1F717BB7891 }}
+          package: ./site/
