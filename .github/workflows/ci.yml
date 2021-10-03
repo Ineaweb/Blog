@@ -9,13 +9,14 @@ on:
 jobs:
   deploy-ToAzureWebAppPreview:
     runs-on: ubuntu-latest
+    env:
+      SITE_URL: "https://pmorisseau-preview.azurewebsites.net"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
-      - run: export SITE_URL="https://pmorisseau-preview.azurewebsites.net"
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
