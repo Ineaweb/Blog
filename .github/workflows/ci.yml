@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
-      - run: SITE_URL="https://pmorisseau-preview.azurewebsites.net"
+      - run: export SITE_URL="https://pmorisseau-preview.azurewebsites.net"
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -35,7 +35,7 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
-      - run: SITE_URL="https://ineaweb.github.io/Blog"
+      - run: export SITE_URL="https://ineaweb.github.io/Blog"
       - run: mkdocs gh-deploy --force
 
   deploy-ToAzureWebApp:
@@ -47,7 +47,7 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material 
-      - run: SITE_URL="https://pmorisseau.azurewebsites.net"
+      - run: export SITE_URL="https://pmorisseau.azurewebsites.net"
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
