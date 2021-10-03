@@ -21,7 +21,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'pmorisseau(preview)'
+          app-name: 'pmorisseau'
           slot-name: 'preview'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5106C7953C464E13B6939CF4F5C03DFD }}
           package: /site
