@@ -14,6 +14,7 @@ title: "Accueil"
 
 ### Au secours, le DevOps part en vrille !
 
+- [Introduction](articles/devops/vrille/index.md)
 - Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
 
     * [Chapitre 1 : L'agilité](articles/devops/vrille/01.pourquoi.agilite.md)
