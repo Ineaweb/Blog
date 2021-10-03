@@ -23,7 +23,7 @@ jobs:
         with:
           app-name: 'pmorisseau(preview)'
           slot-name: 'preview'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9BF4E1B6E36F473B8C45D1F717BB7891 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5106C7953C464E13B6939CF4F5C03DFD }}
           package: /site
 
   deploy-ToGithubPages:
