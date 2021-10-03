@@ -14,7 +14,7 @@ Dans cette série nous aborderons :
 
 - le pourquoi on arrive aux limites, 
 - le comment on passe au-delà des limites,
-- et enfin, pour que cela ne reste pas que de la téorie, la preuve que cela fonctionne.
+- et enfin, pour que cela ne reste pas que de la téorie, une preuve que l'on peut aller plus loin.
 
 ## Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
 
