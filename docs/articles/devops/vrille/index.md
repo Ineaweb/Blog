@@ -1,0 +1,21 @@
+---
+title: Introduction
+---
+# Au secours, le DevOps part en vrille !
+
+Cela fait maintenant des années que je travaille avec la démarche DevOps. Je parle bien de la démarche DevOps, car tout comme l'agilité, le DevOps ne se limite pas à l'outillage ou à des méthodes.
+L'objectif du DevOps étant de faire sauter les sillots entre le Build et le Run des applications, Le DevOps est une solution permettant à l'agilité d'être plus efficace.
+
+Mais dans le cas d'un projet d'application microservice complexe, la mise en place et surtout le maintient d'une démarche DevOps est bien plus complexe. On arrive au limites du DevOps tel que l'on peut apprendre dans la literrature. 
+
+Mais alors, le DevOps a ces limites et ne peut donc pas s'appliquer partout ? NON, il faut juste reprendre un peu de hauteur comprendre la démarche et trouver les solutions qui permettent de passer au dela des limites.
+
+Dans cette série nous aborderons :
+
+- le pourquoi on arrive aux limites, 
+- le comment on passe au dela des limites,
+- et enfin, pour que cela ne reste pas que de la téorie, la preuve que cela fonctionne.
+
+Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
+
+- [Chapitre 1 : L'agilité](01.pourquoi.agilite.md)
