@@ -1,5 +1,5 @@
 site_name: "Philippe MORISSEAU"
-site_url: !!python/object/apply:os.getenv ["SITE_URL"]  
+site_url: !!python/object/apply:os.getenv ["SITE_URL"]
 theme:
   name: material
   palette:
