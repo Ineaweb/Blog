@@ -9,8 +9,8 @@ title: "Accueil"
 
 ### Azure, Les exceptions qui font mal !
 
-- [Chapitre 1 - Azure Container Registry et Azure Container Instance dans votre Vnet](articles/exceptions/01.azureException.acrAndAciInYourVnet.md)
-- [Chapitre 2 - Azure Container Instance et Windows dans votre Vnet](articles/exceptions/02.azureException.aciWindowsWithVnet.md)
+- [Chapitre 1 : Azure Container Registry et Azure Container Instance dans votre Vnet](articles/exceptions/01.azureException.acrAndAciInYourVnet.md)
+- [Chapitre 2 : Azure Container Instance et Windows dans votre Vnet](articles/exceptions/02.azureException.aciWindowsWithVnet.md)
 
 ### Au secours, le DevOps part en vrille !
 
