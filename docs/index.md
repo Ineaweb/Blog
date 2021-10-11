@@ -18,6 +18,7 @@ title: "Accueil"
 - Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
 
     * [Chapitre 1 : L'agilité](articles/devops/vrille/01.pourquoi.agilite.md)
+    * [Chapitre 2 : Le DevOps](articles/devops/vrille/02.pourquoi.devops.md)
 
 ### Tips & Tricks
 

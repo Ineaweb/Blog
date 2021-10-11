@@ -19,3 +19,4 @@ Dans cette série nous aborderons :
 ## Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
 
 - [Chapitre 1 : L'agilité](01.pourquoi.agilite.md)
+- [Chapitre 2 : Le DevOps](02.pourquoi.devops.md)
