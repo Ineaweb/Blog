@@ -32,6 +32,10 @@ pages:
 plugins:
   - search
 
+google_analytics:
+  - 'G-T8TQW7CYM4'
+  - 'auto'  
+
 markdown_extensions:
   - admonition
   - def_list
