@@ -9,3 +9,4 @@ J'espère que cette série vous permettra d'éviter les pièges dans lesquels no
 
 - [Chapitre 1 : Azure Container Registry et Azure Container Instance dans votre Vnet](01.azureException.acrAndAciInYourVnet.md)
 - [Chapitre 2 : Azure Container Instance et Windows dans votre Vnet](02.azureException.aciWindowsWithVnet.md)
+- [Chapitre 3 : Les firewall et les régions Azure](03.azureException.firewallAndRegion.md)
