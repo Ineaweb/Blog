@@ -11,6 +11,7 @@ title: "Accueil"
 
 - [Chapitre 1 : Azure Container Registry et Azure Container Instance dans votre Vnet](articles/exceptions/01.azureException.acrAndAciInYourVnet.md)
 - [Chapitre 2 : Azure Container Instance et Windows dans votre Vnet](articles/exceptions/02.azureException.aciWindowsWithVnet.md)
+- [Chapitre 3 : Les firewall et les régions Azure](articles/exceptions/03.azureException.firewallAndRegion.md)
 
 ### Au secours, le DevOps part en vrille !
 

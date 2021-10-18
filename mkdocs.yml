@@ -17,6 +17,7 @@ pages:
       - articles/exceptions/index.md
       - articles/exceptions/01.azureException.acrAndAciInYourVnet.md
       - articles/exceptions/02.azureException.aciWindowsWithVnet.md
+      - articles/exceptions/03.azureException.firewallAndRegion.md      
     - 'Au secours, Le DevOps part en vrille !':
       - articles/devops/vrille/index.md
       - 'Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?':
