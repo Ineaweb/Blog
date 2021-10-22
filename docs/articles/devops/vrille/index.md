@@ -20,3 +20,4 @@ Dans cette série nous aborderons :
 
 - [Chapitre 1 : L'agilité](01.pourquoi.agilite.md)
 - [Chapitre 2 : Le DevOps](02.pourquoi.devops.md)
+- [Chapitre 3 : L'entropie](03.pourquoi.entropie.md)

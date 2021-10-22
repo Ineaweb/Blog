@@ -20,6 +20,7 @@ title: "Accueil"
 
     * [Chapitre 1 : L'agilité](articles/devops/vrille/01.pourquoi.agilite.md)
     * [Chapitre 2 : Le DevOps](articles/devops/vrille/02.pourquoi.devops.md)
+    * [Chapitre 3 : L'entropie](articles/devops/vrille/03.pourquoi.entropie.md)
 
 ### Tips & Tricks
 

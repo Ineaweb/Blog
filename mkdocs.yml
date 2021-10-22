@@ -23,6 +23,7 @@ pages:
       - 'Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?':
         - articles/devops/vrille/01.pourquoi.agilite.md
         - articles/devops/vrille/02.pourquoi.devops.md
+        - articles/devops/vrille/03.pourquoi.entropie.md
     - 'Tips & tricks':
       - articles/tips/01.finops.ftpslowcost.md
       - articles/tips/02.cosmosdb.waiting_partialupdate.md
