@@ -23,5 +23,5 @@ A venir :
 
 ## Me suivre ou réagir !
 
-- [LinkedIn](https://www.linkedin.com/in/philippe-morisseau-8ab83216b/)
+- [LinkedIn](https://www.linkedin.com/in/pmorisseau/)
 - [Twitter](https://twitter.com/morisseauphi)
