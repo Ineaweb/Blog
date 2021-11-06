@@ -24,4 +24,4 @@ Dans cette série nous aborderons :
 
 ## Partie 2 : Comment passe-t-on au-delà des limites ?
 
-- [Chapitre 1 : La machine à état](04.comment.marchineetat.md)
+- [Chapitre 1 : La machine à état](04.comment.machineetat.md)
