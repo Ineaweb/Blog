@@ -22,6 +22,9 @@ title: "Accueil"
     * [Chapitre 2 : Le DevOps](articles/devops/vrille/02.pourquoi.devops.md)
     * [Chapitre 3 : L'entropie](articles/devops/vrille/03.pourquoi.entropie.md)
 
+- Partie 2 : Comment passe-t-on au-delà des limites ?
+    * [Chapitre 1 : La machine à état](articles/devops/vrille/04.comment.marchineetat.md)
+
 ### Tips & Tricks
 
 - [FinOps : Un FTPS Low Cost](articles/tips/01.finops.ftpslowcost.md)
