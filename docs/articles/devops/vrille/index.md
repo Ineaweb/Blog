@@ -21,3 +21,7 @@ Dans cette série nous aborderons :
 - [Chapitre 1 : L'agilité](01.pourquoi.agilite.md)
 - [Chapitre 2 : Le DevOps](02.pourquoi.devops.md)
 - [Chapitre 3 : L'entropie](03.pourquoi.entropie.md)
+
+## Partie 2 : Comment passe-t-on au-delà des limites ?
+
+- [Chapitre 1 : La machine à état](04.comment.machineetat.md)
