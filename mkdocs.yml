@@ -44,6 +44,10 @@ google_analytics:
 markdown_extensions:
   - admonition
   - def_list
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets  
 
 extra:
   social:
