@@ -6,6 +6,7 @@ title: "Accueil"
 ### Révision du soir
 
 - [Azure : Private Endpoint, Service Endpoint, Dedicated Service, Service Tags & Firewall](articles/classroom/01.azureClassroom.VnetEndpointFirewall.md)
+- [Azure : Azure Batch, le mal-aimé](articles/classroom/02.azureClassroom.batch.md)
 
 ### Azure, Les exceptions qui font mal !
 

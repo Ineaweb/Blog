@@ -13,6 +13,7 @@ pages:
   - Articles:
     - 'Révision du soir':
       - articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
+      - articles/classroom/02.azureClassroom.batch.md
     - 'Azure, Les exceptions qui font mal !':
       - articles/exceptions/index.md
       - articles/exceptions/01.azureException.acrAndAciInYourVnet.md
