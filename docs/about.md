@@ -5,12 +5,12 @@ Ce blog a pour objectif de partager mes expériences autour du cloud Azure et du
 
 ## Biographie
 
-Responsable du pôle Support/Expertise Microsoft dans la communauté Atlantique de onepoint, je coordonne une équipe de spécialiste sur les technologies Microsoft mais pas que... 
+Responsable du pôle Support/Expertise Microsoft dans la communauté Atlantique de onepoint, je coordonne une équipe de spécialistes sur les technologies Microsoft mais pas que... 
 
 Nous apportons notre expertise et notre support à nos clients sur les thématiques :
 
 - DevOps avec Azure DevOps, 
-- Cloud avec Azure et 
+- Cloud avec Azure, 
 - Data. 
 
 Nous concevons et nous réalisons aussi des solutions applicatives innovantes autour du cloud, du DevOps et de la data. 
