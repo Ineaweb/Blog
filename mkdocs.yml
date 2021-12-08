@@ -27,6 +27,7 @@ pages:
         - articles/devops/vrille/03.pourquoi.entropie.md
       - 'Partie 2 : Comment passe-t-on au-delà des limites ?':
         - articles/devops/vrille/04.comment.machineetat.md
+        - articles/devops/vrille/05.comment.build.md
     - 'Tips & tricks':
       - articles/tips/01.finops.ftpslowcost.md
       - articles/tips/02.cosmosdb.waiting_partialupdate.md
@@ -44,6 +45,10 @@ google_analytics:
 markdown_extensions:
   - admonition
   - def_list
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets  
 
 extra:
   social:

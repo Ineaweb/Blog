@@ -25,6 +25,7 @@ title: "Accueil"
 
 - Partie 2 : Comment passe-t-on au-delà des limites ?
     * [Chapitre 1 : La machine à état](articles/devops/vrille/04.comment.machineetat.md)
+    * [Chapitre 2 : Le build](articles/devops/vrille/05.comment.build.md)
 
 ### Tips & Tricks
 
