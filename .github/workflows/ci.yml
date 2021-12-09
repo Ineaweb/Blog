@@ -30,11 +30,11 @@ jobs:
           package: ./site/
 
   deploy-ToGithubPages:
-    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     env:
       SITE_URL: "https://ineaweb.github.io/Blog"
-    environment: github-pages    
+    environment: github-pages
+    needs: deploy-ToAzureWebAppPreview    
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -48,7 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SITE_URL: "https://pmorisseau.azurewebsites.net"
-    environment: PROD       
+    environment: PROD
+    needs: deploy-ToAzureWebAppPreview       
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
