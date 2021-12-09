@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SITE_URL: "https://pmorisseau-preview.azurewebsites.net"
+    environment: DEV
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -32,7 +33,8 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     env:
-      SITE_URL: "https://ineaweb.github.io/Blog"    
+      SITE_URL: "https://ineaweb.github.io/Blog"
+    environment: github-pages    
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -45,7 +47,8 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     env:
-      SITE_URL: "https://pmorisseau.azurewebsites.net"       
+      SITE_URL: "https://pmorisseau.azurewebsites.net"
+    environment: PROD       
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
