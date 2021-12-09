@@ -8,7 +8,6 @@ on:
 
 jobs:
   deploy-ToAzureWebAppPreview:
-    if: ${{ github.ref != 'refs/heads/main' }}
     runs-on: ubuntu-latest
     env:
       SITE_URL: "https://pmorisseau-preview.azurewebsites.net"
@@ -30,6 +29,7 @@ jobs:
           package: ./site/
 
   deploy-ToGithubPages:
+    if: ${{ github.ref == 'refs/heads/main' }}  
     runs-on: ubuntu-latest
     env:
       SITE_URL: "https://ineaweb.github.io/Blog"
