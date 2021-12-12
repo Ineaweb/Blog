@@ -33,3 +33,4 @@ title: "Accueil"
 - [CosmosDB : En attendant le partial update](articles/tips/02.cosmosdb.waiting_partialupdate.md)
 - [CosmosDB : Une clé de partition calculée !](articles/tips/03.cosmosdb.calculatedPartitionKey.md)
 - [Déployer Sonarqube sur des services managés Azure](articles/tips/04.sonarqube.managed.md)
+- [Azure DevOps : Créer sa propre task agentless](articles/tips/05.azuredevops.extension.agentless.md)
