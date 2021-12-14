@@ -33,6 +33,7 @@ pages:
       - articles/tips/02.cosmosdb.waiting_partialupdate.md
       - articles/tips/03.cosmosdb.calculatedPartitionKey.md
       - articles/tips/04.sonarqube.managed.md
+      - articles/tips/05.azuredevops.extension.agentless.md
   - about.md
 
 plugins:
