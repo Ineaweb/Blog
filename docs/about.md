@@ -11,7 +11,7 @@ Nous apportons notre expertise et notre support à nos clients sur les thématiq
 
 - DevOps avec Azure DevOps, 
 - Cloud avec Azure, 
-- Mordern Workspace avec Microsoft 365, 
+- Modern Workspace avec Microsoft 365, 
 - Data. 
 
 Nous concevons et nous réalisons aussi des solutions applicatives innovantes autour du cloud, du DevOps, du collaboratif et de la data. 
