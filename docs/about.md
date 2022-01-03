@@ -5,17 +5,19 @@ Ce blog a pour objectif de partager mes expériences autour du cloud Azure et du
 
 ## Biographie
 
-Responsable du pôle Support/Expertise Microsoft dans la communauté Atlantique de onepoint, je coordonne une équipe de spécialistes sur les technologies Microsoft mais pas que... 
+Co-responsable du centre d'excellence Microsoft dans la communauté Atlantique de onepoint, je coordonne une équipe de spécialistes sur les technologies Microsoft mais pas que... 
 
 Nous apportons notre expertise et notre support à nos clients sur les thématiques :
 
 - DevOps avec Azure DevOps, 
 - Cloud avec Azure, 
+- Mordern Workspace avec Microsoft 365, 
 - Data. 
 
-Nous concevons et nous réalisons aussi des solutions applicatives innovantes autour du cloud, du DevOps et de la data. 
+Nous concevons et nous réalisons aussi des solutions applicatives innovantes autour du cloud, du DevOps, du collaboratif et de la data. 
 
-Avec plus de 15 ans d'expérience, moi-même, j'apporte mon savoir sur 
+Avec plus de 15 ans d'expérience, moi-même, j'apporte mon savoir sur :
+
 - l'architecture Cloud Azure, 
 - l'expertise FinOps Azure, 
 - l'expertise DevOps, 
@@ -25,7 +27,7 @@ Avec plus de 15 ans d'expérience, moi-même, j'apporte mon savoir sur
 - le lean et 
 - l'exploitation d'infrastructure OnPremise.
   
-Enfin, je partage mes connaissances de diverses formations autour du cloud Azure et du DevOps.
+Enfin, je partage mes connaissances au travers de diverses formations autour du cloud Azure et du DevOps.
 
 ## Mes certifications
 
@@ -33,21 +35,24 @@ Enfin, je partage mes connaissances de diverses formations autour du cloud Azure
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="bd5c4974-eb9e-4181-8fd6-d1b984045e07" data-share-badge-host="https://www.credly.com" style="display: inline-block;"></div>
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="474e2741-6015-4858-9cf0-bb70b13224f8" data-share-badge-host="https://www.credly.com" style="display: inline-block;"></div>
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="87c01da4-9158-4f58-b396-282c96e2a98f" data-share-badge-host="https://www.credly.com" style="display: inline-block;"></div>
+<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="748def44-5ad6-49a3-b8e1-fdc07dae4458" data-share-badge-host="https://www.credly.com" style="display: inline-block;"></div>
 <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
 ## Mes Talks
 
-- CloudOuest 2021 : Un datahub dans Azure : Retour d'expérience sur les services managés
+- CloudOuest 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
 - France DevOps (Juillet 2021) : Au secours, le DevOps part en vrille ! *[replay](https://www.francedevops.fr/webinars/au-secours-le-devops-part-en-vrille)*
 - TADx 2021 (Novembre 2021) : Au secours, le DevOps part en vrille !
-- CloudEst 2021 : Un datahub dans Azure : Retour d'expérience sur les services managés
+- CloudEst 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
 - Agile Tour Montpellier 2021 : Au secours, le DevOps part en vrille !
 - Agile Tour Paris 2021 : Au secours, le DevOps part en vrille !
+- Agile Tour Rennes 2021 : Au secours, le DevOps part en vrille !
 
 A venir :
 
-- Agile Tour Rennes 2021 : Au secours, le DevOps part en vrille !
-- SnowCamp 2022 : Un datahub dans Azure : Retour d'expérience sur les services managés
+- Azug Nantes (27 Janvier 2022) : Azure Batch, le mal-aimé !
+- SnowCamp 2022 : Un datahub dans Azure, Retour d'expérience sur les services managés
+- Azug Nantes (24 Mai 2022) : Pourquoi j’ai mal à la tête lorsqu’il faut mettre en place l’isolation réseau avec Azure ?
 
 ## Me suivre ou réagir !
 
