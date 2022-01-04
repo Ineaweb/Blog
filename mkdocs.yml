@@ -53,9 +53,19 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.snippets  
 
+extra_css:
+  - stylesheets/extra.css
+
 extra:
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/morisseauphi
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/pmorisseau
+  blog:
+    dir: articles
+    author: Philippe Morisseau
+    author_image: img/tronbine.jpg
+    words_read_per_minute: 300
+    list_length: 25
+    extended_preview: false

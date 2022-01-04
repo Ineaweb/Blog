@@ -1,7 +1,8 @@
 ---
 title: "Accueil"
+template: blog_list.html
 ---
-
+<!--
 ## Articles
 
 ### Révision du soir
@@ -36,3 +37,4 @@ title: "Accueil"
 - [CosmosDB : Une clé de partition calculée !](articles/tips/03.cosmosdb.calculatedPartitionKey.md)
 - [Déployer Sonarqube sur des services managés Azure](articles/tips/04.sonarqube.managed.md)
 - [Azure DevOps : Créer sa propre task agentless](articles/tips/05.azuredevops.extension.agentless.md)
+-->
