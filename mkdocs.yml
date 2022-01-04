@@ -2,6 +2,7 @@ site_name: "Philippe MORISSEAU"
 site_url: !!python/object/apply:os.getenv ["SITE_URL"]
 theme:
   name: material
+  language: fr
   custom_dir: docs/overrides
   palette:
     scheme: default
