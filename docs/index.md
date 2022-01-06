@@ -1,6 +1,8 @@
 ---
 title: "Accueil"
+template: blog_list.html
 ---
+<!--
 ## Articles
 
 ### Révision du soir
@@ -26,6 +28,7 @@ title: "Accueil"
 - Partie 2 : Comment passe-t-on au-delà des limites ?
     * [Chapitre 1 : La machine à état](articles/devops/vrille/04.comment.machineetat.md)
     * [Chapitre 2 : Le build](articles/devops/vrille/05.comment.build.md)
+    * [Chapitre 3 : Le déploiement](articles/devops/vrille/06.comment.deploy.md)
 
 ### Tips & Tricks
 
@@ -34,3 +37,4 @@ title: "Accueil"
 - [CosmosDB : Une clé de partition calculée !](articles/tips/03.cosmosdb.calculatedPartitionKey.md)
 - [Déployer Sonarqube sur des services managés Azure](articles/tips/04.sonarqube.managed.md)
 - [Azure DevOps : Créer sa propre task agentless](articles/tips/05.azuredevops.extension.agentless.md)
+-->

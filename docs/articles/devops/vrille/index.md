@@ -26,4 +26,5 @@ Dans cette série nous aborderons :
 
 - [Chapitre 1 : La machine à état](04.comment.machineetat.md)
 - [Chapitre 2 : Le build](05.comment.build.md)
+- [Chapitre 3 : Le déploiement](06.comment.deploy.md)
 

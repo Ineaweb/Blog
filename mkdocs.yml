@@ -2,6 +2,8 @@ site_name: "Philippe MORISSEAU"
 site_url: !!python/object/apply:os.getenv ["SITE_URL"]
 theme:
   name: material
+  language: fr
+  custom_dir: docs/overrides
   palette:
     scheme: default
     primary: blue
@@ -28,6 +30,7 @@ pages:
       - 'Partie 2 : Comment passe-t-on au-delà des limites ?':
         - articles/devops/vrille/04.comment.machineetat.md
         - articles/devops/vrille/05.comment.build.md
+        - articles/devops/vrille/06.comment.deploy.md
     - 'Tips & tricks':
       - articles/tips/01.finops.ftpslowcost.md
       - articles/tips/02.cosmosdb.waiting_partialupdate.md
@@ -51,9 +54,19 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.snippets  
 
+extra_css:
+  - stylesheets/extra.css
+
 extra:
   social:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/morisseauphi
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/pmorisseau
+  blog:
+    dir: articles
+    author: Philippe Morisseau
+    author_image: img/tronbine.jpg
+    words_read_per_minute: 300
+    list_length: 25
+    extended_preview: false
