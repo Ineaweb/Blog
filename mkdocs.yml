@@ -37,6 +37,7 @@ pages:
       - articles/tips/03.cosmosdb.calculatedPartitionKey.md
       - articles/tips/04.sonarqube.managed.md
       - articles/tips/05.azuredevops.extension.agentless.md
+      - articles/tips/06.azuredevops.ephemeralagents.md
   - about.md
 
 plugins:

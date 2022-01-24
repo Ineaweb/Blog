@@ -40,6 +40,9 @@ Enfin, je partage mes connaissances au travers de diverses formations autour du 
 
 ## Mes Talks
 
+- ReBuild 2018 (Nantes) - GÉRER SON PARC CLOUD AVEC AZURE DEVOPS (Talk)
+- MS Experience 2018 (Paris) - GÉRER SON PARC CLOUD AVEC AZURE DEVOPS (Quickie)
+- ReBuild 2019 (Nantes) - REX Services Managés Azure (Talk)
 - CloudOuest 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
 - France DevOps (Juillet 2021) : Au secours, le DevOps part en vrille ! *[replay](https://www.francedevops.fr/webinars/au-secours-le-devops-part-en-vrille)*
 - TADx 2021 (Novembre 2021) : Au secours, le DevOps part en vrille !
