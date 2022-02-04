@@ -28,3 +28,8 @@ Dans cette série nous aborderons :
 - [Chapitre 2 : Le build](05.comment.build.md)
 - [Chapitre 3 : Le déploiement](06.comment.deploy.md)
 
+## Partie 3 : C'est possible, la preuve !
+
+- [La preuve, conclusion](07.lapreuve.md)
+
+
