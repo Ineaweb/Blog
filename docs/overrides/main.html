@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+  <meta property="og:title" content="{{ page.title }}" />
+  {% if page.meta is defined %}
+  <meta property="og:image" content="{{ page.meta.image }}" />
+  <meta property="og:description" content="{{ page.meta.summary }}" />
+  {% endif %}
+{% endblock %}
+
 {% block header %}
 {#-
     This file was automatically generated - do not edit
