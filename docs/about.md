@@ -44,7 +44,7 @@ Enfin, je partage mes connaissances au travers de diverses formations autour du 
 - MS Experience 2018 (Paris) - GÉRER SON PARC CLOUD AVEC AZURE DEVOPS (Quickie)
 - ReBuild 2019 (Nantes) - REX Services Managés Azure (Talk)
 - CloudOuest 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
-- France DevOps (Juillet 2021) : Au secours, le DevOps part en vrille ! *[replay](https://www.francedevops.fr/webinars/au-secours-le-devops-part-en-vrille)*
+- France DevOps (Juillet 2021) : Au secours, le DevOps part en vrille ! *[replay](https://youtu.be/BDQ4C6y7-ss)*
 - TADx 2021 (Novembre 2021) : Au secours, le DevOps part en vrille !
 - CloudEst 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
 - Agile Tour Montpellier 2021 : Au secours, le DevOps part en vrille !
@@ -52,7 +52,7 @@ Enfin, je partage mes connaissances au travers de diverses formations autour du 
 - Agile Tour Rennes 2021 : Au secours, le DevOps part en vrille !
 - Azug Nantes (24 Janvier 2022) : Azure Batch, le mal-aimé !
 - SnowCamp 2022 (du 02 au 04 Février 2022) : Un datahub dans Azure, Retour d'expérience sur les services managés
-- France DevOps (08 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
+- France DevOps (08 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?! *[replay](https://youtu.be/BJVhxnDVpks)*
 
 A venir :
 
