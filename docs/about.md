@@ -50,7 +50,7 @@ Enfin, je partage mes connaissances au travers de diverses formations autour du 
 - Agile Tour Montpellier 2021 : Au secours, le DevOps part en vrille !
 - Agile Tour Paris 2021 : Au secours, le DevOps part en vrille !
 - Agile Tour Rennes 2021 : Au secours, le DevOps part en vrille !
-- Azug Nantes (24 Janvier 2022) : Azure Batch, le mal-aimé !
+- Azug Nantes (24 Janvier 2022) : Azure Batch, le mal-aimé ! *[replay](https://youtu.be/g_vI5aUPIwo)*
 - SnowCamp 2022 (du 02 au 04 Février 2022) : Un datahub dans Azure, Retour d'expérience sur les services managés
 - France DevOps (08 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?! *[replay](https://youtu.be/BJVhxnDVpks)*
 
