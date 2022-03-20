@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="#BlogPMorisseau" />
+  <meta name="twitter:creator" content="@morisseauphi" />
   <meta property="og:title" content="{{ page.title }}" />
-  <meta property="twitter:title" content="{{ page.title }}" />
   <meta name="google-site-verification" content="4u5iczH_BZIFNPOH62WW8FkORuWGS2C8L_K4oBWwUWY" />
   {% if page.meta is defined %}
   <meta property="og:image" content="{{ config.site_url ~ page.meta.image }}" />
   <meta property="og:description" content="{{ page.meta.summary }}" />
   <meta property="og:url" content="{{ config.site_url ~ page.url }}" />
-  <meta property="twitter:image" content="{{ config.site_url ~ page.meta.image }}" />
-  <meta property="twitter:description" content="{{ page.meta.summary }}" />
-  <meta property="twitter:creator" content="{{ page.meta.authors }}" />
   <meta name="Description" CONTENT="{{ page.meta.summary }}" />
   {% endif %}
 
