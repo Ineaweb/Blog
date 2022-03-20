@@ -44,11 +44,7 @@ pages:
   - about.md
 
 plugins:
-  - search
-
-google_analytics:
-  - 'G-T8TQW7CYM4'
-  - 'auto'  
+  - search 
 
 markdown_extensions:
   - admonition
