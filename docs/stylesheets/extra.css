@@ -1,3 +1,7 @@
+.md-sidebar--secondary {
+    width: 0rem;
+}
+ 
 .blog-item {
     width: 100%;
     display: flex;
@@ -27,7 +31,6 @@
        display: none;
     }
  }
-
 
 .blog-info {
     box-sizing: border-box;
