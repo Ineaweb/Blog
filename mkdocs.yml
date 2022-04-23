@@ -32,6 +32,8 @@ nav:
         - articles/devops/vrille/05.comment.build.md
         - articles/devops/vrille/06.comment.deploy.md
       - articles/devops/vrille/07.lapreuve.md
+    - 'Adopter une démarche GitOps':    
+        - articles/devops/gitops/01.gitops.AzureAppConfiguration.md
     - 'Tips & tricks':
       - articles/tips/01.finops.ftpslowcost.md
       - articles/tips/02.cosmosdb.waiting_partialupdate.md
@@ -41,7 +43,6 @@ nav:
       - articles/tips/06.azuredevops.ephemeralagents.md
       - articles/tips/07.github.ephemeralactionsrunner.md
       - articles/tips/08.dockerhub.windowsServerCore2022.md
-      - articles/tips/09.gitops.AzureAppConfiguration-01.md
   - about.md
 
 plugins:
