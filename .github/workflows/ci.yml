@@ -20,7 +20,7 @@ jobs:
           python-version: 3.x
       - run: pip install mkdocs-material
       - run: pip install pygments==2.11.2
-      - run: pip install pymdown-extensions==9.3 
+      - run: pip install pymdown-extensions==9.3
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
