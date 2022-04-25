@@ -19,9 +19,9 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-T8TQW7CYM4');
   </script>
+  <link href="{{ 'stylesheets/custom.css'|url }}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -57,7 +57,7 @@
             </span>
             {% endfor %}
           {% endif %}
-          </div>
+        </div>
         {% include "partials/blog_metadata.html" %}
         <!-- Use a hidden p tag to provide a preview -->
         {% if config.extra.blog.extended_preview %}
