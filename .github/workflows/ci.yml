@@ -19,6 +19,7 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
+      - run: pip install pygments==2.11.2
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -42,6 +43,7 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
+      - run: pip install pygments==2.11.2
       - run: mkdocs gh-deploy --force
 
   deploy-ToAzureWebApp:
@@ -57,6 +59,7 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
+      - run: pip install pygments==2.11.2
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
