@@ -52,7 +52,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     env:
-      SITE_URL: "https://pmorisseau.azurewebsites.net"
+      SITE_URL: "https://pmorisseau.ineaweb.net"
     environment: PROD
     needs: deploy-ToAzureWebAppPreview       
     steps:
