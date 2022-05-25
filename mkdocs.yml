@@ -35,6 +35,7 @@ nav:
     - 'Adopter une démarche GitOps':    
       - articles/devops/gitops/01.gitops.AzureAppConfiguration.md
       - articles/devops/gitops/02.gitops.AzureAppConfiguration.md
+      - articles/devops/gitops/03.gitops.AzureAppConfiguration.md
     - 'Tips & tricks':
       - articles/tips/01.finops.ftpslowcost.md
       - articles/tips/02.cosmosdb.waiting_partialupdate.md
