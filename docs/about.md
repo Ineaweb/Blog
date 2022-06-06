@@ -53,13 +53,15 @@ Enfin, je partage mes connaissances au travers de diverses formations autour du 
 - Azug Nantes (24 Janvier 2022) : Azure Batch, le mal-aimé ! *[replay](https://youtu.be/g_vI5aUPIwo)*
 - SnowCamp 2022 (du 02 au 04 Février 2022) : Un datahub dans Azure, Retour d'expérience sur les services managés
 - France DevOps (08 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?! *[replay](https://youtu.be/BJVhxnDVpks)*
-- Onepoint Atlantique (17 Mars 2022) : Au secours, le DevOps part en vrille !
+- Inauguration / 20 ans onepoint (17 Mars 2022) : Au secours, le DevOps part en vrille !
 - Cloud Sud 2022 (24 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
+- Azug Nantes (31 Mai 2022) : Pourquoi j’ai mal à la tête lorsqu’il faut mettre en place l’isolation réseau avec Azure ?
 
 A venir :
 
-- Azug Nantes (31 Mai 2022) : Pourquoi j’ai mal à la tête lorsqu’il faut mettre en place l’isolation réseau avec Azure ?
+- Meetup onepoint (22 Juin 2022) : Au secours, le DevOps part en vrille !
 - Sunny Tech (30 Juin 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
+- Breizhcamp (1er Juillet 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
 
 ## Me suivre ou réagir !
 
