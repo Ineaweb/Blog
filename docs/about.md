@@ -40,28 +40,30 @@ Enfin, je partage mes connaissances au travers de diverses formations autour du 
 
 ## Mes Talks
 
-- ReBuild 2018 (Nantes) - GÉRER SON PARC CLOUD AVEC AZURE DEVOPS (Talk)
-- MS Experience 2018 (Paris) - GÉRER SON PARC CLOUD AVEC AZURE DEVOPS (Quickie)
-- ReBuild 2019 (Nantes) - REX Services Managés Azure (Talk)
-- CloudOuest 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
-- France DevOps (Juillet 2021) : Au secours, le DevOps part en vrille ! *[replay](https://youtu.be/BDQ4C6y7-ss)*
-- TADx 2021 (Novembre 2021) : Au secours, le DevOps part en vrille !
-- CloudEst 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
-- Agile Tour Montpellier 2021 : Au secours, le DevOps part en vrille !
-- Agile Tour Paris 2021 : Au secours, le DevOps part en vrille !
-- Agile Tour Rennes 2021 : Au secours, le DevOps part en vrille !
-- Azug Nantes (24 Janvier 2022) : Azure Batch, le mal-aimé ! *[replay](https://youtu.be/g_vI5aUPIwo)*
-- SnowCamp 2022 (du 02 au 04 Février 2022) : Un datahub dans Azure, Retour d'expérience sur les services managés
-- France DevOps (08 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?! *[replay](https://youtu.be/BJVhxnDVpks)*
-- Inauguration / 20 ans onepoint (17 Mars 2022) : Au secours, le DevOps part en vrille !
-- Cloud Sud 2022 (24 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
-- Azug Nantes (31 Mai 2022) : Pourquoi j’ai mal à la tête lorsqu’il faut mettre en place l’isolation réseau avec Azure ?
-
 A venir :
 
 - Meetup onepoint (22 Juin 2022) : Au secours, le DevOps part en vrille !
 - Sunny Tech (30 Juin 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
 - Breizhcamp (1er Juillet 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
+
+Passés :
+
+- Azug Nantes (31 Mai 2022) : Pourquoi j’ai mal à la tête lorsqu’il faut mettre en place l’isolation réseau avec Azure ?
+- Cloud Sud 2022 (24 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
+- Inauguration / 20 ans onepoint (17 Mars 2022) : Au secours, le DevOps part en vrille !
+- France DevOps (08 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?! *[replay](https://youtu.be/BJVhxnDVpks)*
+- SnowCamp 2022 (du 02 au 04 Février 2022) : Un datahub dans Azure, Retour d'expérience sur les services managés
+- Azug Nantes (24 Janvier 2022) : Azure Batch, le mal-aimé ! *[replay](https://youtu.be/g_vI5aUPIwo)*
+- Agile Tour Rennes 2021 : Au secours, le DevOps part en vrille !
+- Agile Tour Paris 2021 : Au secours, le DevOps part en vrille !
+- Agile Tour Montpellier 2021 : Au secours, le DevOps part en vrille !
+- CloudEst 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
+- TADx 2021 (Novembre 2021) : Au secours, le DevOps part en vrille !
+- France DevOps (Juillet 2021) : Au secours, le DevOps part en vrille ! *[replay](https://youtu.be/BDQ4C6y7-ss)*
+- CloudOuest 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
+- ReBuild 2019 (Nantes) - REX Services Managés Azure (Talk)
+- MS Experience 2018 (Paris) - GÉRER SON PARC CLOUD AVEC AZURE DEVOPS (Quickie)
+- ReBuild 2018 (Nantes) - GÉRER SON PARC CLOUD AVEC AZURE DEVOPS (Talk)
 
 ## Me suivre ou réagir !
 
