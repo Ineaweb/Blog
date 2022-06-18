@@ -5,7 +5,8 @@ on:
       - master
       - main
       - article/*
-      - article/tips/*      
+      - article/tips/*
+      - feat/*      
 
 jobs:
   deploy-ToAzureWebAppPreview:
@@ -21,6 +22,7 @@ jobs:
       - run: pip install mkdocs-material
       - run: pip install pygments==2.11.2
       - run: pip install pymdown-extensions==9.3
+      - run: pip install mkdocs-material-relative-language-selector==1.1.4
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -46,6 +48,7 @@ jobs:
       - run: pip install mkdocs-material
       - run: pip install pygments==2.11.2
       - run: pip install pymdown-extensions==9.3 
+      - run: pip install mkdocs-material-relative-language-selector==1.1.4
       - run: mkdocs gh-deploy --force
 
   deploy-ToAzureWebApp:
@@ -63,6 +66,7 @@ jobs:
       - run: pip install mkdocs-material
       - run: pip install pygments==2.11.2
       - run: pip install pymdown-extensions==9.3 
+      - run: pip install mkdocs-material-relative-language-selector==1.1.4
       - run: mkdocs build      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp

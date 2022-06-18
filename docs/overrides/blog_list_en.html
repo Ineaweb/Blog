@@ -28,7 +28,7 @@
   {{ page.content }}
   {% set blog_posts = [] %}
   {% for page in nav.pages %}
-    {% if page.url.startswith(config.extra.blog.dir) and page.meta.date is defined and page.meta.language != 'en'%}
+    {% if page.url.startswith("en/" + config.extra.blog.dir) and page.meta.date is defined %}
       <!-- or "" suppresses "None" output-->
       {{ blog_posts.append( page ) or "" }}
     {% endif %}
