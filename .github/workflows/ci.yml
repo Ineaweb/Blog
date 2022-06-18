@@ -5,7 +5,8 @@ on:
       - master
       - main
       - article/*
-      - article/tips/*      
+      - article/tips/*
+      - feat/*      
 
 jobs:
   deploy-ToAzureWebAppPreview:
