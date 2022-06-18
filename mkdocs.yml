@@ -11,44 +11,83 @@ theme:
     text: Poppins
 
 nav:
-  - index.md
-  - Articles:
-    - 'Révision du soir':
-      - articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
-      - articles/classroom/02.azureClassroom.batch.md
-    - 'Azure, Les exceptions qui font mal !':
-      - articles/exceptions/index.md
-      - articles/exceptions/01.azureException.acrAndAciInYourVnet.md
-      - articles/exceptions/02.azureException.aciWindowsWithVnet.md
-      - articles/exceptions/03.azureException.firewallAndRegion.md      
-    - 'Au secours, Le DevOps part en vrille !':
-      - articles/devops/vrille/index.md
-      - 'Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?':
-        - articles/devops/vrille/01.pourquoi.agilite.md
-        - articles/devops/vrille/02.pourquoi.devops.md
-        - articles/devops/vrille/03.pourquoi.entropie.md
-      - 'Partie 2 : Comment passe-t-on au-delà des limites ?':
-        - articles/devops/vrille/04.comment.machineetat.md
-        - articles/devops/vrille/05.comment.build.md
-        - articles/devops/vrille/06.comment.deploy.md
-      - articles/devops/vrille/07.lapreuve.md
-    - 'Adopter une démarche GitOps':    
-      - articles/devops/gitops/01.gitops.AzureAppConfiguration.md
-      - articles/devops/gitops/02.gitops.AzureAppConfiguration.md
-      - articles/devops/gitops/03.gitops.AzureAppConfiguration.md
-    - 'Tips & tricks':
-      - articles/tips/01.finops.ftpslowcost.md
-      - articles/tips/02.cosmosdb.waiting_partialupdate.md
-      - articles/tips/03.cosmosdb.calculatedPartitionKey.md
-      - articles/tips/04.sonarqube.managed.md
-      - articles/tips/05.azuredevops.extension.agentless.md
-      - articles/tips/06.azuredevops.ephemeralagents.md
-      - articles/tips/07.github.ephemeralactionsrunner.md
-      - articles/tips/08.dockerhub.windowsServerCore2022.md
-  - about.md
+  - French :
+    - index.md
+    - Articles:
+      - 'Révision du soir':
+        - articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
+        - articles/classroom/02.azureClassroom.batch.md
+      - 'Azure, Les exceptions qui font mal !':
+        - articles/exceptions/index.md
+        - articles/exceptions/01.azureException.acrAndAciInYourVnet.md
+        - articles/exceptions/02.azureException.aciWindowsWithVnet.md
+        - articles/exceptions/03.azureException.firewallAndRegion.md      
+      - 'Au secours, Le DevOps part en vrille !':
+        - articles/devops/vrille/index.md
+        - 'Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?':
+          - articles/devops/vrille/01.pourquoi.agilite.md
+          - articles/devops/vrille/02.pourquoi.devops.md
+          - articles/devops/vrille/03.pourquoi.entropie.md
+        - 'Partie 2 : Comment passe-t-on au-delà des limites ?':
+          - articles/devops/vrille/04.comment.machineetat.md
+          - articles/devops/vrille/05.comment.build.md
+          - articles/devops/vrille/06.comment.deploy.md
+        - articles/devops/vrille/07.lapreuve.md
+      - 'Adopter une démarche GitOps':    
+        - articles/devops/gitops/01.gitops.AzureAppConfiguration.md
+        - articles/devops/gitops/02.gitops.AzureAppConfiguration.md
+        - articles/devops/gitops/03.gitops.AzureAppConfiguration.md
+      - 'Tips & tricks':
+        - articles/tips/01.finops.ftpslowcost.md
+        - articles/tips/02.cosmosdb.waiting_partialupdate.md
+        - articles/tips/03.cosmosdb.calculatedPartitionKey.md
+        - articles/tips/04.sonarqube.managed.md
+        - articles/tips/05.azuredevops.extension.agentless.md
+        - articles/tips/06.azuredevops.ephemeralagents.md
+        - articles/tips/07.github.ephemeralactionsrunner.md
+        - articles/tips/08.dockerhub.windowsServerCore2022.md
+    - about.md
+  - English: 
+    - en/index.md
+    - Articles:
+      - 'Back to school':
+        - en/articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
+        - en/articles/classroom/02.azureClassroom.batch.md
+      - 'Azure, Exceptions that hurt!':
+        - en/articles/exceptions/index.md
+        - en/articles/exceptions/01.azureException.acrAndAciInYourVnet.md
+        - en/articles/exceptions/02.azureException.aciWindowsWithVnet.md
+        - en/articles/exceptions/03.azureException.firewallAndRegion.md      
+      - 'Help, DevOps is going into a spin!':
+        - en/articles/devops/vrille/index.md
+        - 'Part 1: Why are we reaching the limits of DevOps?':
+          - en/articles/devops/vrille/01.pourquoi.agilite.md
+          - en/articles/devops/vrille/02.pourquoi.devops.md
+          - en/articles/devops/vrille/03.pourquoi.entropie.md
+        - 'Part 2: How do we go beyond the limits?':
+          - en/articles/devops/vrille/04.comment.machineetat.md
+          - en/articles/devops/vrille/05.comment.build.md
+          - en/articles/devops/vrille/06.comment.deploy.md
+        - en/articles/devops/vrille/07.lapreuve.md
+      - 'Adopt a GitOps approach':    
+        - en/articles/devops/gitops/01.gitops.AzureAppConfiguration.md
+        - en/articles/devops/gitops/02.gitops.AzureAppConfiguration.md
+        - en/articles/devops/gitops/03.gitops.AzureAppConfiguration.md
+      - 'Tips & tricks':
+        - en/articles/tips/01.finops.ftpslowcost.md
+        - en/articles/tips/02.cosmosdb.waiting_partialupdate.md
+        - en/articles/tips/03.cosmosdb.calculatedPartitionKey.md
+        - en/articles/tips/04.sonarqube.managed.md
+        - en/articles/tips/05.azuredevops.extension.agentless.md
+        - en/articles/tips/06.azuredevops.ephemeralagents.md
+        - en/articles/tips/07.github.ephemeralactionsrunner.md
+        - en/articles/tips/08.dockerhub.windowsServerCore2022.md
+    - en/about.md
 
 plugins:
-  - search 
+  - search
+  - material-relative-language-selector:
+      root_domain: true
 
 markdown_extensions:
   - admonition
@@ -74,3 +113,10 @@ extra:
     words_read_per_minute: 300
     list_length: 25
     extended_preview: false
+  alternate:
+    - name: French
+      link: ""
+      lang: fr
+    - name: English
+      link: en
+      lang: en
