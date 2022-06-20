@@ -58,7 +58,7 @@
             {% endfor %}
           {% endif %}
         </div>
-        {% include "partials/blog_metadata.html" %}
+        {% include "partials/blog_metadata_en.html" %}
         <!-- Use a hidden p tag to provide a preview -->
         {% if config.extra.blog.extended_preview %}
           {{ page.content.split("<p hidden>#more</p>", 1)[0] }}
