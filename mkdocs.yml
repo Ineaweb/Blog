@@ -58,7 +58,7 @@ nav:
         - en/articles/exceptions/01.azureException.acrAndAciInYourVnet.md
         - en/articles/exceptions/02.azureException.aciWindowsWithVnet.md
         - en/articles/exceptions/03.azureException.firewallAndRegion.md      
-      - 'Help, DevOps is going into a spin!':
+      - 'Help, DevOps is going off road!':
         - en/articles/devops/vrille/index.md
         - 'Part 1: Why are we reaching the limits of DevOps?':
           - en/articles/devops/vrille/01.pourquoi.agilite.md
