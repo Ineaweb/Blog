@@ -46,6 +46,7 @@ nav:
         - articles/tips/06.azuredevops.ephemeralagents.md
         - articles/tips/07.github.ephemeralactionsrunner.md
         - articles/tips/08.dockerhub.windowsServerCore2022.md
+        - articles/tips/09.azurefunction.limitlogs.md
     - about.md
   - English: 
     - en/index.md
