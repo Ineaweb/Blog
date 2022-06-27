@@ -83,6 +83,7 @@ nav:
         - en/articles/tips/06.azuredevops.ephemeralagents.md
         - en/articles/tips/07.github.ephemeralactionsrunner.md
         - en/articles/tips/08.dockerhub.windowsServerCore2022.md
+        - en/articles/tips/09.azurefunction.limitlogs.md
     - en/about.md
 
 plugins:
