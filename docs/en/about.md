@@ -47,6 +47,7 @@ Coming :
 
 - Volcamp (les 13 et 14 Octobre 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
 - Agile Tour Nantes (3 Novembre 2022) : Et PAF, encore un PoC ! ... qu'on pousse en prod. 🙄
+- Devfest Strasbourg (18 Novembre 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
 - Agile Tour Grenoble (du 23 au 25 Novembre 2022) :  Au secours, le DevOps part en vrille !
 - Agile Tour Grenoble (du 23 au 25 Novembre 2022) :  Le DevOps expliqué à mon père, agriculteur à la retraite. 🙄
 
