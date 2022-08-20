@@ -27,7 +27,10 @@ With more than 15 years of experience, myself, I bring my knowledge on:
 - lean and
 - operation of OnPremise infrastructure.
   
-Finally, I share my knowledge through various training courses around the Azure cloud and DevOps.
+I share my knowledge through various training courses around the Azure cloud and DevOps.
+
+Finally, i'm very proud to be recognized by Microsoft as a [MVP (Most Valuable Professional)](https://mvp.microsoft.com/fr-fr/PublicProfile/5004832?fullName=Philippe%20MORISSEAU).
+
 
 ## My certifications
 
@@ -42,12 +45,16 @@ Finally, I share my knowledge through various training courses around the Azure 
 
 Coming :
 
-- Meetup onepoint (22 Juin 2022) : Au secours, le DevOps part en vrille !
-- Sunny Tech (30 Juin 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
-- Breizhcamp (1er Juillet 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
+- Volcamp (les 13 et 14 Octobre 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
+- Agile Tour Nantes (3 Novembre 2022) : Et PAF, encore un PoC ! ... qu'on pousse en prod. 🙄
+- Agile Tour Grenoble (du 23 au 25 Novembre 2022) :  Au secours, le DevOps part en vrille !
+- Agile Tour Grenoble (du 23 au 25 Novembre 2022) :  Le DevOps expliqué à mon père, agriculteur à la retraite. 🙄
 
 Past :
 
+- Breizhcamp (1er Juillet 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?! *[replay](https://youtu.be/dVFyacA1-iI)*
+- Sunny Tech (30 Juin 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?! *[replay](https://youtu.be/OsfJtpqw6iM)*
+- Meetup onepoint (22 Juin 2022) : Au secours, le DevOps part en vrille !
 - Azug Nantes (31 Mai 2022) : Pourquoi j’ai mal à la tête lorsqu’il faut mettre en place l’isolation réseau avec Azure ?
 - Cloud Sud 2022 (24 Mars 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?!
 - Inauguration / 20 ans onepoint (17 Mars 2022) : Au secours, le DevOps part en vrille !
