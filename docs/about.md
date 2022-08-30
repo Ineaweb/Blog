@@ -63,9 +63,9 @@ Passés :
 - Azug Nantes (24 Janvier 2022) : Azure Batch, le mal-aimé ! *[replay](https://youtu.be/g_vI5aUPIwo)*
 - Agile Tour Rennes 2021 : Au secours, le DevOps part en vrille !
 - Agile Tour Paris 2021 : Au secours, le DevOps part en vrille !
-- Agile Tour Montpellier 2021 : Au secours, le DevOps part en vrille !
+- Agile Tour Montpellier 2021 : Au secours, le DevOps part en vrille ! *[replay](https://youtu.be/XbcVOfd4Rp8)*
 - CloudEst 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
-- TADx 2021 (Novembre 2021) : Au secours, le DevOps part en vrille !
+- TADx 2021 (Novembre 2021) : Au secours, le DevOps part en vrille ! *[replay](https://youtu.be/icvdFPYtB6Q)*
 - France DevOps (Juillet 2021) : Au secours, le DevOps part en vrille ! *[replay](https://youtu.be/BDQ4C6y7-ss)*
 - CloudOuest 2021 : Un datahub dans Azure, Retour d'expérience sur les services managés
 - ReBuild 2019 (Nantes) - REX Services Managés Azure (Talk)
