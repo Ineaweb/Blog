@@ -44,11 +44,12 @@ Enfin, je suis très fier d'être reconnu par Microsoft en tant que [MVP (Most V
 
 A venir :
 
-- Touraine Tech (du 19 au 20 Janvier 2023) : Le DevOps expliqué à mon père, agriculteur à la retraite.
-- AgiLeMans (le 2 février 2023) : Le DevOps expliqué à mon père, agriculteur à la retraite.
+- DevOpsDays Geneva (le 24-25 avril 2023) : Le DevOps expliqué à mon père, agriculteur à la retraite.
 
 Passés :
 
+- AgiLeMans (le 2 février 2023) : Le DevOps expliqué à mon père, agriculteur à la retraite.
+- Touraine Tech (du 19 au 20 Janvier 2023) : Le DevOps expliqué à mon père, agriculteur à la retraite.
 - Agile Tour Grenoble (du 23 au 25 Novembre 2022) :  Le DevOps expliqué à mon père, agriculteur à la retraite.
 - Agile Tour Grenoble (du 23 au 25 Novembre 2022) :  Au secours, le DevOps part en vrille !
 - Devfest Strasbourg (18 Novembre 2022) : GitOps, Continuous Delivery et environnements : Comment éviter l'enfer ?! *[replay](https://youtu.be/ZAFXBsgQA_4)*
