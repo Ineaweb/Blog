@@ -57,6 +57,7 @@ nav:
     - Articles:
       - 'A short story about the big Azure cloud':
         - en/articles/assatbac/ep01.md
+        - en/articles/assatbac/ep02.md
       - 'Back to school':
         - en/articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
         - en/articles/classroom/02.azureClassroom.batch.md
