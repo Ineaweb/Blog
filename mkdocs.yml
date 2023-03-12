@@ -17,6 +17,7 @@ nav:
       - 'A short story about the big Azure cloud':
         - articles/assatbac/ep01.md
         - articles/assatbac/ep02.md
+        - articles/assatbac/ep03.md
       - 'Révision du soir':
         - articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
         - articles/classroom/02.azureClassroom.batch.md
