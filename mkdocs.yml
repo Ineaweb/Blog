@@ -18,6 +18,7 @@ nav:
         - articles/assatbac/ep01.md
         - articles/assatbac/ep02.md
         - articles/assatbac/ep03.md
+        - articles/assatbac/ep04.md
       - 'Révision du soir':
         - articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
         - articles/classroom/02.azureClassroom.batch.md
@@ -60,6 +61,7 @@ nav:
         - en/articles/assatbac/ep01.md
         - en/articles/assatbac/ep02.md
         - en/articles/assatbac/ep03.md
+        - en/articles/assatbac/ep04.md
       - 'Back to school':
         - en/articles/classroom/01.azureClassroom.VnetEndpointFirewall.md
         - en/articles/classroom/02.azureClassroom.batch.md
