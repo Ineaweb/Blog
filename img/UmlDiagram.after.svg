@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Généré par Microsoft Visio, SVG Export UmlDiagram.after.svg Page 1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="7.35555in" height="6.92139in"
+		viewBox="0 0 529.6 498.34" xml:space="preserve" color-interpolation-filters="sRGB" class="st18">
+	<v:documentProperties v:langID="1036" v:metric="true" v:viewMarkup="false"/>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {stroke:#b8b8b8;stroke-dasharray:4.5,9;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.5}
+		.st2 {fill:#3999c6;stroke:none;stroke-linecap:butt;stroke-width:9.5625}
+		.st3 {fill:#fcd116;stroke:none;stroke-linecap:butt;stroke-width:9.5625}
+		.st4 {fill:#ff8c00;fill-opacity:0.3;stroke:none;stroke-linecap:butt;stroke-width:9.5625}
+		.st5 {fill:#59b4d9;stroke:none;stroke-linecap:butt;stroke-width:25.5202}
+		.st6 {fill:#ffffff;fill-opacity:0.5;stroke:none;stroke-linecap:butt;stroke-width:25.5202}
+		.st7 {fill:#b8d432;stroke:none;stroke-linecap:butt;stroke-width:25.5202}
+		.st8 {fill:#000000;stroke:none;stroke-linecap:butt;stroke-width:25.5202}
+		.st9 {fill:#eaeaea;stroke:#b8b8b8;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st10 {marker-start:url(#mrkr1-37);stroke:#b8b8b8;stroke-dasharray:4.5,9;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.5}
+		.st11 {fill:#b8b8b8;fill-opacity:1;stroke:#b8b8b8;stroke-opacity:1;stroke-width:0.64102564102564}
+		.st12 {marker-start:url(#mrkr1-37);stroke:#b8b8b8;stroke-linecap:round;stroke-linejoin:round;stroke-width:4.5}
+		.st13 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.5}
+		.st14 {fill:#595959;font-family:Arial;font-size:1.00001em}
+		.st15 {fill:#ba141a;stroke:none;stroke-linecap:butt;stroke-width:0.75}
+		.st16 {fill:#1e1e1e;fill-opacity:0.25;stroke:none;stroke-linecap:butt;stroke-width:0.75}
+		.st17 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:0.75}
+		.st18 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend1">
+			<path d="M 1 -1 L 0 0 L 1 1 " style="stroke-linecap:round;stroke-linejoin:round;fill:none"/>
+		</g>
+		<marker id="mrkr1-37" class="st11" v:arrowType="1" v:arrowSize="2" orient="auto" markerUnits="strokeWidth"
+				overflow="visible">
+			<use xlink:href="#lend1" transform="scale(1.56) "/>
+		</marker>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Page 1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="Lien" v:index="0"/>
+		<g id="shape103-1" v:mID="103" v:groupContext="shape" v:layerMember="0" transform="translate(315.784,-36.0529)">
+			<title>Lien dynamique.189</title>
+			<path d="M7.09 498.34 L7.09 125.39" class="st1"/>
+		</g>
+		<g id="group106-4" transform="translate(11.4683,-407.934)" v:mID="106" v:groupContext="group">
+			<title>Azure Functions</title>
+			<g id="shape107-5" v:mID="107" v:groupContext="shape" transform="translate(48.1693,-12.6472)">
+				<title>Feuille.107</title>
+				<path d="M22 478.98 C22.65 478.32 22.54 477.11 22 476.45 L18.59 473.05 L3.41 458.31 C2.75 457.65 1.76 457.65 0.99
+							 458.31 C0.33 458.97 0.11 460.18 0.99 460.84 L16.94 476.45 C17.6 477.11 17.6 478.32 16.94 478.98 L0.66
+							 495.15 C0 495.81 0 497.02 0.66 497.68 C1.32 498.34 2.53 498.23 3.08 497.68 L18.15 482.72 C18.15 482.72
+							 18.15 482.72 18.26 482.61 L22 478.98 Z" class="st2"/>
+			</g>
+			<g id="shape108-7" v:mID="108" v:groupContext="shape" transform="translate(0,-12.6472)">
+				<title>Feuille.108</title>
+				<path d="M0.66 478.98 C0 478.32 0.11 477.11 0.66 476.45 L4.07 473.05 L19.25 458.31 C19.91 457.65 20.9 457.65 21.67
+							 458.31 C22.33 458.97 22.54 460.18 21.67 460.84 L6.05 476.45 C5.39 477.11 5.39 478.32 6.05 478.98 L22
+							 495.15 C22.65 495.81 22.65 497.02 22 497.68 C21.34 498.34 20.13 498.23 19.58 497.68 L4.18 482.94 C4.18
+							 482.94 4.18 482.94 4.07 482.83 L0.66 478.98 Z" class="st2"/>
+			</g>
+			<g id="shape109-9" v:mID="109" v:groupContext="shape" transform="translate(19.5756,0)">
+				<title>Feuille.109</title>
+				<path d="M32.99 433.45 L11.55 433.45 L0 466.01 L14.08 466.12 L3.08 498.34 L33.43 455.34 L18.7 455.34 L32.99 433.45
+							 Z" class="st3"/>
+			</g>
+			<g id="shape110-11" v:mID="110" v:groupContext="shape" transform="translate(22.655,0)">
+				<title>Feuille.110</title>
+				<path d="M15.62 455.34 L29.91 433.45 L18.7 433.45 L6.82 460.51 L20.9 460.62 L0 498.34 L30.35 455.34 L15.62 455.34
+							 Z" class="st4"/>
+			</g>
+		</g>
+		<g id="group115-13" transform="translate(287.846,-409.992)" v:mID="115" v:groupContext="group">
+			<title>Feuille.115</title>
+			<g id="group116-14" v:mID="116" v:groupContext="group">
+				<title> Cosmos_DB_2</title>
+				<g id="shape117-15" v:mID="117" v:groupContext="shape" transform="translate(23.7364,-9.73199)">
+					<title>Feuille.117</title>
+					<path d="M33.95 473.23 A22.7894 22.7894 0 1 1 6.82 456.67 A22.7037 22.7037 0 0 1 33.95 473.23 Z" class="st5"/>
+				</g>
+				<g id="shape118-17" v:mID="118" v:groupContext="shape" transform="translate(13.7079,-9.70977)">
+					<title>Feuille.118</title>
+					<path d="M18.85 487.77 A6.03148 6.03148 -180 0 0 12.85 481.78 L11.71 481.78 A5.75447 5.75447 -180 0 0 7.43 474.64
+								 L0 474.64 A22.2754 22.2754 -180 0 0 5.43 494.06 L12.85 494.06 A6.28279 6.28279 -180 0 0 18.85 487.77
+								 ZM26.27 462.93 L26.27 464.07 L23.7 464.07 A6.28279 6.28279 -180 0 0 23.7 476.64 L44.55 476.64 A21.7727
+								 21.7727 -180 0 0 32.84 458.93 L30.27 458.93 A3.9039 3.9039 -180 0 0 26.27 462.93 ZM44.55 480.92
+								 L32.27 480.92 A5.12048 5.12048 -180 0 0 27.13 486.06 A8.33898 8.33898 -180 0 0 27.7 488.63 A5.17474
+								 5.17474 -180 0 0 24.27 494.91 A4.65783 4.65783 -180 0 0 29.13 498.34 L32.56 498.34 A22.6952 22.6952
+								 -180 0 0 44.55 480.92 Z" class="st6"/>
+				</g>
+				<g id="shape119-19" v:mID="119" v:groupContext="shape" transform="translate(1.14233,-44.5507)">
+					<title>Feuille.119</title>
+					<path d="M9.14 498.34 a0.614 0.614 0 0 1 -0.571163 -0.571163 A7.99628 7.99628 -180 0 0 0.57 489.77 C0.29 490.06
+								 0 489.49 0 489.2 a0.614 0.614 0 0 1 0.571163 -0.571163 A7.99628 7.99628 -180 0 0 8.57 480.63 C8.57
+								 480.06 8.85 480.06 9.14 480.06 C9.42 480.06 10 480.06 10 480.63 A7.99628 7.99628 -180 0 0 17.99
+								 488.63 a0.571163 0.571163 0 0 1 0 1.14233 A7.99628 7.99628 -180 0 0 10 497.77 C10 498.05 9.71 498.34
+								 9.14 498.34 Z" class="st7"/>
+				</g>
+				<g id="shape120-21" v:mID="120" v:groupContext="shape" transform="translate(53.6893,-1.13687E-13)">
+					<title>Feuille.120</title>
+					<path d="M5.43 498.34 C5.14 498.34 5.14 498.34 5.14 498.05 A4.75779 4.75779 -180 0 0 0.29 493.49 C0 493.49 0
+								 493.49 0 493.2 C0 492.91 0 492.91 0.29 492.91 A4.95484 4.95484 -180 0 0 5.14 488.34 C5.14 488.06
+								 5.14 488.06 5.43 488.06 C5.71 488.06 5.71 488.06 5.71 488.34 A4.75779 4.75779 -180 0 0 10.57 492.91
+								 C10.85 492.91 10.85 492.91 10.85 493.2 C10.85 493.49 10.85 493.49 10.57 493.49 A4.95484 4.95484
+								 -180 0 0 5.71 498.05 C6 498.34 5.71 498.34 5.43 498.34 Z" class="st5"/>
+				</g>
+				<g id="shape121-23" v:mID="121" v:groupContext="shape" transform="translate(0,-5.99721)">
+					<title>Feuille.121</title>
+					<path d="M68.83 454.65 C66.54 451.22 61.4 450.36 53.12 452.36 A56.4081 56.4081 -180 0 0 45.69 454.65 A22.381
+								 22.381 0 0 1 49.98 457.5 C51.4 457.22 52.83 456.65 53.97 456.36 A25.9279 25.9279 0 0 1 60.54 455.5
+								 C63.11 455.5 64.54 456.07 65.11 456.93 C65.97 458.36 65.11 461.79 60.54 467.21 A26.9246 26.9246
+								 0 0 1 57.69 470.07 A97.3205 97.3205 0 0 1 40.55 483.2 A79.6772 79.6772 0 0 1 21.13 492.06 C12.85
+								 494.63 7.14 494.63 6 492.63 C4.85 490.63 7.14 485.49 13.42 479.49 A31.4682 31.4682 0 0 1 12.85 474.35
+								 C3.14 483.2 0 490.91 2.28 494.91 A10.0239 10.0239 -180 0 0 10.85 498.34 A42.9714 42.9714 -180 0
+								 0 25.42 495.2 A96.0268 96.0268 -180 0 0 42.55 486.63 A119.57 119.57 -180 0 0 57.97 475.21 A48.6745
+								 48.6745 -180 0 0 63.4 469.78 C69.11 463.21 70.82 458.07 68.83 454.65 Z" class="st8"/>
+				</g>
+			</g>
+		</g>
+		<g id="shape122-25" v:mID="122" v:groupContext="shape" v:layerMember="0" transform="translate(53.967,-33.815)">
+			<title>Lien dynamique.122</title>
+			<path d="M-7.09 498.34 L-7.09 122.28" class="st1"/>
+		</g>
+		<g id="shape123-28" v:mID="123" v:groupContext="shape" transform="translate(37.2426,-47.5853)">
+			<title>Feuille.123</title>
+			<rect x="0" y="151.096" width="19.2756" height="347.244" class="st9"/>
+		</g>
+		<g id="shape125-30" v:mID="125" v:groupContext="shape" transform="translate(313.621,-224.751)">
+			<title>Feuille.125</title>
+			<rect x="0" y="461.49" width="19.2756" height="36.8504" class="st9"/>
+		</g>
+		<g id="shape126-32" v:mID="126" v:groupContext="shape" v:layerMember="0" transform="translate(61.6915,-217.664)">
+			<title>Lien dynamique.126</title>
+			<path d="M0 491.25 L246.26 491.25" class="st10"/>
+		</g>
+		<g id="shape127-38" v:mID="127" v:groupContext="shape" v:layerMember="0" transform="translate(304.833,-141.129)">
+			<title>Lien dynamique.127</title>
+			<path d="M0 491.25 L-241.82 491.25" class="st12"/>
+		</g>
+		<g id="shape128-43" v:mID="128" v:groupContext="shape" transform="translate(313.621,-111.365)">
+			<title>Feuille.128</title>
+			<rect x="0" y="461.49" width="19.2756" height="36.8504" class="st9"/>
+		</g>
+		<g id="shape129-45" v:mID="129" v:groupContext="shape" transform="translate(47.4474,-165.223)">
+			<title>Feuille.129</title>
+			<rect x="0" y="461.49" width="19.2756" height="36.8504" class="st9"/>
+		</g>
+		<g id="shape130-47" v:mID="130" v:groupContext="shape" transform="translate(113.402,-384.925)">
+			<title>Feuille.130</title>
+			<desc>Find Lock</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
+			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
+			<text x="49.99" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Find Lock</text>		</g>
+		<g id="shape131-50" v:mID="131" v:groupContext="shape" transform="translate(104.109,-224.751)">
+			<title>Feuille.131</title>
+			<desc>data</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
+			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
+			<text x="64.32" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>data</text>		</g>
+		<g id="shape132-53" v:mID="132" v:groupContext="shape" transform="translate(68.1404,-173.648)">
+			<title>Feuille.132</title>
+			<desc>Merge data</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
+			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
+			<text x="4" y="491.94" class="st14" v:langID="1036"><v:paragraph/><v:tabList/>Merge data</text>		</g>
+		<g id="shape133-56" v:mID="133" v:groupContext="shape" transform="translate(107.479,-148.058)">
+			<title>Feuille.133</title>
+			<desc>Upsert data</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
+			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
+			<text x="44.98" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Upsert data</text>		</g>
+		<g id="shape134-59" v:mID="134" v:groupContext="shape" v:layerMember="0" transform="translate(61.0538,-105.696)">
+			<title>Lien dynamique.134</title>
+			<path d="M0 491.25 L246.26 491.25" class="st10"/>
+		</g>
+		<g id="group135-64" transform="translate(464.991,-417.736)" v:mID="135" v:groupContext="group">
+			<title>Redis Cache #1</title>
+			<g id="group136-65" v:mID="136" v:groupContext="group">
+				<title>Feuille.136</title>
+				<g id="shape137-66" v:mID="137" v:groupContext="shape" transform="translate(0.351867,0)">
+					<title>Feuille.137</title>
+					<path d="M0.17 486.58 C0.07 487.18 0.58 487.78 1.68 488.24 L24.31 497.5 C26.34 498.34 29.65 498.34 31.68 497.5
+								 L54.31 488.24 C55.41 487.78 55.92 487.18 55.82 486.58 L55.83 481.28 C55.9 481.86 55.39 482.45 54.31
+								 482.89 L31.68 492.16 C29.65 493 26.34 493 24.31 492.16 L1.68 482.89 C0.5 482.4 0 481.74 0.2 481.11
+								 L0.17 486.58 Z" class="st15"/>
+				</g>
+				<g id="shape138-68" v:mID="138" v:groupContext="shape" transform="translate(0,-5.34482)">
+					<title>Feuille.138</title>
+					<path d="M54.66 485.21 C56.69 486.05 56.69 487.4 54.66 488.24 L32.03 497.5 C30 498.34 26.7 498.34 24.66 497.5
+								 L2.04 488.24 C0 487.4 0 486.05 2.04 485.21 L24.66 475.95 C26.7 475.11 30 475.11 32.04 475.95 L54.66
+								 485.21 Z" class="st15"/>
+				</g>
+			</g>
+			<g id="group139-70" transform="translate(0,-9.38238)" v:mID="139" v:groupContext="group">
+				<title>Feuille.139</title>
+				<g id="shape140-71" v:mID="140" v:groupContext="shape" transform="translate(0.351867,0)">
+					<title>Feuille.140</title>
+					<path d="M0.17 486.58 C0.07 487.18 0.58 487.78 1.68 488.24 L24.31 497.5 C26.34 498.34 29.65 498.34 31.68 497.5
+								 L54.31 488.24 C55.41 487.78 55.92 487.18 55.82 486.58 L55.83 481.28 C55.9 481.86 55.39 482.45 54.31
+								 482.89 L31.68 492.16 C29.65 493 26.34 493 24.31 492.16 L1.68 482.89 C0.5 482.4 0 481.74 0.2 481.11
+								 L0.17 486.58 Z" class="st15"/>
+				</g>
+				<g id="shape141-73" v:mID="141" v:groupContext="shape" transform="translate(0,-5.34482)">
+					<title>Feuille.141</title>
+					<path d="M54.66 485.21 C56.69 486.05 56.69 487.4 54.66 488.24 L32.03 497.5 C30 498.34 26.7 498.34 24.66 497.5
+								 L2.04 488.24 C0 487.4 0 486.05 2.04 485.21 L24.66 475.95 C26.7 475.11 30 475.11 32.04 475.95 L54.66
+								 485.21 Z" class="st15"/>
+				</g>
+			</g>
+			<g id="group142-75" v:mID="142" v:groupContext="group">
+				<title>Feuille.142</title>
+				<g id="shape143-76" v:mID="143" v:groupContext="shape" transform="translate(0.351867,-18.7648)">
+					<title>Feuille.143</title>
+					<path d="M0.17 486.58 C0.07 487.18 0.58 487.78 1.68 488.24 L24.31 497.5 C26.34 498.34 29.65 498.34 31.68 497.5
+								 L54.31 488.24 C55.41 487.78 55.92 487.18 55.82 486.58 L55.83 481.28 C55.9 481.86 55.39 482.45 54.31
+								 482.89 L31.68 492.16 C29.65 493 26.34 493 24.31 492.16 L1.68 482.89 C0.5 482.4 0 481.74 0.2 481.11
+								 L0.17 486.58 Z" class="st15"/>
+				</g>
+				<g id="shape144-78" v:mID="144" v:groupContext="shape" transform="translate(0.351867,0)">
+					<title>Feuille.144</title>
+					<path d="M0.17 486.58 C0.07 487.18 0.58 487.78 1.68 488.24 L24.31 497.5 C26.34 498.34 29.65 498.34 31.68 497.5
+								 L54.31 488.24 C55.41 487.78 55.92 487.18 55.82 486.58 L55.83 481.28 C55.9 481.86 55.39 482.45 54.31
+								 482.89 L31.68 492.16 C29.65 493 26.34 493 24.31 492.16 L1.68 482.89 C0.5 482.4 0 481.74 0.2 481.11
+								 L0.17 486.58 Z" class="st16"/>
+				</g>
+				<g id="shape145-80" v:mID="145" v:groupContext="shape" transform="translate(0.351867,-9.38238)">
+					<title>Feuille.145</title>
+					<path d="M0.17 486.58 C0.07 487.18 0.58 487.78 1.68 488.24 L24.31 497.5 C26.34 498.34 29.65 498.34 31.68 497.5
+								 L54.31 488.24 C55.41 487.78 55.92 487.18 55.82 486.58 L55.83 481.28 C55.9 481.86 55.39 482.45 54.31
+								 482.89 L31.68 492.16 C29.65 493 26.34 493 24.31 492.16 L1.68 482.89 C0.5 482.4 0 481.74 0.2 481.11
+								 L0.17 486.58 Z" class="st16"/>
+				</g>
+				<g id="shape146-82" v:mID="146" v:groupContext="shape" transform="translate(0.351867,-18.7648)">
+					<title>Feuille.146</title>
+					<path d="M0.17 486.58 C0.07 487.18 0.58 487.78 1.68 488.24 L24.31 497.5 C26.34 498.34 29.65 498.34 31.68 497.5
+								 L54.31 488.24 C55.41 487.78 55.92 487.18 55.82 486.58 L55.83 481.28 C55.9 481.86 55.39 482.45 54.31
+								 482.89 L31.68 492.16 C29.65 493 26.34 493 24.31 492.16 L1.68 482.89 C0.5 482.4 0 481.74 0.2 481.11
+								 L0.17 486.58 Z" class="st16"/>
+				</g>
+				<g id="shape147-84" v:mID="147" v:groupContext="shape" transform="translate(0,-24.1096)">
+					<title>Feuille.147</title>
+					<path d="M54.66 485.21 C56.69 486.05 56.69 487.4 54.66 488.24 L32.03 497.5 C30 498.34 26.7 498.34 24.66 497.5
+								 L2.04 488.24 C0 487.4 0 486.05 2.04 485.21 L24.66 475.95 C26.7 475.11 30 475.11 32.04 475.95 L54.66
+								 485.21 Z" class="st15"/>
+				</g>
+			</g>
+			<g id="shape148-86" v:mID="148" v:groupContext="shape" transform="translate(9.44474,-32.8294)">
+				<title>Feuille.148</title>
+				<path d="M11.93 497.19 C9.35 498.34 5.16 498.34 2.58 497.19 C0 496.04 0 494.18 2.58 493.03 C5.16 491.88 9.35 491.88
+							 11.93 493.03 C14.51 494.18 14.51 496.04 11.93 497.19 Z" class="st17"/>
+			</g>
+			<g id="shape149-88" v:mID="149" v:groupContext="shape" transform="translate(19.6244,-26.7063)">
+				<title>Feuille.149</title>
+				<path d="M0 494.03 L13.25 492.45 L9.7 498.34 L0 494.03 Z" class="st17"/>
+			</g>
+			<g id="shape150-90" v:mID="150" v:groupContext="shape" transform="translate(32.4609,-32.5009)">
+				<title>Feuille.150</title>
+				<path d="M7.92 498.34 L0 494.82 L7.92 491.29 L15.85 494.82 L7.92 498.34 Z" class="st16"/>
+			</g>
+			<g id="shape151-92" v:mID="151" v:groupContext="shape" transform="translate(32.4609,-32.5009)">
+				<title>Feuille.151</title>
+				<path d="M7.92 498.34 L0 494.82 L7.92 491.29 L7.92 498.34 Z" class="st16"/>
+			</g>
+			<g id="shape152-94" v:mID="152" v:groupContext="shape" transform="translate(20.6321,-38.0306)">
+				<title>Feuille.152</title>
+				<path d="M5.17 496.04 L0 495.57 L4.59 494.41 L4 492.08 L7.89 493.67 L12.69 492.69 L10.5 494.83 L14.07 496.56 L8.82
+							 496.3 L6.22 498.34 L5.17 496.04 Z" class="st17"/>
+			</g>
+		</g>
+		<g id="shape153-96" v:mID="153" v:groupContext="shape" v:layerMember="0" transform="translate(486.251,-29.7122)">
+			<title>Lien dynamique.153</title>
+			<path d="M7.09 498.34 L7.09 113.79" class="st1"/>
+		</g>
+		<g id="shape154-99" v:mID="154" v:groupContext="shape" transform="translate(483.699,-350.892)">
+			<title>Feuille.154</title>
+			<rect x="0" y="461.49" width="19.2756" height="36.8504" class="st9"/>
+		</g>
+		<g id="shape124-101" v:mID="124" v:groupContext="shape" v:layerMember="0" transform="translate(477.657,-377.647)">
+			<title>Lien dynamique.124</title>
+			<path d="M0 491.25 L-152.42 491.25 A2.3622 2.3622 -180 1 0 -157.15 491.25 L-410.39 491.25" class="st12"/>
+		</g>
+		<g id="shape155-106" v:mID="155" v:groupContext="shape" v:layerMember="0" transform="translate(68.1403,-345.223)">
+			<title>Lien dynamique.155</title>
+			<path d="M0 491.25 L252.37 491.25 A2.3622 2.3622 0 0 1 257.09 491.25 L408.4 491.25" class="st10"/>
+		</g>
+		<g id="shape156-111" v:mID="156" v:groupContext="shape" transform="translate(112.613,-352.31)">
+			<title>Feuille.156</title>
+			<desc>lock : NO</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
+			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
+			<text x="51.33" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>lock : NO</text>		</g>
+		<g id="shape157-114" v:mID="157" v:groupContext="shape" transform="translate(483.699,-291.365)">
+			<title>Feuille.157</title>
+			<rect x="0" y="461.49" width="19.2756" height="36.8504" class="st9"/>
+		</g>
+		<g id="shape158-116" v:mID="158" v:groupContext="shape" v:layerMember="0" transform="translate(303.476,-267.897)">
+			<title>Lien dynamique.158</title>
+			<path d="M0 505.43 L-238.82 505.43" class="st12"/>
+		</g>
+		<g id="shape159-121" v:mID="159" v:groupContext="shape" transform="translate(110.66,-264.278)">
+			<title>Feuille.159</title>
+			<desc>Fetch Data</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
+			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
+			<text x="46.65" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Fetch Data</text>		</g>
+		<g id="shape160-124" v:mID="160" v:groupContext="shape" v:layerMember="0" transform="translate(475.792,-316.877)">
+			<title>Lien dynamique.160</title>
+			<path d="M0 491.25 L-150.56 491.25 A2.3622 2.3622 -180 0 0 -155.28 491.25 L-410.39 491.25" class="st12"/>
+		</g>
+		<g id="shape161-129" v:mID="161" v:groupContext="shape" transform="translate(117.747,-325.223)">
+			<title>Feuille.161</title>
+			<desc>Set Lock</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
+			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
+			<text x="52.65" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Set Lock</text>		</g>
+		<g id="shape162-132" v:mID="162" v:groupContext="shape" v:layerMember="0" transform="translate(65.5146,-288.53)">
+			<title>Lien dynamique.162</title>
+			<path d="M0 491.25 L254.99 491.25 A2.3622 2.3622 0 1 1 259.72 491.25 L408.4 491.25" class="st10"/>
+		</g>
+		<g id="shape163-137" v:mID="163" v:groupContext="shape" transform="translate(483.812,-50.42)">
+			<title>Feuille.163</title>
+			<rect x="0" y="461.49" width="19.2756" height="36.8504" class="st9"/>
+		</g>
+		<g id="shape164-139" v:mID="164" v:groupContext="shape" v:layerMember="0" transform="translate(475.905,-75.9318)">
+			<title>Lien dynamique.164</title>
+			<path d="M0 491.25 L-150.67 491.25 A2.3622 2.3622 -180 0 0 -155.4 491.25 L-410.39 491.25" class="st12"/>
+		</g>
+		<g id="shape165-144" v:mID="165" v:groupContext="shape" v:layerMember="0" transform="translate(65.6273,-47.5853)">
+			<title>Lien dynamique.165</title>
+			<path d="M0 491.25 L254.88 491.25 A2.3622 2.3622 0 0 1 259.61 491.25 L408.4 491.25" class="st10"/>
+		</g>
+		<g id="shape166-149" v:mID="166" v:groupContext="shape" transform="translate(110.66,-83.0184)">
+			<title>Feuille.166</title>
+			<desc>Release Lock</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="76" cy="488.34" width="152" height="20"/>
+			<rect x="0" y="478.34" width="152" height="20" class="st13"/>
+			<text x="39.64" y="491.94" class="st14" v:langID="1036"><v:paragraph v:horizAlign="1"/><v:tabList/>Release Lock</text>		</g>
+	</g>
+</svg>
