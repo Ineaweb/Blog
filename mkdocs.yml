@@ -42,6 +42,8 @@ nav:
         - articles/devops/gitops/01.gitops.AzureAppConfiguration.md
         - articles/devops/gitops/02.gitops.AzureAppConfiguration.md
         - articles/devops/gitops/03.gitops.AzureAppConfiguration.md
+      - 'Le monde fantastique de Lemniscat':
+        - articles/devops/lemniscat/01.lemniscat.microsoftfabric.md
       - 'Tips & tricks':
         - articles/tips/01.finops.ftpslowcost.md
         - articles/tips/02.cosmosdb.waiting_partialupdate.md
@@ -85,6 +87,8 @@ nav:
         - en/articles/devops/gitops/01.gitops.AzureAppConfiguration.md
         - en/articles/devops/gitops/02.gitops.AzureAppConfiguration.md
         - en/articles/devops/gitops/03.gitops.AzureAppConfiguration.md
+      - 'The fantastic world of Lemniscat':
+        - en/articles/devops/lemniscat/01.lemniscat.microsoftfabric.md
       - 'Tips & tricks':
         - en/articles/tips/01.finops.ftpslowcost.md
         - en/articles/tips/02.cosmosdb.waiting_partialupdate.md
