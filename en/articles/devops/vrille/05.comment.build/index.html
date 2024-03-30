@@ -1,0 +1,3037 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ineaweb.github.io/Blog/en/articles/devops/vrille/05.comment.build/">
+      
+      
+        <link rel="prev" href="../04.comment.machineetat/">
+      
+      
+        <link rel="next" href="../06.comment.deploy/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
+    
+    
+      
+        <title>Chapitre 2 : Le build - Philippe MORISSEAU</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Poppins";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@morisseauphi" />
+  <meta name="twitter:creator" content="@morisseauphi" />
+  <meta property="og:title" content="Chapitre 2 : Le build" />
+  <meta name="google-site-verification" content="w_wkWaWiJN0xRkstken01Q7CmA4d_jKTliKb5ilkQlU" />
+  
+  <meta property="og:image" content="https://ineaweb.github.io/Blog/img/cover/devops.vrille.05.comment.build.png" />
+  <meta property="og:description" content="Maintenant que nous avons conceptualisé le principe de machine à état dans un meta-pipeline CI/CD, comment faire pour que le build de nos différents composants puisse être géré de façon harmonieuse ?" />
+  <meta property="og:url" content="https://ineaweb.github.io/Blog/en/articles/devops/vrille/05.comment.build/" />
+  <meta name="Description" CONTENT="Maintenant que nous avons conceptualisé le principe de machine à état dans un meta-pipeline CI/CD, comment faire pour que le build de nos différents composants puisse être géré de façon harmonieuse ?" />
+  
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T8TQW7CYM4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-T8TQW7CYM4');
+  </script>
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#la-conceptualisation-du-processus-de-build" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+  
+  <header class="md-header" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="header.title">
+      <!--<img src="img/linkedInBandeau.png" />-->
+      <a href="../../../../.." title="Philippe MORISSEAU" class="md-header__button md-logo" aria-label="Philippe MORISSEAU" data-md-component="logo">
+        
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+      </a>
+      <label class="md-header__button md-icon" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      </label>
+      <div class="md-header__title" data-md-component="header-title">
+        <div class="md-header__ellipsis">
+          <div class="md-header__topic">
+            <span class="md-ellipsis">
+              Philippe MORISSEAU
+            </span>
+          </div>
+          <div class="md-header__topic" data-md-component="header-topic">
+            <span class="md-ellipsis">
+              
+                Chapitre 2 : Le build
+              
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      
+        <div class="md-header__option">
+          <div class="md-select">
+            
+            <button class="md-header__button md-icon" aria-label="select.language.title">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+            </button>
+            <div class="md-select__inner">
+              <ul class="md-select__list">
+                
+                  <li class="md-select__item">
+                    <a href="../../../../.." hreflang="fr" class="md-select__link">
+                      French
+                    </a>
+                  </li>
+                  
+                  <li class="md-select__item">
+                    <a href="../../../.." hreflang="en" class="md-select__link">
+                      English
+                    </a>
+                  </li>
+                  
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+      
+      
+    </nav>
+    
+  </header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Philippe MORISSEAU" class="md-nav__button md-logo" aria-label="Philippe MORISSEAU" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Philippe MORISSEAU
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    French
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            French
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Articles
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Articles
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_1" id="__nav_1_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    A short story about the big Azure cloud
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            A short story about the big Azure cloud
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/assatbac/ep01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/assatbac/ep02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint VS Vnet Integration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/assatbac/ep03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPN, SMI et UMI. Mais c'est quoi ces trucs ?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/assatbac/ep04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cosmos DB, c'est comme l'orbe de Morag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_2" id="__nav_1_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Révision du soir
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Révision du soir
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/classroom/01.azureClassroom.VnetEndpointFirewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint, Service Endpoint, Dedicated Service, Service Tags & Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/classroom/02.azureClassroom.batch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure Batch, le mal-aimé
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_3" id="__nav_1_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Azure, Les exceptions qui font mal !
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Azure, Les exceptions qui font mal !
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/exceptions/01.azureException.acrAndAciInYourVnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : Azure Container Registry et Azure Container Instance dans votre Vnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/exceptions/02.azureException.aciWindowsWithVnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapite 2 : Azure Container Instance et Windows dans votre Vnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/exceptions/03.azureException.firewallAndRegion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : Les firewall et les régions Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_4" id="__nav_1_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Au secours, Le DevOps part en vrille !
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Au secours, Le DevOps part en vrille !
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_4_2" id="__nav_1_2_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/01.pourquoi.agilite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : L'agilité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/02.pourquoi.devops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le DevOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/03.pourquoi.entropie/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : L'entropie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_4_3" id="__nav_1_2_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Partie 2 : Comment passe-t-on au-delà des limites ?
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Partie 2 : Comment passe-t-on au-delà des limites ?
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/04.comment.machineetat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : La machine à état
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/05.comment.build/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le build
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/06.comment.deploy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : Le déploiement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/07.lapreuve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C'est possible, la preuve !
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_5" id="__nav_1_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Adopter une démarche GitOps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Adopter une démarche GitOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/gitops/01.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopter une démarche GitOps grâce à Azure App Configuration (Partie 1)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/gitops/02.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopter une démarche GitOps grâce à Azure App Configuration (Partie 2)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/gitops/03.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopter une démarche GitOps grâce à Azure App Configuration (Partie 3)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_6" id="__nav_1_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Le monde fantastique de Lemniscat
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Le monde fantastique de Lemniscat
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/lemniscat/01.lemniscat.microsoftfabric/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permettre l'adoption de Fabric grâce à Lemniscat (Partie 1)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_7" id="__nav_1_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tips & tricks
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Tips & tricks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/01.finops.ftpslowcost/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L'astuce FinOps : Un serveur FTPS Low Cost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/02.cosmosdb.waiting_partialupdate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CosmosDB : En attendant le partial update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/03.cosmosdb.calculatedPartitionKey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CosmosDB : Une clé de partition calculée !
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/04.sonarqube.managed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Déployer Sonarqube sur des services managés Azure.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/05.azuredevops.extension.agentless/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure DevOps : Créer sa propre task agentless
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/06.azuredevops.ephemeralagents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure DevOps : Vos propres agents à la demande dans votre SI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/07.github.ephemeralactionsrunner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub : Vos propres runner à la demande dans votre SI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/08.dockerhub.windowsServerCore2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dockerhub : Votre Actions Runner et votre Azure DevOps Agent sous Windows Server Core 2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/09.azurefunction.limitlogs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L'astuce FinOps : Limiter la verbosité de vos Azure Function
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/10.dockerhub.ubuntu22.04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Votre agent Azure DevOps et votre runner Github avec Jammy la méduse.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A Propos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    English
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            English
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Articles
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Articles
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    A short story about the big Azure cloud
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            A short story about the big Azure cloud
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assatbac/ep01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assatbac/ep02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint VS Vnet Integration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assatbac/ep03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPN, SMI et UMI. But what are these things?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assatbac/ep04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cosmos DB, it's like Morag's orb
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Back to school
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Back to school
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../classroom/01.azureClassroom.VnetEndpointFirewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint, Service Endpoint, Dedicated Service, Service Tags & Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../classroom/02.azureClassroom.batch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure Batch, le mal-aimé
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Azure, Exceptions that hurt!
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Azure, Exceptions that hurt!
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exceptions/01.azureException.acrAndAciInYourVnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : Azure Container Registry et Azure Container Instance dans votre Vnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exceptions/02.azureException.aciWindowsWithVnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapite 2 : Azure Container Instance et Windows dans votre Vnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exceptions/03.azureException.firewallAndRegion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : Les firewall et les régions Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Help, DevOps is going off road!
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Help, DevOps is going off road!
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4_2" id="__nav_2_2_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Part 1: Why are we reaching the limits of DevOps?
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Part 1: Why are we reaching the limits of DevOps?
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01.pourquoi.agilite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : L'agilité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02.pourquoi.devops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le DevOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03.pourquoi.entropie/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : L'entropie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4_3" id="__nav_2_2_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Part 2: How do we go beyond the limits?
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Part 2: How do we go beyond the limits?
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04.comment.machineetat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : La machine à état
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le build
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le build
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-conceptualisation-du-processus-de-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      La conceptualisation du processus de build
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La conceptualisation du processus de build">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-referentiel-de-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le référentiel de build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-processus-de-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le processus de build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-pilotage-des-repositories-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le pilotage des repositories Git
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-pilotage-des-pipelines-de-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le pilotage des pipelines de CI/CD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Références
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remerciements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remerciements
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06.comment.deploy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : Le déploiement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07.lapreuve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    It is possible, the proof!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Adopt a GitOps approach
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gitops/01.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach with Azure App Configuration (Part 2)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gitops/02.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach with Azure App Configuration (Part 2)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gitops/03.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach with Azure App Configuration (Part 3)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_6" id="__nav_2_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    The fantastic world of Lemniscat
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            The fantastic world of Lemniscat
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lemniscat/01.lemniscat.microsoftfabric/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enabling Adoption of Fabric with Lemniscat (Part 1)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_7" id="__nav_2_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tips & tricks
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Tips & tricks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/01.finops.ftpslowcost/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L'astuce FinOps : Un serveur FTPS Low Cost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/02.cosmosdb.waiting_partialupdate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CosmosDB : En attendant le partial update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/03.cosmosdb.calculatedPartitionKey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CosmosDB : Une clé de partition calculée !
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/04.sonarqube.managed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Déployer Sonarqube sur des services managés Azure.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/05.azuredevops.extension.agentless/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure DevOps : Créer sa propre task agentless
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/06.azuredevops.ephemeralagents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure DevOps: Your own on-demand agents in your corporate network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/07.github.ephemeralactionsrunner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub : Your own on-demand runner in your corporate network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/08.dockerhub.windowsServerCore2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dockerhub: Your Actions Runner and Azure DevOps Agent on Windows Server Core 2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/09.azurefunction.limitlogs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The FinOps tip: Limit the verbosity of your Azure Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/10.dockerhub.ubuntu22.04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Your Azure DevOps Agent and Github Runner with Jammy Jellyfish.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#la-conceptualisation-du-processus-de-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      La conceptualisation du processus de build
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La conceptualisation du processus de build">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-referentiel-de-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le référentiel de build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-processus-de-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le processus de build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-pilotage-des-repositories-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le pilotage des repositories Git
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-pilotage-des-pipelines-de-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le pilotage des pipelines de CI/CD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Références
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remerciements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remerciements
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Chapitre 2 : Le build</h1>
+
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This article written in French will be translated into English in the next few days. stay tuned ;-).</p>
+</div>
+<p>Maintenant que nous avons conceptualisé le principe de machine à état dans un "meta" pipeline <strong>CI/CD</strong>, comment faire pour que le <strong>build</strong> de nos différents composants puisse être géré de façon harmonieuse ?</p>
+<p>Comment faire pour s'assurer qu'une évolution sur une librairie va entrainer systématiquement la recompilation de composants utilisant cette librairie ?</p>
+<p>Comment faire pour ne recompiler que ce qu'il y a besoin de recompiler ?</p>
+<h2 id="la-conceptualisation-du-processus-de-build">La conceptualisation du processus de build</h2>
+<p>Pour commencer, il nous faut un référentiel de <strong>build</strong>. </p>
+<h3 id="le-referentiel-de-build">Le référentiel de build</h3>
+<p>Ce référentiel aura pour unique but d'identifier chaque composant de notre application, avec :</p>
+<ul>
+<li>le nom du <strong>repository Git</strong></li>
+<li>la dernière version,</li>
+<li>l'id du commit Git lié à la dernière version,</li>
+<li>les dépendances du composant</li>
+</ul>
+<div class="admonition sample">
+<p class="admonition-title">exemple</p>
+<p>Imaginons 2 librairies : <strong>Lib1</strong> et <strong>Lib2</strong>. <strong>Lib2</strong> dépend de <strong>Lib1</strong>.</p>
+<p>Voici ce que pourrait donner notre référentiel au format <strong>yaml</strong> :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">components</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lib1</span><span class="w"></span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"></span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0123456789ab</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lib2</span><span class="w"></span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"></span>
+<span class="w">  </span><span class="nt">commit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456789abc</span><span class="w"></span>
+<span class="w">  </span><span class="nt">dependencies</span><span class="p">:</span><span class="w"> </span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lib1</span><span class="w"></span>
+</code></pre></div>
+</div>
+<p>Ce référentiel va évoluer au fur et à mesure des itérations pour correspondre exactement à l'état souhaité de tous les composants de l'application. Et pour permettre une historisation des évolutions au fur et à mesure des itérations, quoi de mieux qu'un <strong>repository Git</strong>.
+On va donc mettre notre référentiel de <strong>build</strong> dans un <strong>repo.</strong> que l'on va nommer "meta".</p>
+<h3 id="le-processus-de-build">Le processus de build</h3>
+<p>Imaginons que j'apporte une modification sur mon référentiel de <strong>build</strong>, cela implique que j'ai ajouté, modifié ou supprimé un ou plusieurs composants de mon application. Pour ne pas prendre de risque je vais donc parcourir chaque composant déclaré dans mon référentiel et pour chacun, vérifier :</p>
+<ul>
+<li>s'il a déjà été <strong>buildé</strong> : il n'y aura donc rien à faire,</li>
+<li>s'il y a une mise à jour : il faudra déclencher le <strong>build</strong> du composant,</li>
+<li>s'il y a eu une mise à jour d'une des dépendances : il faudra redéclencher le <strong>build</strong> du composant,</li>
+<li>s'il y a eu un échec d'une dépendance : il ne faudra pas lancer le <strong>build</strong>.</li>
+</ul>
+<p>C'est comme un arbre où chaque composant correspond à un noeud.</p>
+<div class="admonition sample">
+<p class="admonition-title">exemple</p>
+<p>Imaginons que durant notre <strong>sprint</strong> nous ayons fait évoluer nos composants B, D, G et H. 
+Ci-dessous l'arbre de dépendances correspondant :
+<img alt="tree" src="../../../../../img/05.comment.build.002.svg" /></p>
+<p>Lors de l'exécution de notre "meta" pipeline pour passer notre application à l'état buildé, il faudra :</p>
+<ul>
+<li>Ignorer les composants A et C,</li>
+<li>Compiler les composant B, D, G et H,</li>
+<li>Recompiler les composants E, F, I, J et K qui ont vu leurs dépendances évoluer (vérification de la non-régression)</li>
+</ul>
+<p>Si durant le processus, le composant H est en échec (erreur remontée lors de la compilation ou de l'exécution des tests unitaires), alors il faudra veiller à stopper le processus et ne pas builder les composants dépendants. Le composant K est donc bloqué par son prédécesseur le composant H.</p>
+</div>
+<p>Notre <strong>build</strong> applicatif peut se représenter sous la forme du processus ci-dessous : </p>
+<p><img alt="process" src="../../../../../img/05.comment.build.001.svg" /></p>
+<p>Le processus va parcourir le référentiel de <strong>build</strong> en commençant par ceux qui n'ont pas de dépendance, puis par ceux qui dépendent de ces premiers, et ainsi de suite. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Je vous recommande d'utiliser des processus parallèles pour parcourir l'arbre.</p>
+</div>
+<div class="admonition sample">
+<p class="admonition-title">exemple</p>
+<p>Si on reprend notre exemple ci-dessus, on aura par ordre de passage :</p>
+<ol>
+<li>A</li>
+<li>B et C</li>
+<li>D, E, F, G et H</li>
+<li>I, J, K</li>
+</ol>
+</div>
+<p>Pour chaque composant,</p>
+<ol>
+<li>on vérifie si celui-ci a déjà été correctement buildé (commit déjà buildé).</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Il existe une multitude de raisons, autres que le code en lui-même, d'échec d'un build. Par exemple : </p>
+<ul>
+<li>La saturation du disque dur de l'agent de <strong>build</strong>, </li>
+<li>L'indisponibilité d'un service utilisé durant le <strong>build</strong> (sonarqube, artifactory, ...).</li>
+</ul>
+<p>Il faut prévoir la possibilité de relancer le build en échec ultérieurement.</p>
+</div>
+<ol>
+<li>si oui, on vérifie que ses dépendances n'ont pas évolué.</li>
+<li>si c'est le cas, on passe au composant suivant. Sinon, on déclenche le <strong>build</strong>.</li>
+<li>si celui-ci n'a pas déjà été correctement buildé, on déclenche le <strong>build</strong>.</li>
+<li>on attend la fin du <strong>build</strong> et on récupère le résultat.</li>
+<li>si le <strong>build</strong> est OK, on passe au composant suivant.</li>
+<li>si le <strong>build</strong> est KO, on stoppe le <strong>build</strong> des composants dépendants.</li>
+</ol>
+<p>Une fois le référentiel totalement parcouru, on peut déterminer l'état de notre application. Si tous les composants ont été correctement buildés, alors on peut considérer que notre application est correctement buildée.</p>
+<p>Ainsi nous pouvons passer l'état de notre application à "Buildé".</p>
+<p><img alt="statemachine" src="../../../../../img/05.comment.build.003.svg" /></p>
+<h3 id="le-pilotage-des-repositories-git">Le pilotage des repositories Git</h3>
+<p>Cependant, pour pouvoir déclencher le <strong>build</strong> de nos différents composants, il va falloir piloter les <strong>repositories Git</strong> de chacun des composants.</p>
+<p>Par exemple, en fin de <strong>sprint</strong> et suite à la validation par le client de la démo., je vais vouloir builder une version stable de l'ensemble des composants de l'application avec pour objectif de déployer les évolutions de l'application jusqu'en production. </p>
+<ul>
+<li>Si je suis en <strong>Trunk Based Developement</strong>, je vais vouloir créer des branches de <strong>release</strong> et poser des <strong>tags</strong> sur les <strong>repositories</strong> de mes composants.</li>
+<li>Si je suis en <strong>Github Flow</strong>, je vais vouloir poser des <strong>tags</strong> sur la branche <strong>main</strong> sur les <strong>repositories</strong> de mes composants.</li>
+</ul>
+<p>Dans le détail, l'étape de déclenchement du <strong>build</strong> va se décomposer comme ceci :</p>
+<p><img alt="build-run" src="../../../../../img/05.comment.build.004.svg" /></p>
+<p>Nous devons déclencher le pipeline CI/CD de nos composants pour pouvoir déclencher nos <strong>builds</strong> !</p>
+<h3 id="le-pilotage-des-pipelines-de-cicd">Le pilotage des pipelines de CI/CD</h3>
+<p>Mais pour pouvoir ensuite faire avancer les pipelines <strong>CI/CD</strong> de nos différents composants, il va falloir identifier exactement les pipelines correspondants aux <strong>builds</strong> de ces derniers.
+Notre phase de <strong>Build</strong> doit donc générer un fichier manifeste permettant d'identifier les pipelines de chaque composant.</p>
+<p><img alt="manifest-generate" src="../../../../../img/05.comment.build.005.svg" /></p>
+<div class="admonition sample">
+<p class="admonition-title">exemple</p>
+<p>Voici notre manifeste au format yaml :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">components</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pipelineId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id1</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web2</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pipelineId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id2</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">infra</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pipelineId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id3</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch1</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pipelineId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id4</span><span class="w"></span>
+</code></pre></div>
+</div>
+<h2 id="conclusion">Conclusion</h2>
+<p>Nous avons vu dans ce chapitre comment gérer le <strong>build</strong> des composants d'une application. Cette phase de notre "meta" pipeline va nous mettre à disposition un manifeste qui nous permettra dans un second temps de piloter le déploiement de nos différents composants. Nous verrons cela dans le prochain chapitre.</p>
+<p><a href="../06.comment.deploy/">A suivre...</a>  </p>
+<h2 id="references">Références</h2>
+<h2 id="remerciements">Remerciements</h2>
+<ul>
+<li><a href="https://www.linkedin.com/in/etienne-louise-78154063/">Etienne Louise</a> : pour la relecture</li>
+<li><a href="https://www.linkedin.com/in/samy-mameri-60649079/">Samy Mameri</a> : pour la relecture</li>
+<li><a href="https://www.linkedin.com/in/fabrice-weinling-414187114/">Fabrice Weinling</a> : pour la relecture</li>
+<li><a href="https://twitter.com/michael_maillot">Michael Maillot</a> : pour la relecture</li>
+</ul>
+<p><em>Rédigé par Philippe MORISSEAU, Publié le 08 Décembre 2021</em></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/morisseauphi" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/pmorisseau" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+        <script src="../../../../../assets/javascripts/mmrls.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3248 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ineaweb.github.io/Blog/en/articles/devops/gitops/01.gitops.AzureAppConfiguration/">
+      
+      
+        <link rel="prev" href="../../vrille/07.lapreuve/">
+      
+      
+        <link rel="next" href="../02.gitops.AzureAppConfiguration/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
+    
+    
+      
+        <title>Adopt a GitOps approach with Azure App Configuration (Part 2) - Philippe MORISSEAU</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Poppins";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@morisseauphi" />
+  <meta name="twitter:creator" content="@morisseauphi" />
+  <meta property="og:title" content="Adopt a GitOps approach with Azure App Configuration (Part 2)" />
+  <meta name="google-site-verification" content="w_wkWaWiJN0xRkstken01Q7CmA4d_jKTliKb5ilkQlU" />
+  
+  <meta property="og:image" content="https://ineaweb.github.io/Blog/img/cover/09.gitops.png" />
+  <meta property="og:description" content="In my last talk "GitOps, Continuous Delivery and environments: how to escape hell!", a participant pointed out to me that it would be good to show concretely how to set up a GitOps approach with modern tools. Being a fan of Azure managed services, I therefore suggest that you study how to set up a GitOps approach with Azure App Configuration." />
+  <meta property="og:url" content="https://ineaweb.github.io/Blog/en/articles/devops/gitops/01.gitops.AzureAppConfiguration/" />
+  <meta name="Description" CONTENT="In my last talk "GitOps, Continuous Delivery and environments: how to escape hell!", a participant pointed out to me that it would be good to show concretely how to set up a GitOps approach with modern tools. Being a fan of Azure managed services, I therefore suggest that you study how to set up a GitOps approach with Azure App Configuration." />
+  
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T8TQW7CYM4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-T8TQW7CYM4');
+  </script>
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#why-adopt-a-gitops-approach" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+  
+  <header class="md-header" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="header.title">
+      <!--<img src="img/linkedInBandeau.png" />-->
+      <a href="../../../../.." title="Philippe MORISSEAU" class="md-header__button md-logo" aria-label="Philippe MORISSEAU" data-md-component="logo">
+        
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+      </a>
+      <label class="md-header__button md-icon" for="__drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      </label>
+      <div class="md-header__title" data-md-component="header-title">
+        <div class="md-header__ellipsis">
+          <div class="md-header__topic">
+            <span class="md-ellipsis">
+              Philippe MORISSEAU
+            </span>
+          </div>
+          <div class="md-header__topic" data-md-component="header-topic">
+            <span class="md-ellipsis">
+              
+                Adopt a GitOps approach with Azure App Configuration (Part 2)
+              
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      
+        <div class="md-header__option">
+          <div class="md-select">
+            
+            <button class="md-header__button md-icon" aria-label="select.language.title">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+            </button>
+            <div class="md-select__inner">
+              <ul class="md-select__list">
+                
+                  <li class="md-select__item">
+                    <a href="../../../../.." hreflang="fr" class="md-select__link">
+                      French
+                    </a>
+                  </li>
+                  
+                  <li class="md-select__item">
+                    <a href="../../../.." hreflang="en" class="md-select__link">
+                      English
+                    </a>
+                  </li>
+                  
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+      
+      
+    </nav>
+    
+  </header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Philippe MORISSEAU" class="md-nav__button md-logo" aria-label="Philippe MORISSEAU" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Philippe MORISSEAU
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    French
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            French
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Accueil
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Articles
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Articles
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_1" id="__nav_1_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    A short story about the big Azure cloud
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            A short story about the big Azure cloud
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/assatbac/ep01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/assatbac/ep02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint VS Vnet Integration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/assatbac/ep03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPN, SMI et UMI. Mais c'est quoi ces trucs ?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/assatbac/ep04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cosmos DB, c'est comme l'orbe de Morag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_2" id="__nav_1_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Révision du soir
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Révision du soir
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/classroom/01.azureClassroom.VnetEndpointFirewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint, Service Endpoint, Dedicated Service, Service Tags & Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/classroom/02.azureClassroom.batch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure Batch, le mal-aimé
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_3" id="__nav_1_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Azure, Les exceptions qui font mal !
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Azure, Les exceptions qui font mal !
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/exceptions/01.azureException.acrAndAciInYourVnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : Azure Container Registry et Azure Container Instance dans votre Vnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/exceptions/02.azureException.aciWindowsWithVnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapite 2 : Azure Container Instance et Windows dans votre Vnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/exceptions/03.azureException.firewallAndRegion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : Les firewall et les régions Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_4" id="__nav_1_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Au secours, Le DevOps part en vrille !
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Au secours, Le DevOps part en vrille !
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_4_2" id="__nav_1_2_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Partie 1 : Pourquoi arrive-t-on aux limites du DevOps ?
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/01.pourquoi.agilite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : L'agilité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/02.pourquoi.devops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le DevOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/03.pourquoi.entropie/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : L'entropie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_4_3" id="__nav_1_2_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Partie 2 : Comment passe-t-on au-delà des limites ?
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Partie 2 : Comment passe-t-on au-delà des limites ?
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/04.comment.machineetat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : La machine à état
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/05.comment.build/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le build
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/06.comment.deploy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : Le déploiement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/vrille/07.lapreuve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C'est possible, la preuve !
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_5" id="__nav_1_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Adopter une démarche GitOps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Adopter une démarche GitOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/gitops/01.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopter une démarche GitOps grâce à Azure App Configuration (Partie 1)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/gitops/02.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopter une démarche GitOps grâce à Azure App Configuration (Partie 2)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/gitops/03.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopter une démarche GitOps grâce à Azure App Configuration (Partie 3)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_6" id="__nav_1_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Le monde fantastique de Lemniscat
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Le monde fantastique de Lemniscat
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/devops/lemniscat/01.lemniscat.microsoftfabric/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permettre l'adoption de Fabric grâce à Lemniscat (Partie 1)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2_7" id="__nav_1_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tips & tricks
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Tips & tricks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/01.finops.ftpslowcost/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L'astuce FinOps : Un serveur FTPS Low Cost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/02.cosmosdb.waiting_partialupdate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CosmosDB : En attendant le partial update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/03.cosmosdb.calculatedPartitionKey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CosmosDB : Une clé de partition calculée !
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/04.sonarqube.managed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Déployer Sonarqube sur des services managés Azure.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/05.azuredevops.extension.agentless/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure DevOps : Créer sa propre task agentless
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/06.azuredevops.ephemeralagents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure DevOps : Vos propres agents à la demande dans votre SI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/07.github.ephemeralactionsrunner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub : Vos propres runner à la demande dans votre SI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/08.dockerhub.windowsServerCore2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dockerhub : Votre Actions Runner et votre Azure DevOps Agent sous Windows Server Core 2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/09.azurefunction.limitlogs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L'astuce FinOps : Limiter la verbosité de vos Azure Function
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../articles/tips/10.dockerhub.ubuntu22.04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Votre agent Azure DevOps et votre runner Github avec Jammy la méduse.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A Propos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    English
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            English
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Articles
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Articles
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    A short story about the big Azure cloud
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            A short story about the big Azure cloud
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assatbac/ep01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assatbac/ep02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint VS Vnet Integration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assatbac/ep03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPN, SMI et UMI. But what are these things?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assatbac/ep04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cosmos DB, it's like Morag's orb
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Back to school
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Back to school
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../classroom/01.azureClassroom.VnetEndpointFirewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Private Endpoint, Service Endpoint, Dedicated Service, Service Tags & Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../classroom/02.azureClassroom.batch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure Batch, le mal-aimé
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Azure, Exceptions that hurt!
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Azure, Exceptions that hurt!
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exceptions/01.azureException.acrAndAciInYourVnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : Azure Container Registry et Azure Container Instance dans votre Vnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exceptions/02.azureException.aciWindowsWithVnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapite 2 : Azure Container Instance et Windows dans votre Vnet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../exceptions/03.azureException.firewallAndRegion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : Les firewall et les régions Azure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4" id="__nav_2_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Help, DevOps is going off road!
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Help, DevOps is going off road!
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vrille/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4_2" id="__nav_2_2_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Part 1: Why are we reaching the limits of DevOps?
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Part 1: Why are we reaching the limits of DevOps?
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vrille/01.pourquoi.agilite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : L'agilité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vrille/02.pourquoi.devops/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le DevOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vrille/03.pourquoi.entropie/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : L'entropie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_4_3" id="__nav_2_2_4_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Part 2: How do we go beyond the limits?
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Part 2: How do we go beyond the limits?
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vrille/04.comment.machineetat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 1 : La machine à état
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vrille/05.comment.build/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 2 : Le build
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vrille/06.comment.deploy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapitre 3 : Le déploiement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vrille/07.lapreuve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    It is possible, the proof!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_5" id="__nav_2_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Adopt a GitOps approach
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach with Azure App Configuration (Part 2)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach with Azure App Configuration (Part 2)
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-adopt-a-gitops-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why adopt a GitOps approach?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-azure-app-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview of Azure App Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-in-your-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation in your applications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation in your applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-your-net-apps-to-use-azure-app-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure your .NET apps to use Azure App Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-the-configuration-in-pull-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refresh the configuration in "Pull" mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-the-configuration-in-push-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refresh the configuration in "Push" mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-to-use-azure-app-configuration-with-azure-key-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure to use Azure App Configuration with Azure Key vault
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thanks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thanks
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach with Azure App Configuration (Part 2)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03.gitops.AzureAppConfiguration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopt a GitOps approach with Azure App Configuration (Part 3)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_6" id="__nav_2_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    The fantastic world of Lemniscat
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            The fantastic world of Lemniscat
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lemniscat/01.lemniscat.microsoftfabric/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enabling Adoption of Fabric with Lemniscat (Part 1)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_7" id="__nav_2_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tips & tricks
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Tips & tricks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/01.finops.ftpslowcost/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L'astuce FinOps : Un serveur FTPS Low Cost
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/02.cosmosdb.waiting_partialupdate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CosmosDB : En attendant le partial update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/03.cosmosdb.calculatedPartitionKey/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CosmosDB : Une clé de partition calculée !
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/04.sonarqube.managed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Déployer Sonarqube sur des services managés Azure.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/05.azuredevops.extension.agentless/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure DevOps : Créer sa propre task agentless
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/06.azuredevops.ephemeralagents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Azure DevOps: Your own on-demand agents in your corporate network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/07.github.ephemeralactionsrunner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub : Your own on-demand runner in your corporate network
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/08.dockerhub.windowsServerCore2022/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dockerhub: Your Actions Runner and Azure DevOps Agent on Windows Server Core 2022
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/09.azurefunction.limitlogs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The FinOps tip: Limit the verbosity of your Azure Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tips/10.dockerhub.ubuntu22.04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Your Azure DevOps Agent and Github Runner with Jammy Jellyfish.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-adopt-a-gitops-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why adopt a GitOps approach?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-azure-app-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview of Azure App Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-in-your-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation in your applications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation in your applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-your-net-apps-to-use-azure-app-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure your .NET apps to use Azure App Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-the-configuration-in-pull-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refresh the configuration in "Pull" mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-the-configuration-in-push-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refresh the configuration in "Push" mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-to-use-azure-app-configuration-with-azure-key-vault" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure to use Azure App Configuration with Azure Key vault
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thanks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thanks
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Adopt a GitOps approach with Azure App Configuration (Part 2)</h1>
+
+<p>In my last talk <em>GitOps, Continuous Delivery and environments: how to escape hell!</em>, a participant pointed out to me that it would be good to show concretely how to set up a GitOps approach with modern tools.</p>
+<p>Being a fan of Azure managed services, I therefore suggest that you study how to set up a GitOps approach with Azure App Configuration.</p>
+<h2 id="why-adopt-a-gitops-approach">Why adopt a GitOps approach?</h2>
+<p>Commençons par un petit rappel. </p>
+<p>The GitOps approach is the result of the meeting of the world of developers and the world of administrators and operators. This meeting took place at the time of the democratization of the DevOps approach. Developers working with administrators, the two (once well-separated) worlds have inspired each other and one of the results is the GitOps approach.</p>
+<p>But what is GitOps?</p>
+<p>The GitOps approach is simply the use of code management tools like git to manage the configuration parameters of an application. These tools offer the following advantages:</p>
+<ul>
+<li>Centralization: thanks to the repository server,</li>
+<li>Historization: thanks to commits,</li>
+<li>Governance: thanks to access control,</li>
+<li>Automation: thanks to CI/CD pipelines.</li>
+</ul>
+<p>Does that mean it's the new standard?</p>
+<p>Yes and no. This will mainly depend on the context of your application. If you manage a monolithic application, you may not need to implement a GitOps approach. Maybe you can just manage your application's configuration settings directly in your pipeline. "Keep it simple and stupid!".</p>
+<p>You will find the benefit of setting up a GitOps approach as soon as you have to manage a distributed application. Indeed, in your configuration settings, you will have to manage attributes common to the components of your architecture (such as connection strings to your databases) and attributes that are not related to the deployment of your components (such as certificates). These parameters will be managed independently of your components.</p>
+<p><img alt="common &amp; unrelated to deployment" src="../../../../../img/tips.09.gitops.001.svg" /></p>
+<h2 id="overview-of-azure-app-configuration">Overview of Azure App Configuration</h2>
+<p>The Azure App Configuration service will allow you to set up a GitOps approach on Azure.
+Indeed, this managed service will allow you to manage and distribute your configuration parameters to your applications.</p>
+<p>Microsoft offers SDKs for this service available in many languages: .NET, Java, Python, JavaScript, ...</p>
+<p>You will therefore be able to use this service to distribute your configuration to your Function Apps, Web Apps, Container Instances, Kubernetes Services, ...</p>
+<p>There are 2 pricing tiers: <em>Free</em> and <em>Standard</em>. You will find that the <em>Free</em> level may be interesting but only for non-production environments. The absence of SLAs and quotas are simply not an option for a production application (unless you have a taste for risk).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To learn more, I invite you to consult the Microsoft documentation: <a href="https://docs.microsoft.com/en-us/azure/azure-app-configuration/overview?WT.mc_id=AZ-MVP-5004832">here</a></p>
+</div>
+<h2 id="architecture">Architecture</h2>
+<p>Enough with <em>blabla</em> and let's go straight to the heart of the matter. Let's start with a small architectural diagram.
+The goal is to use Azure DevOps and Azure App Configuration together to distribute the configuration to the different elements of our distributed application.</p>
+<p><img alt="Architecture 1" src="../../../../../img/tips.09.gitops.002.svg" /></p>
+<p>We will push the configuration from Azure DevOps to Azure App Configuration and configure our various components of our distributed architecture to retrieve the configuration from the latter.</p>
+<p>It is possible to indicate in Azure App Configuration that one of the parameters is in Azure Key vault. Your application will then directly retrieve the configuration in the vault from the key indicated by Azure App Configuration.</p>
+<p>There are 2 ways to connect to Azure App Configuration:</p>
+<ul>
+<li>with an access key,</li>
+<li>with a managed identity (System Assigned or User Assigned).</li>
+</ul>
+<p>I strongly recommend that you use the second solution; the first should only be used if you have no other solution.</p>
+<p>You can also isolate this service from a network point of view by using a Private Endpoint. But in this case, you will have to make sure to use *Self-hosted Azure DevOps agents to deploy your configuration.
+Here is an example of an architecture diagram with network isolation:</p>
+<p><img alt="Architecture 2" src="../../../../../img/tips.09.gitops.003.svg" /></p>
+<p>Finally, if you want your components to be notified on every configuration change, you can add the Event Grid System Topic service.</p>
+<p><img alt="Architecture 3" src="../../../../../img/tips.09.gitops.004.svg" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is not possible to network isolate an Event Grid System Topic with a Private Endpoint. To solve this problem, it will be necessary to make a "small hole" via Service Tag to authorize traffic coming from your Event Grid (cf.: <a href="../../../classroom/01.azureClassroom.VnetEndpointFirewall/#service-tag">my article on network isolation</a>).</p>
+</div>
+<h2 id="implementation-in-your-applications">Implementation in your applications</h2>
+<h3 id="configure-your-net-apps-to-use-azure-app-configuration">Configure your .NET apps to use Azure App Configuration</h3>
+<p>To configure your .NET applications, you will need to add the nuget package <code>Microsoft.Azure.AppConfiguration.AspNetCore</code> for your ASP.NET Core or <code>Microsoft.Extensions.Configuration.AzureAppConfiguration</code> for all your other .NET Core apps.</p>
+<p>Next, you need to configure the service.</p>
+<p>Here is an example of a simple configuration of your ASP.NET core application:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">WebApplication</span><span class="p">.</span><span class="n">CreateBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">builder</span><span class="p">.</span><span class="n">Host</span><span class="p">.</span><span class="n">ConfigureAppConfiguration</span><span class="p">(</span><span class="n">builder</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="n">Build</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//Connect to your App Config Store</span>
+<span class="w">    </span><span class="n">builder</span><span class="p">.</span><span class="n">AddAzureAppConfiguration</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&quot;AppConfig:Endpoint&quot;</span><span class="p">]),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ManagedIdentityCredential</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">});</span><span class="w"> </span>
+</code></pre></div>
+<p>In this example, we're using the managed identity to authenticate the app to the Azure App Configuration service.</p>
+<p>Finally, you must give the <code>App Configuration Data Reader</code> (RBAC) role at the Azure App Configuration level to your ASP.NET core application.</p>
+<h3 id="refresh-the-configuration-in-pull-mode">Refresh the configuration in "Pull" mode</h3>
+<p>Being able to load your app configuration from Azure App Configuration is good. But performing a restart of the application to load the new configuration is not always ideal.
+The Azure App Configuration SDK overcomes this problem by detecting the modification of the configuration and reloading it automatically.</p>
+<p>First of all, make sure that the middleware of Azure App Configuration is configured. To do this in the <code>HostBuilder</code>, you must add the service via <code>AddAzureAppConfiguration</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Host</span><span class="p">.</span><span class="n">ConfigureAppConfiguration</span><span class="p">(</span><span class="n">builder</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...   </span>
+<span class="p">})</span><span class="w"></span>
+<span class="p">.</span><span class="n">ConfigureServices</span><span class="p">(</span><span class="n">services</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">services</span><span class="p">.</span><span class="n">AddControllersWithViews</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">services</span><span class="p">.</span><span class="n">AddAzureAppConfiguration</span><span class="p">();</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</code></pre></div>
+<p>Then activate the middleware at the <code>WebApplication</code> level via <code>UseAzureAppConfiguration</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="n">Build</span><span class="p">();</span><span class="w"></span>
+<span class="n">app</span><span class="p">.</span><span class="n">UseHttpsRedirection</span><span class="p">();</span><span class="w"></span>
+<span class="n">app</span><span class="p">.</span><span class="n">UseAzureAppConfiguration</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// ...</span>
+</code></pre></div>
+<p>Next, we'll use a "sentinel" parameter in Azure App Configuration. Each time this parameter is changed, it will indicate that the configuration must be reloaded.</p>
+<p>Here is an example :</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">AddAzureAppConfiguration</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&quot;AppConfig:Endpoint&quot;</span><span class="p">]),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ManagedIdentityCredential</span><span class="p">())</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">ConfigureRefresh</span><span class="p">(</span><span class="n">refresh</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">refresh</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="s">&quot;TestApp:Settings:Sentinel&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+<span class="c1">// ...</span>
+</code></pre></div>
+<p>In this example, we will condition the refresh of all the parameters to the update of <code>TestApp:Settings:Sentinel</code>.</p>
+<p>Thus our application will regularly check the value of our "sentinel" parameter. By default the frequency is set to 30 seconds. But you can set the frequency yourself:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ...    </span>
+<span class="n">refresh</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="s">&quot;TestApp:Settings:Sentinel&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">).</span><span class="n">SetCacheExpiration</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w"></span>
+<span class="c1">// ...</span>
+</code></pre></div>
+<p>In this example, we will check the "sentinel" parameter every 10 seconds.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be careful not to set the frequency too high. Indeed, if you want to make sure that your configuration can be refreshed very quickly, you will be tempted to reduce it to one second or even less. But it must be taken into account that each web app will do this verification independently. By setting to 1 second, your components will poll at least 2.6 million times per month Azure App Configuration. Let's say you have 10 components in your architecture, then that goes up to 26 million requests. You will then have a significant impact on the costs of your Azure App Configuration service (~ 140 € / month).</p>
+</div>
+<p>If you absolutely want to have a solution that takes your new configuration into account almost instantly, then I advise you to refresh the configuration of your application in "Push" mode.</p>
+<h3 id="refresh-the-configuration-in-push-mode">Refresh the configuration in "Push" mode</h3>
+<p>The principle is that each change made to your configuration in Azure App Configuration triggers a notification that is captured by your components. This solution will use another service: the Event Grid System Topic.</p>
+<p>In the case of an ASP.NET core component, you will need:</p>
+<ol>
+<li>Create a webhook capable of registering with the Event Grid,</li>
+<li>Set up the mechanism for refreshing the settings.</li>
+</ol>
+<p>Let's start with the webhook. To do this, we must add the nuget package <code>Azure.Messaging.EventGrid</code> to our project. Then, create a dedicated controller with a POST method. Like this :</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">Azure.Messaging.EventGrid</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Azure.Messaging.EventGrid.SystemEvents</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="err">[</span><span class="nn">yournamespace</span><span class="p">].</span><span class="n">Controllers</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="na">[ApiController]</span><span class="w"></span>
+<span class="w">    </span><span class="na">[Route(&quot;[controller]</span><span class="s">&quot;)]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="na">[HttpPost]</span><span class="w"></span>
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="p">&lt;</span><span class="n">IActionResult</span><span class="p">&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">BinaryData</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">BinaryData</span><span class="p">.</span><span class="n">FromStreamAsync</span><span class="p">(</span><span class="n">Request</span><span class="p">.</span><span class="n">Body</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">EventGridEvent</span><span class="p">[]</span><span class="w"> </span><span class="n">eventGridEvents</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">EventGridEvent</span><span class="p">.</span><span class="n">ParseMany</span><span class="p">(</span><span class="n">events</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">EventGridEvent</span><span class="w"> </span><span class="n">eventGridEvent</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eventGridEvents</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// Handle system events</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eventGridEvent</span><span class="p">.</span><span class="n">TryGetSystemEventData</span><span class="p">(</span><span class="k">out</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">eventData</span><span class="p">))</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="c1">// Handle the subscription validation event</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eventData</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">SubscriptionValidationEventData</span><span class="w"> </span><span class="n">subscriptionValidationEventData</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="kt">var</span><span class="w"> </span><span class="n">responseData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SubscriptionValidationResponse</span><span class="p">()</span><span class="w"></span>
+<span class="w">                        </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="n">ValidationResponse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">subscriptionValidationEventData</span><span class="p">.</span><span class="n">ValidationCode</span><span class="w"></span>
+<span class="w">                        </span><span class="p">};</span><span class="w"></span>
+<span class="w">                        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">OkObjectResult</span><span class="p">(</span><span class="n">responseData</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                    </span><span class="c1">// Handle the app configuration keyvalue event</span>
+<span class="w">                    </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">eventData</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">AppConfigurationKeyValueModifiedEventData</span><span class="w"> </span><span class="p">||</span><span class="w"> </span><span class="n">eventData</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">AppConfigurationKeyValueDeletedEventData</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="c1">// TO DO</span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">OkObjectResult</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>We are now able to capture events pushed by the Event Grid. You must now trigger the refresh of the configuration.
+To do this, you must create a class in charge of triggering the refresh with the middleware of Azure App Configuration. Here is an example :</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.Extensions.Configuration.AzureAppConfiguration</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="err">[</span><span class="nn">yournamespace</span><span class="p">]</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OnDemandConfigurationRefresher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IOnDemandConfigurationRefresher</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">IConfigurationRefresher</span><span class="p">&gt;</span><span class="w"> </span><span class="n">_configurationRefreshers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">IConfigurationRefresher</span><span class="p">&gt;();</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nf">OnDemandConfigurationRefresher</span><span class="p">(</span><span class="n">IConfiguration</span><span class="w"> </span><span class="n">configuration</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">configurationRoot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">IConfigurationRoot</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">configurationRoot</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">InvalidOperationException</span><span class="p">(</span><span class="s">&quot;The &#39;IConfiguration&#39; injected in OnDemandConfigurationRefresher is not an &#39;IConfigurationRoot&#39;, and needs to be as well.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">provider</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">configurationRoot</span><span class="p">.</span><span class="n">Providers</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">provider</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">IConfigurationRefresher</span><span class="w"> </span><span class="n">refresher</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">_configurationRefreshers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">refresher</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">RefreshAllRegisteredKeysAsync</span><span class="p">(</span><span class="n">PushNotification</span><span class="w"> </span><span class="n">pushNotification</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">_configurationRefreshers</span><span class="p">.</span><span class="n">ForEach</span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">ProcessPushNotification</span><span class="p">(</span><span class="n">pushNotification</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>And add this class as a service.</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">Host</span><span class="p">.</span><span class="n">ConfigureAppConfiguration</span><span class="p">(</span><span class="n">builder</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...   </span>
+<span class="p">})</span><span class="w"></span>
+<span class="p">.</span><span class="n">ConfigureServices</span><span class="p">(</span><span class="n">services</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">services</span><span class="p">.</span><span class="n">AddControllersWithViews</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">services</span><span class="p">.</span><span class="n">AddAzureAppConfiguration</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">services</span><span class="p">.</span><span class="n">AddScoped</span><span class="p">&lt;</span><span class="n">IOnDemandConfigurationRefresher</span><span class="p">,</span><span class="w"> </span><span class="n">OnDemandConfigurationRefresher</span><span class="p">&gt;();</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</code></pre></div>
+<p>Finally, implement triggering the refresh from the webhook:</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">Azure.Messaging.EventGrid</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Azure.Messaging.EventGrid.SystemEvents</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.Extensions.Configuration.AzureAppConfiguration</span><span class="p">;</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="nn">Microsoft.Extensions.Configuration.AzureAppConfiguration.Extensions</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="err">[</span><span class="nn">yournamespace</span><span class="p">].</span><span class="n">Controllers</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="na">[ApiController]</span><span class="w"></span>
+<span class="w">    </span><span class="na">[Route(&quot;[controller]</span><span class="s">&quot;)]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ControllerBase</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IOnDemandConfigurationRefresher</span><span class="w"> </span><span class="n">_azureAppConfigurationRefresher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nf">ConfigurationController</span><span class="p">(</span><span class="n">IOnDemandConfigurationRefresher</span><span class="w"> </span><span class="n">azureAppConfigurationRefresher</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">_configuration</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">configuration</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">_azureAppConfigurationRefresher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">azureAppConfigurationRefresher</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="na">[HttpPost]</span><span class="w"></span>
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="p">&lt;</span><span class="n">IActionResult</span><span class="p">&gt;</span><span class="w"> </span><span class="n">Post</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">BinaryData</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">BinaryData</span><span class="p">.</span><span class="n">FromStreamAsync</span><span class="p">(</span><span class="n">Request</span><span class="p">.</span><span class="n">Body</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">EventGridEvent</span><span class="p">[]</span><span class="w"> </span><span class="n">eventGridEvents</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">EventGridEvent</span><span class="p">.</span><span class="n">ParseMany</span><span class="p">(</span><span class="n">events</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">EventGridEvent</span><span class="w"> </span><span class="n">eventGridEvent</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">eventGridEvents</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// Handle system events</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eventGridEvent</span><span class="p">.</span><span class="n">TryGetSystemEventData</span><span class="p">(</span><span class="k">out</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">eventData</span><span class="p">))</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="c1">// Handle the subscription validation event</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eventData</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">SubscriptionValidationEventData</span><span class="w"> </span><span class="n">subscriptionValidationEventData</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="kt">var</span><span class="w"> </span><span class="n">responseData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SubscriptionValidationResponse</span><span class="p">()</span><span class="w"></span>
+<span class="w">                        </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="n">ValidationResponse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">subscriptionValidationEventData</span><span class="p">.</span><span class="n">ValidationCode</span><span class="w"></span>
+<span class="w">                        </span><span class="p">};</span><span class="w"></span>
+<span class="w">                        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">OkObjectResult</span><span class="p">(</span><span class="n">responseData</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                    </span><span class="c1">// Handle the app configuration keyvalue event</span>
+<span class="w">                    </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">eventData</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">AppConfigurationKeyValueModifiedEventData</span><span class="w"> </span><span class="p">||</span><span class="w"> </span><span class="n">eventData</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">AppConfigurationKeyValueDeletedEventData</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="n">eventGridEvent</span><span class="p">.</span><span class="n">TryCreatePushNotification</span><span class="p">(</span><span class="k">out</span><span class="w"> </span><span class="n">PushNotification</span><span class="w"> </span><span class="n">pushNotification</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="n">_azureAppConfigurationRefresher</span><span class="p">.</span><span class="n">RefreshAllRegisteredKeysAsync</span><span class="p">(</span><span class="n">pushNotification</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">OkObjectResult</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>And There you go !</p>
+<p>You can then increase the cache expiration to one or more days: <code>SetCacheExpiration(TimeSpan.FromDays(10))</code>.</p>
+<p>This solution has a drawback. If at the time of your configuration change your component is not available, the event will not be captured and the configuration will not be updated.
+You can overcome this problem by using a Service Bus queue between your Event Grid and your Web app. This way, your component can then retrieve the configuration change as soon as it becomes available again.</p>
+<p><img alt="Architecture 4" src="../../../../../img/tips.09.gitops.005.svg" /></p>
+<h3 id="configure-to-use-azure-app-configuration-with-azure-key-vault">Configure to use Azure App Configuration with Azure Key vault</h3>
+<p>In your configuration settings, it is not uncommon to find sensitive elements such as access keys, passwords, connection strings. It is strongly recommended to protect these sensitive parameters in a safe. Azure App Configuration allows you to reference sensitive settings of your configuration and indicate their location in Azure Key vault. This way your application can easily retrieve the value of the parameter directly from the vault. Additionally, as with all other configuration settings, you will be able to notify your components of a change in the vault.</p>
+<p>To do this, it's very simple, all you have to do is modify the setting of Azure App Configuration in your component. Here is an example using managed identities:</p>
+<div class="highlight"><pre><span></span><code><span class="n">builder</span><span class="p">.</span><span class="n">AddAzureAppConfiguration</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Uri</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s">&quot;AppConfig:Endpoint&quot;</span><span class="p">]),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ManagedIdentityCredential</span><span class="p">())</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">ConfigureRefresh</span><span class="p">(</span><span class="n">refresh</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">refresh</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="s">&quot;TestApp:Settings:Sentinel&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">ConfigureKeyVault</span><span class="p">(</span><span class="n">kv</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">kv</span><span class="p">.</span><span class="n">SetCredential</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ManagedIdentityCredential</span><span class="p">()));</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+<span class="c1">// ...</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your application (via its managed identity) must be authorized to retrieve (GET) the values ​​in Azure Key vault.</p>
+</div>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this first part we saw how to set up Azure App Configuration with our applications.
+We will see in the second part, how to automate the configuration update with Azure DevOps. </p>
+<p><a href="../02.gitops.AzureAppConfiguration/">To be continued...</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/azure/azure-app-configuration/?WT.mc_id=AZ-MVP-5004832">Microsoft : Azure App Configuration</a></li>
+<li><a href="https://www.bustroker.com/notes/azure-app-configuration-refresh-on-demand/">Azure App Configuration refresh on demand</a></li>
+</ul>
+<h2 id="thanks">Thanks</h2>
+<ul>
+<li><a href="https://www.linkedin.com/in/etienne-louise-78154063/">Etienne Louise</a> : for the proofreading and the comment that led me to publish this article</li>
+<li><a href="https://www.linkedin.com/in/dubourg-david-7413779/">David Dubourg</a> : for the proofreading</li>
+<li><a href="https://twitter.com/michael_maillot">Michael Maillot</a> : for the proofreading</li>
+</ul>
+<p><em>Written by Philippe MORISSEAU, Published on April 25, 2022.</em></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/morisseauphi" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/pmorisseau" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+        <script src="../../../../../assets/javascripts/mmrls.js"></script>
+      
+    
+  </body>
+</html>
